@@ -6,4 +6,5 @@ import 'mdbreact/dist/css/mdb.css';
 import './index.css';
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import UserProfile from './Component/UserProfile';
+ReactDOM.render(<UserProfile />, document.getElementById('root'));
