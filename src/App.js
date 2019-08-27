@@ -4,6 +4,7 @@ import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
 import './App.css';
 import Home from './Component/Home';
 import SignIn from './Component/SignIn';
+import UserProfile from './Component/UserProfile';
 function App() {
   return (
    <Router>

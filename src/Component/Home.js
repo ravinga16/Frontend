@@ -87,7 +87,11 @@ class Home extends React.Component {
                           type="password"
                         />
                         <div className="text-center mt-4 black-text">
-                          <MDBBtn color="indigo">Log In</MDBBtn>
+                          <MDBBtn color="indigo">
+
+                            {/* change this */}
+                           Log In
+                          </MDBBtn>
                           <hr className="hr-light" />
                      </div>
                       </MDBCardBody>

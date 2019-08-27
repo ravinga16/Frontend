@@ -32,7 +32,8 @@ render() {
             </MDBNavItem>
             <MDBNavItem>
               <MDBNavLink to="#!">Order</MDBNavLink>
-            </MDBNavItem>            
+            </MDBNavItem>
+            
           </MDBNavbarNav>
           <MDBNavbarNav right>
             <MDBNavItem>
