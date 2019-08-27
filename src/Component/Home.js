@@ -47,7 +47,7 @@ class Home extends React.Component {
                   className="white-text text-center text-md-left col-md-6 mt-xl-5 mb-5"
                 >
                   <h1 className="h1-responsive font-weight-bold">
-                    Sign up right now!
+                    Meet Your Worker And Customer!
                   </h1>
                   <hr className="hr-light" />
                   <h6 className="mb-4">

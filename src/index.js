@@ -7,4 +7,4 @@ import './index.css';
 import App from './App';
 
 import UserProfile from './Component/UserProfile';
-ReactDOM.render(<UserProfile />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));

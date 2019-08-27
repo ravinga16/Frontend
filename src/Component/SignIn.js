@@ -33,6 +33,14 @@ export default class SignIn extends React.Component{
                             <form onSubmit={this.handleSubmit}>
                                 <p className="h4 text-center py-4">Sign up</p>
                                 <div className="grey-text">
+                                <label style={{marginLeft:"100px"}}>
+                                    <input type="radio"  name ="usertype" value="Customer" onChange={this.handleChange}/>
+                                    Customer       
+                                </label>
+                                <label style={{marginLeft:"125px"}}>
+                                    <input type="radio" name ="usertype" value="Worker"  onChange={this.handleChange} />
+                                    Worker
+                                </label>
                                 <MDBInput
                                     label="Your name"
                                     icon="user"
@@ -74,14 +82,7 @@ export default class SignIn extends React.Component{
                                     name="contact"
                                     onChange={this.handleChange}
                                 />
-                                <label>
-                                    <input type="radio"  name ="usertype" value="Customer" onChange={this.handleChange}/>
-                                    Customer       
-                                </label>
-                                <label style={{marginLeft:"320px"}}>
-                                    <input type="radio" name ="usertype" value="Worker"  onChange={this.handleChange} />
-                                    Worker
-                                </label>
+                                
                                 </div>
                                 
                                 <div className="text-center py-4 mt-3">
