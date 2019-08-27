@@ -1,6 +1,6 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
-import "./SignIn.css";
+
 export default class SignIn extends React.Component{
     constructor(props){
         super(props);
@@ -8,7 +8,8 @@ export default class SignIn extends React.Component{
             name:'',
             email:'',
             password:'',
-            contact:''
+            contact:'',
+            usertype:''
         }
         this.handleChange=this.handleChange.bind(this);
         this.handleSubmit=this.handleSubmit.bind(this);
@@ -18,12 +19,12 @@ export default class SignIn extends React.Component{
     }
     handleSubmit(event){
         event.preventDefault();
-        alert(this.state.email)
+        console.log(this.state)
     }
     render(){
         return (
-            <div className="bg">             
-            <container style={{marginLeft:"800px"}}>
+            <div style={{marginLeft:"500px",marginTop:"200px"}}>             
+            <container >               
                 <MDBContainer >
                     <MDBRow >
                         <MDBCol md="6">
@@ -73,7 +74,16 @@ export default class SignIn extends React.Component{
                                     name="contact"
                                     onChange={this.handleChange}
                                 />
+                                <label>
+                                    <input type="radio"  name ="usertype" value="Customer" onChange={this.handleChange}/>
+                                    Customer       
+                                </label>
+                                <label style={{marginLeft:"320px"}}>
+                                    <input type="radio" name ="usertype" value="Worker"  onChange={this.handleChange} />
+                                    Worker
+                                </label>
                                 </div>
+                                
                                 <div className="text-center py-4 mt-3">
                                 <MDBBtn color="cyan" type="submit">
                                     Sign Up
