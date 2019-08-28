@@ -60,7 +60,9 @@ export default class Home extends React.Component {
                     veniam sapiente, fugiat! Commodi sequi non animi ea dolor
                     molestiae, quisquam iste, maiores. Nulla.
                   </h6>
-               
+                  <MDBBtn outline color="white">
+                    Learn More
+                  </MDBBtn>
                 </MDBAnimation>
 
                 <MDBCol md="6" xl="5" className="mb-4">
@@ -103,7 +105,7 @@ export default class Home extends React.Component {
                                     onChange={this.handleChange}
                                 />
                         <div className="text-center mt-4 black-text">
-                          <MDBBtn color="white" onClick={this.handleSubmit}>
+                          <MDBBtn color="white"  onClick={this.handleSubmit}>
                             <Link to="/LogIn/">Log In</Link>        
                       
                           </MDBBtn>

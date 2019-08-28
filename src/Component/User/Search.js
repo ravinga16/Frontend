@@ -18,10 +18,10 @@ export default class Search extends React.Component {
                             </div>
                         </MDBCol>
                         <MDBCol md="2">
-                            <MDBBtn color="unique">Book Now</MDBBtn>
+                            <MDBBtn color="unique-color">Book Now</MDBBtn>
                         </MDBCol>
                         <MDBCol md="2">
-                            <MDBBtn color="unique">Book Later</MDBBtn>
+                            <MDBBtn color="unique-color">Book Later</MDBBtn>
                         </MDBCol>
                     </MDBRow>
                 </MDBContainer>
