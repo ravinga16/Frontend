@@ -6,5 +6,7 @@ import 'mdbreact/dist/css/mdb.css';
 import './index.css';
 import App from './App';
 
+import Search from './Component/User/Search';
+
 import UserProfile from './Component/UserProfile';
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Search />, document.getElementById('root'));
