@@ -16,24 +16,28 @@ import {
 } from "mdbreact";
 import "./Home.css";
 
-class Home extends React.Component {
-  state = {
-    collapseID: ""
-  };
+export default class Home extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+        name:'',
+        email:'',
+        password:''      
+     }
+    this.handleChange=this.handleChange.bind(this);
+    this.handleSubmit=this.handleSubmit.bind(this);
+    }
+    handleChange(event){
+        this.setState({[event.target.name]:event.target.value})
+    }
+    handleSubmit(event){
+        event.preventDefault();
+        console.log(this.state)
+    }
+  
 
-  toggleCollapse = collapseID => () =>
-    this.setState(prevState => ({
-      collapseID: prevState.collapseID !== collapseID ? collapseID : ""
-    }));
-
-  render() {
-    const overlay = (
-      <div
-        id="sidenav-overlay"
-        style={{ backgroundColor: "transparent" }}
-        onClick={this.toggleCollapse("navbarCollapse")}
-      />
-    );
+  render() {   
+   
     return (
       <div id="classicformpage">
         
@@ -70,24 +74,38 @@ class Home extends React.Component {
                         </h3>
                         <hr className="hr-light" />
                         <MDBInput
-                          className="white-text"
-                          iconClass="white-text"
-                          label="Your name"
-                        
-                        />
-                        <MDBInput
-                          className="white-text"
-                          iconClass="white-text"
-                          label="Your email"                        
-                        />
-                        <MDBInput
-                          className="white-text"
-                          iconClass="white-text"
-                          label="Your password"                    
-                          type="password"
-                        />
+                                    label="Your name"
+                                    icon="user"
+                                    group
+                                    type="text"
+                                    validate
+                                    error="wrong"
+                                    success="right"
+                                    name="name"
+                                    onChange={this.handleChange}
+                                />
+                                <MDBInput
+                                    label="Your email"
+                                    icon="envelope"
+                                    group
+                                    type="email"
+                                    validate
+                                    error="wrong"
+                                    success="right"
+                                    name="email"
+                                    onChange={this.handleChange}
+                                />                                                    
+                                <MDBInput
+                                    label="Your password"
+                                    icon="lock"
+                                    group
+                                    type="password"
+                                    validate
+                                    name="password"
+                                    onChange={this.handleChange}
+                                />
                         <div className="text-center mt-4 black-text">
-                          <MDBBtn color="indigo">
+                          <MDBBtn color="indigo" onClick={this.handleSubmit}>
 
                             {/* change this */}
                            Log In
@@ -113,4 +131,3 @@ class Home extends React.Component {
   }
 }
 
-export default Home;

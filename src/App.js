@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route,Link} from 'react-router-dom';
 import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
 import './App.css';
 import Home from './Component/Home';
-import SignIn from './Component/SignIn';
+
 import UserProfile from './Component/UserProfile';
+import SignInFinal from './Component/SignInFinal';
 function App() {
   return (
    <Router>
@@ -24,7 +25,7 @@ function App() {
     </MDBNav> */}
 
     <Route path="/" exact component={Home} />
-    <Route path="/SignIn/" exact component={SignIn} />
+    <Route path="/SignIn/" exact component={SignInFinal} />
    </Router>
 
     
