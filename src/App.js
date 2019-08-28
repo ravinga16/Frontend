@@ -6,6 +6,7 @@ import Home from './Component/Home';
 
 import UserProfile from './Component/UserProfile';
 import SignInFinal from './Component/SignInFinal';
+import Search from './Component/User/Search';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
 
     <Route path="/" exact component={Home} />
     <Route path="/SignIn/" exact component={SignInFinal} />
+    <Route path="/LogIn/" component={Search}/>
    </Router>
 
     

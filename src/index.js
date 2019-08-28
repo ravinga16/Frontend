@@ -9,4 +9,6 @@ import App from './App';
 import Search from './Component/User/Search';
 
 import UserProfile from './Component/UserProfile';
-ReactDOM.render(<Search />, document.getElementById('root'));
+// ReactDOM.render(<Search />, document.getElementById('root'));
+
+ReactDOM.render(<App />, document.getElementById('root'));
