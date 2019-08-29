@@ -4,13 +4,14 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, 
 export default class ImageCard extends React.Component{
     render(){
         return(
-            <MDBCol>
+            <MDBCol style={{marginLeft:"50px"}}>
             <MDBCard style={{ width: "22rem" }}>
                 <MDBCardImage className="img-fluid" src="https://www.colourbox.com/preview/27873730-user-simple-icon-vector.jpg" waves />
                 <MDBCardBody>
                 <MDBCardTitle style={{textAlign:"centre"}}>Card title{this.props.name}</MDBCardTitle>
                 <MDBCardText>
-                    Description About Themself
+                    Description About Themself <br></br>
+                    Rating : {this.props.rating}
                 </MDBCardText>
                 <MDBBtn href="#">Upload Profile Picture</MDBBtn>
                 </MDBCardBody>
