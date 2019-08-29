@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route,Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route,Link, Switch} from 'react-router-dom';
 import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
 import './App.css';
 import Home from './Component/Home';
@@ -7,7 +7,9 @@ import Home from './Component/Home';
 import UserProfile from './Component/UserProfile';
 import SignInFinal from './Component/SignInFinal';
 import Search from './Component/User/Search';
+import UserNavBar from './Component/User/UserNavBar';
 
+import Profile from './Component/Worker/profile';
 function App() {
   return (
    <Router>
@@ -25,13 +27,15 @@ function App() {
         <MDBNavLink disabled to="#!">Disabled</MDBNavLink>
       </MDBNavItem>
     </MDBNav> */}
-
-    <Route path="/" exact component={Home} />
-    <Route path="/SignIn/" exact component={SignInFinal} />
-    <Route path="/LogIn/" component={Search}/>
-   </Router>
-
+    <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/SignIn/" exact component={SignInFinal} />
+        <Route path="/usernavbar/" component={Profile}/>
+        {/* <Route path="/usernavbar/" component={UserNavBar}/> */}
+        <Route path="/usernavbar/search/" component={Search}/>
+    </Switch>
     
+   </Router>   
  
 
  

@@ -3,7 +3,7 @@ body, html {
   }
   .bg {
     background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNHNB-TkWK3QVoCM1u2Nq_esQQy4iWthBym7uSZuSQjdjvjB7c");
-    height: 25vh;
+    height: 20vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

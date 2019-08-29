@@ -3,9 +3,10 @@ import {
 MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
 MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
 } from "mdbreact";
-import { BrowserRouter as Router } from 'react-router-dom';
-
-export default class UserProfile extends Component {
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import appointment from './appointment';
+import Profile from './profile';
+export default class WorkerNavBar extends React.Component {
 state = {
   isOpen: false
 };
@@ -17,7 +18,7 @@ toggleCollapse = () => {
 render() {
   return (
     <Router>
-      <MDBNavbar color="deep-purple lighten-2" dark expand="md">
+      <MDBNavbar color=" teal darken-4" dark expand="md">
         <MDBNavbarBrand>
           <strong className="white-text">Find Your Worker</strong>
         </MDBNavbarBrand>
@@ -25,30 +26,27 @@ render() {
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
           <MDBNavbarNav left>
             <MDBNavItem active>
-              <MDBNavLink to="#!">Home</MDBNavLink>
+              <MDBNavLink to="/worker/">Home</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to="#!">Search</MDBNavLink>
+              <MDBNavLink to="/worker/appointment/">Appointments</MDBNavLink>
             </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink to="#!">Order</MDBNavLink>
-            </MDBNavItem>
-            
           </MDBNavbarNav>
           <MDBNavbarNav right>
             <MDBNavItem>
               <MDBFormInline waves>
-                <div className="md-form my-0">
-                  <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
-                </div>
+                <MDBNavLink to="/">Log Out</MDBNavLink>
               </MDBFormInline>
             </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBNavbar>
+      <Switch>
+          {/* <Route path="/worker/" component={Profile} /> */}
+          <Route path="/worker/appointment/" component={appointment}/>
+      </Switch>
     </Router>
     );
   }
 }
 
-// ReactDOM.render(<UserProfile />, document.getElementById('root'));

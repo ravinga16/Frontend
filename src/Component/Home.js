@@ -106,7 +106,7 @@ export default class Home extends React.Component {
                                 />
                         <div className="text-center mt-4 black-text">
                           <MDBBtn color="white"  onClick={this.handleSubmit}>
-                            <Link to="/LogIn/">Log In</Link>        
+                            <Link to="/usernavbar/">Log In</Link>        
                       
                           </MDBBtn>
                           <hr className="hr-light" />
