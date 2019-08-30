@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import {
   MDBMask,
@@ -20,9 +21,9 @@ export default class Home extends React.Component {
   constructor(props){
     super(props);
     this.state={
-        name:'',
-        email:'',
-        password:''      
+        UserEmail:'',
+        Password:'',
+         
      }
     this.handleChange=this.handleChange.bind(this);
     this.handleSubmit=this.handleSubmit.bind(this);
@@ -31,8 +32,15 @@ export default class Home extends React.Component {
         this.setState({[event.target.name]:event.target.value})
     }
     handleSubmit(event){
-        event.preventDefault();
-        console.log(this.state)
+      event.preventDefault();
+      console.log(this.state);
+      axios.post( "http://localhost:3000/user/register/", this.state)
+          .then(response => {
+              console.log(response)
+          })
+          .catch(error => {
+              console.log(error)
+          })
     }
   
 
@@ -74,36 +82,28 @@ export default class Home extends React.Component {
                         </h3>
                         <hr className="hr-light" />
                         <MDBInput
-                                    label="Your name"
-                                    icon="user"
-                                    group
-                                    type="text"
-                                    validate
-                                    error="wrong"
-                                    success="right"
-                                    name="name"
-                                    onChange={this.handleChange}
-                                />
-                                <MDBInput
-                                    label="Your email"
+                                    label="Your Email"
                                     icon="envelope"
                                     group
                                     type="email"
                                     validate
                                     error="wrong"
                                     success="right"
-                                    name="email"
+                                    name="UserEmail"
                                     onChange={this.handleChange}
-                                />                                                    
+                                />
                                 <MDBInput
                                     label="Your password"
                                     icon="lock"
                                     group
                                     type="password"
                                     validate
-                                    name="password"
+                                    error="wrong"
+                                    success="right"
+                                    name="Password"
                                     onChange={this.handleChange}
-                                />
+                                />                                                    
+                                
                         <div className="text-center mt-4 black-text">
                           <MDBBtn color="white"  onClick={this.handleSubmit}>
                             <Link to="/usernavbar/">Log In</Link>        

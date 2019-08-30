@@ -8,8 +8,8 @@ import UserProfile from './Component/UserProfile';
 import SignInFinal from './Component/SignInFinal';
 import Search from './Component/User/Search';
 import UserNavBar from './Component/User/UserNavBar';
+import Workerprofile from './Component/WorkerFinal/Workerprofile';
 
-import Profile from './Component/Worker/profile';
 function App() {
   return (
    <Router>
@@ -30,7 +30,7 @@ function App() {
     <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/SignIn/" exact component={SignInFinal} />
-        <Route path="/usernavbar/" component={Profile}/>
+        <Route path="/usernavbar/" component={Workerprofile}/>
         {/* <Route path="/usernavbar/" component={UserNavBar}/> */}
         <Route path="/usernavbar/search/" component={Search}/>
     </Switch>
