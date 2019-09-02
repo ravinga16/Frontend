@@ -1,7 +1,7 @@
 import React from 'react';
 import { MDBContainer, MDBCollapse, MDBCard, MDBCardBody, MDBBtn } from "mdbreact";
 
-export default class CancelledBooking extends React.Component{
+export default class AcceptedBooking extends React.Component{
     state={
         collapseID: "collapse3"
       }
@@ -32,26 +32,39 @@ export default class CancelledBooking extends React.Component{
                               </div><br></br> 
                                 {/*  */}
                               <div class="row">
-                                  <div class="col-md-5">Worker Id: </div>
+                                  <div class="col-md-5">Worker ID: </div>
                                   <div class="col-md-5">
                                       <input type="text" name="WorkerId" placeholder={this.props.WorkerId} disabled></input>
                               </div>
                               </div><br></br> 
                                 {/*  */}
-                                <div class="row">
-                                  <div class="col-md-5">OrderDate: </div>
+                              <div class="row">
+                                  <div class="col-md-5">Worker Name: </div>
                                   <div class="col-md-5">
-                                      <input type="text" name="OrderDate" placeholder={this.props.OrderDate} disabled></input>
+                                      <input type="text" name="Name" placeholder={this.props.Name} disabled></input>
+                              </div>
+                              </div><br></br> 
+                                {/*  */}
+                                <div class="row">
+                                  <div class="col-md-5">Worker Rating: </div>
+                                  <div class="col-md-5">
+                                      <input type="text" name="Rate" placeholder={this.props.Rate} disabled></input>
                               </div>
                               </div><br></br>
                                {/*  */}
                                <div class="row">
-                                  <div class="col-md-5"> Cancellation Reason: </div>
+                                  <div class="col-md-5">Contact Number: </div>
                                   <div class="col-md-5">
-                                      <input type="text" name="CancellationReason" placeholder={this.props.CancellationReason} disabled></input>
+                                      <input type="text" name="ContactNumber" placeholder="0714454545" disabled></input>
                               </div>
                               </div><br></br> 
-                               
+                               {/*  */}
+                               <div class="row">
+                                  <div class="col-md-5">Start Time: </div>
+                                  <div class="col-md-5">
+                                      <input type="text" name="StartTime" placeholder={this.props.StartTime} disabled></input>
+                              </div>
+                              </div><br></br> 
                   </form>
       
                   </MDBCardBody>

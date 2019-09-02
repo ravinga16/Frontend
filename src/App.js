@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route,Link, Switch} from 'react-router-dom';
 import { MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
 import './App.css';
 import Home from './Component/Home';
-
 import UserProfile from './Component/User/UserProfile';
 import SignInFinal from './Component/SignInFinal';
+import MyBooking from './Component/User/Mybooking'
 
 
 
@@ -27,12 +27,12 @@ function App() {
       </MDBNavItem>
     </MDBNav> */}
     <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/SignIn/" exact component={SignInFinal} />
-        <Route path="/usernavbar/" component={UserProfile}/>
-
-    </Switch>
-    
+        <Route exact path="/"  component={Home} ></Route>
+        <Route path="/SignIn/" exact component={SignInFinal} ></Route>
+        {/* <Route path="/usernavbar/" component={UserProfile}/> */}
+        <Route path="/client/profile/" component={UserProfile}></Route>
+        <Route path ="/client/order/" component={MyBooking}></Route>
+    </Switch>    
    </Router>   
  
 

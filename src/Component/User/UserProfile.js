@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import {  MDBRow, MDBCol } from "mdbreact";
+import {  MDBRow, MDBCol, MDBContainer } from "mdbreact";
 
 import UserNavBar from "./UserNavBar";
 import Userprofilecard from "./Userprofilecard";
+import NotificationCard from "./notificationCard";
 
 export default class UserProfile extends Component {
 state = {
@@ -17,11 +18,15 @@ render() {
   return (
     <div>
       <UserNavBar/>
-      <MDBRow>
-        <MDBCol md="4"><Userprofilecard/></MDBCol>
-        <MDBCol md="4">.col-md-4</MDBCol>
-        <MDBCol md="4">.col-md-4</MDBCol>
-      </MDBRow>
+
+      <MDBContainer>
+        <MDBRow>
+          <MDBCol md="6"><Userprofilecard/></MDBCol>
+          <MDBCol md="6"><NotificationCard/></MDBCol>
+          {/* <MDBCol md="4">.col-md-4</MDBCol> */}
+        </MDBRow>
+      </MDBContainer>
+      
     </div>
     
     );
