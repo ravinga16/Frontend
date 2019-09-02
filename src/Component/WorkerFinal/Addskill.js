@@ -6,22 +6,36 @@ export default class addskilltest extends React.Component{
     constructor(props){
         super(props);
         this.state={"skillObj" : [ ],
-                    skillId:"",
+                    skillId:'',
                     description:"",
                     hrate:"",
-                    workerId:7
+                    workerId:7,
+                    availableSkills:[]  
                     }
     
         
         this.handleChange=this.handleChange.bind(this);
         this.handleSubmit=this.handleSubmit.bind(this);
+ 
     }
-
+    componentDidMount(){
+        axios.get('http://localhost:3000/dataservices/getallskills')
+        .then(response => {
+            
+            //get the response sent by the API. setState to the response data this.setState({posts:response.data})
+            this.setState({availableSkills:response.data.recordset})
+            console.log("*****",this.state.availableSkills);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
  
     handleChange(event){
         this.setState({[event.target.name]:event.target.value})    
     
     }
+  
     handleSubmit(event){
         event.preventDefault();
         this.setState(state => ({
@@ -38,6 +52,7 @@ export default class addskilltest extends React.Component{
                 console.log(error)
             })
         })
+        console.log("ssssssssss",this.state)
     }
     render(){
         return(
@@ -49,14 +64,13 @@ export default class addskilltest extends React.Component{
                     <MDBCol md="11">
                         <form onSubmit={this.handleSubmit}>
                         <h5 style={{textAlign:"center"}}>Add a Skill</h5>                  
-                        <input
-                            type="text" 
-                            name="skillId"                 
-                            className="form-control"
-                            placeholder="skill title"
-                            onChange={this.handleChange}
-                        />
-                        <br />                 
+                        
+                        <select value={this.state.skillId} onChange={this.handleChange}>
+                            {
+                               this.state.availableSkills.length?this.state.availableSkills.map(skill => <option key={skill.SkillId} value={skill.SkillId} >{skill.SkillId}</option>):null 
+                            }
+                        </select>
+                        <br></br>  <br></br>              
                         <input
                             type="text" 
                             name="description"           

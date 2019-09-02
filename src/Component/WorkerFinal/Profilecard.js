@@ -5,11 +5,12 @@ class Profilecard extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      FirstName:"",
-      LastName:"",
-      BaseLocation:"",
-      Status:"",
-      ContactNumber:"",
+      fname:"",
+      lname:"",
+      baseL:"",
+      imgURL:"",
+      status:"",
+      contactno:"",
       personalData:[],
       skills:[]
     }
@@ -51,9 +52,9 @@ class Profilecard extends React.Component{
       this.setState({[e.target.name]:e.target.value})
     }else{
       if(e.target.value=="Available"){
-        this.setState({Status:true})
+        this.setState({Status:1})
       }else{
-        this.setState({Status:false})
+        this.setState({Status:0})
       }
     }
   }
@@ -111,19 +112,19 @@ class Profilecard extends React.Component{
                     I am capable of gas negima. Energic soul.<br></br>
                     <div class="row">
                       <div class="col-md-5">FirstName</div>
-                      <div class="col-md-5"><input name="FirstName" value={this.state.FirstName} style={{marginTop:"10px"}}placeholder={this.state.personalData.FirstName} onChange={this.handleChange}></input><br></br></div>
+                      <div class="col-md-5"><input name="fname" value={this.state.FirstName} style={{marginTop:"10px"}}placeholder={this.state.personalData.FirstName} onChange={this.handleChange}></input><br></br></div>
                     </div>
                     <div class="row">
                       <div class="col-md-5">LastName</div>
-                      <div class="col-md-5"><input name="LastName" value={this.state.LastName}style={{marginTop:"10px"}}placeholder={this.state.personalData.LastName} onChange={this.handleChange}></input><br></br></div>
+                      <div class="col-md-5"><input name="lname" value={this.state.LastName}style={{marginTop:"10px"}}placeholder={this.state.personalData.LastName} onChange={this.handleChange}></input><br></br></div>
                     </div>
                     <div class="row">
                       <div class="col-md-5">BaseLocation</div>
-                      <div class="col-md-5"><input name="BaseLocation" value={this.state.BaseLocation}  style={{marginTop:"10px"}}placeholder={this.state.personalData.BaseLocation} onChange={this.handleChange}></input><br></br></div>
+                      <div class="col-md-5"><input name="baseL" value={this.state.BaseLocation}  style={{marginTop:"10px"}}placeholder={this.state.personalData.BaseLocation} onChange={this.handleChange}></input><br></br></div>
                     </div>
                     <div class="row">
                       <div class="col-md-5">ContactNumber</div>
-                      <div class="col-md-5"><input name="ContactNumber" value={this.state.ContactNumber} style={{marginTop:"10px"}} placeholder={this.state.personalData.ContactNumber} onChange={this.handleChange}></input><br></br></div>
+                      <div class="col-md-5"><input name="contactno" value={this.state.ContactNumber} style={{marginTop:"10px"}} placeholder={this.state.personalData.ContactNumber} onChange={this.handleChange}></input><br></br></div>
                     </div>
                     
                     

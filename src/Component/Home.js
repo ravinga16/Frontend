@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import "./Home.css";
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import {
   MDBMask,
@@ -15,7 +16,7 @@ import {
   MDBAnimation,
   MDBModalFooter
 } from "mdbreact";
-import "./Home.css";
+
 
 export default class Home extends React.Component {
   constructor(props){
@@ -34,13 +35,13 @@ export default class Home extends React.Component {
     handleSubmit(event){
       event.preventDefault();
       console.log(this.state);
-      axios.post( "http://localhost:3000/user/register/", this.state)
-          .then(response => {
-              console.log(response)
-          })
-          .catch(error => {
-              console.log(error)
-          })
+      // axios.post( "http://localhost:3000/user/register/", this.state)
+      //     .then(response => {
+      //         console.log(response)
+      //     })
+      //     .catch(error => {
+      //         console.log(error)
+      //     })
     }
   
 
@@ -49,8 +50,8 @@ export default class Home extends React.Component {
     return (
       <div name="classicformpage">
         
-        <MDBView>
-          <MDBMask className="d-flex justify-content-center align-items-center gradient">
+        {/* <MDBView> */}
+          {/* <MDBMask className="d-flex justify-content-center align-items-center gradient"> */}
             <MDBContainer>
               <MDBRow>
                 <MDBAnimation
@@ -105,7 +106,7 @@ export default class Home extends React.Component {
                                 />                                                    
                                 
                         <div className="text-center mt-4 black-text">
-                          <MDBBtn color="white"  onClick={this.handleSubmit}>
+                          <MDBBtn color="white"  >
                             <Link to="/worker/profile/">Log In</Link>        
                       
                           </MDBBtn>
@@ -123,8 +124,9 @@ export default class Home extends React.Component {
                 </MDBCol>
               </MDBRow>
             </MDBContainer>
-          </MDBMask>
-        </MDBView>
+          {/* </MDBMask> */}
+        {/* </MDBView> */}
+        <h1>hi</h1>
       </div>
     );
   }

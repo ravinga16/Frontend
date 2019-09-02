@@ -43,13 +43,13 @@ export default class SignInFinal extends React.Component {
     handleSubmit(event){
         event.preventDefault();
         console.log(this.state);
-        axios.post( "http://localhost:3000/user/register/", this.state)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        // axios.post( "http://localhost:3000/user/register/", this.state)
+        //     .then(response => {
+        //         console.log(response)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
     }
   
 

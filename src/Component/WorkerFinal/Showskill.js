@@ -5,14 +5,19 @@ export default class Showskill extends React.Component{
     render(){
         return (
             <MDBCol style={{marginTop:"15px"}}>
-              <MDBCard style={{ width: "30rem" }}>
-                
+              <MDBCard style={{ width: "30rem" }}>                
                 <MDBCardBody>
-                  <MDBCardTitle>Skill Title</MDBCardTitle>
+                  <MDBCardTitle>{this.props.SkillTitle}</MDBCardTitle>
                   <MDBCardText>
-                   Skill Description provided
+                    <div class="row">
+                      <div class="col-md-5">{this.props.Description}
+                   <br></br>
+                   {this.props.HourlyCharge}</div>
+                      <div class="col-md-5"> <MDBBtn href="#">Delete</MDBBtn></div>
+                    </div>
+                   
                   </MDBCardText>
-                  <MDBBtn href="#">Delete</MDBBtn>
+                 
                 </MDBCardBody>
               </MDBCard>
             </MDBCol>
