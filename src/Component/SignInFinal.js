@@ -56,7 +56,7 @@ export default class SignInFinal extends React.Component {
   render() {   
    
     return (
-      <div id="classicformpage">
+      <div name="classicformpage">
         
         <MDBView>
           <MDBMask className="d-flex justify-content-center align-items-center gradient">

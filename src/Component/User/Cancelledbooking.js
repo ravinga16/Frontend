@@ -17,13 +17,13 @@ export default class CancelledBooking extends React.Component{
           <MDBContainer>
             <MDBContainer className="mt-3">
               <MDBCard className="mt-3" style={{ width: "30rem" }}>
-                <button onClick={this.toggleCollapse("collapse1")}>
-                  {this.props.title} job Id 
+                <button onClick={this.toggleCollapse("collapse1")} style={{backgroundColor:"#e53935", color:"white", height:"38px"}}>
+                  {this.props.title} job  
                   <i className={ collapseID==="collapse1" ? "fa fa-angle-down rotate-icon" : "fa fa-angle-down" } />
                 </button>
                 <MDBCollapse id="collapse1" isOpen={collapseID}>
                   <MDBCardBody>
-                  <form style={{ textAlign: "left",display:"block" ,fontSize:"13px"}} id="showProfile">                              
+                  <form style={{ textAlign: "left",display:"block" ,fontSize:"13px"}} name="showProfile">                              
                               <div class="row">
                                   <div class="col-md-5">Order Id: </div>
                                   <div class="col-md-5">

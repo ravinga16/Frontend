@@ -52,8 +52,8 @@ class MyBooking extends React.Component{
     }
     render(){
         var MDBCardTitleStyle = {
-            textAlign:"center",
-            color:"#3F729B",
+            marginLeft:"200px",
+            color:"black",
             fontWeight:"bold",
             fontSize:"20px"
         }

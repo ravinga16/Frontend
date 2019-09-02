@@ -6,8 +6,7 @@ import Home from './Component/Home';
 import UserProfile from './Component/User/UserProfile';
 import SignInFinal from './Component/SignInFinal';
 import MyBooking from './Component/User/Mybooking'
-
-
+import Workerprofile from './Component/WorkerFinal/Workerprofile';
 
 function App() {
   return (
@@ -32,6 +31,7 @@ function App() {
         {/* <Route path="/usernavbar/" component={UserProfile}/> */}
         <Route path="/client/profile/" component={UserProfile}></Route>
         <Route path ="/client/order/" component={MyBooking}></Route>
+        <Route path="/worker/profile/" component={Workerprofile}></Route>
     </Switch>    
    </Router>   
  

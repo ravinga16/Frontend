@@ -47,7 +47,7 @@ export default class Home extends React.Component {
   render() {   
    
     return (
-      <div id="classicformpage">
+      <div name="classicformpage">
         
         <MDBView>
           <MDBMask className="d-flex justify-content-center align-items-center gradient">
@@ -106,7 +106,7 @@ export default class Home extends React.Component {
                                 
                         <div className="text-center mt-4 black-text">
                           <MDBBtn color="white"  onClick={this.handleSubmit}>
-                            <Link to="/client/profile/">Log In</Link>        
+                            <Link to="/worker/profile/">Log In</Link>        
                       
                           </MDBBtn>
                           <hr className="hr-light" />

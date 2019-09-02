@@ -45,7 +45,7 @@ class Userprofilecard extends React.Component{
                     <MDBCardImage style={{marginLeft:"100px"}}className="img-fluid" src="https://image.shutterstock.com/image-vector/user-icon-trendy-flat-style-260nw-418179865.jpg" waves />
                     <MDBCardBody>
                    
-                        <form style={{ textAlign: "left",display:"block" ,fontSize:"13px"}} id="showProfile">
+                        <form style={{ textAlign: "left",display:"block" ,fontSize:"13px"}} name="showProfile">
                         
                             <div class="row">
                                 <div class="col-md-5">User Name:
@@ -84,34 +84,34 @@ class Userprofilecard extends React.Component{
 
                     
                         
-                        <form onSubmit={this.handleUpdate} style={{ textAlign: "left",display:"none" ,fontSize:"13px"}} id="editProfile"> 
+                        <form onSubmit={this.handleUpdate} style={{ textAlign: "left",display:"none" ,fontSize:"13px"}} name="editProfile"> 
                       
                             <div class="row">
                                 <div class="col-md-5">User Name:
                         </div>
                                 <div class="col-md-5">
-                                    <input type="text" id="UserName" placeholder="Ravinga Sewwandi" ></input>
+                                    <input type="text" name="UserName" placeholder="Ravinga Sewwandi" ></input>
                                 </div>
                             </div><br></br>
                             <div class="row">
                                 <div class="col-md-5">Email:
                         </div>
                                 <div class="col-md-5">
-                                    <input type="email" id="Email" placeholder="ravinga.p@eyepax.com" ></input>
+                                    <input type="email" name="Email" placeholder="ravinga.p@eyepax.com" ></input>
                                 </div>
                             </div><br></br>
                             <div class="row">
                                 <div class="col-md-5">Password:
                         </div>
                                 <div class="col-md-5">
-                                    <input type="password" id="Password" placeholder="12345"></input>
+                                    <input type="password" name="Password" placeholder="12345"></input>
                                 </div>
                             </div><br></br>
                             <div class="row">
                                 <div class="col-md-5">Contact Number:
                         </div>
                                 <div class="col-md-5">
-                                    <input type="text" id="ContactNumber" placeholder="071404040" ></input>
+                                    <input type="text" name="ContactNumber" placeholder="071404040" ></input>
                                 </div>
                             </div><br></br>
                             <div class="row">
