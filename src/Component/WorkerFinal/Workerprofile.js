@@ -15,11 +15,11 @@ export default class Workerprofile extends React.Component{
         }
     }
     componentDidMount(){
-        axios.get('http://localhost:3000/worker/profile/5')
+        axios.get('http://localhost:3000/worker/profile/7')
         .then(response => {           
             //get the response sent by the API. setState to the response data this.setState({posts:response.data})
             this.setState({skills:response.data.result.recordsets[1]});   
-            console.log(this.state.skills)
+            console.log("**************************",this.state.skills)
         })
         .catch(error => {
             console.log(error)

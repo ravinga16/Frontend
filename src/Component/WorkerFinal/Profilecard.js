@@ -93,13 +93,8 @@ class Profilecard extends React.Component{
                     <div class="row">
                       <div class="col-md-5">ContactNumber</div>
                       <div class="col-md-5"><input name="ContactNumber" style={{marginTop:"10px"}}placeholder={this.state.personalData.ContactNumber} disabled></input><br></br></div>
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                  </MDBCardText>
+                    </div> 
+                    </MDBCardText>
                   <MDBBtn href="#" onClick={this.handleEdit}>Edit Profile</MDBBtn>                  
                 </MDBCardBody>
               </MDBCard>
@@ -109,7 +104,7 @@ class Profilecard extends React.Component{
                 <MDBCardBody>
                   <MDBCardTitle>Ravinga Sewwandi Perera</MDBCardTitle>
                   <MDBCardText>
-                    I am capable of gas negima. Energic soul.<br></br>
+                    I am capable of ...........<br></br>
                     <div class="row">
                       <div class="col-md-5">FirstName</div>
                       <div class="col-md-5"><input name="fname" value={this.state.FirstName} style={{marginTop:"10px"}}placeholder={this.state.personalData.FirstName} onChange={this.handleChange}></input><br></br></div>
@@ -125,11 +120,9 @@ class Profilecard extends React.Component{
                     <div class="row">
                       <div class="col-md-5">ContactNumber</div>
                       <div class="col-md-5"><input name="contactno" value={this.state.ContactNumber} style={{marginTop:"10px"}} placeholder={this.state.personalData.ContactNumber} onChange={this.handleChange}></input><br></br></div>
-                    </div>
-                    
-                    
-                                        
-                    
+                    </div>                
+                                                          
+                   
                     <br></br>
                     <label style={{marginLeft:"70px"}}>
                        <input type="radio"  name ="Availability" value="Available" onChange={this.handleChange}/>Available                                           

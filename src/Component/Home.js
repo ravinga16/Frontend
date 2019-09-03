@@ -1,134 +1,124 @@
 import React from "react";
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter, MDBAnimation} from 'mdbreact';
 import axios from 'axios';
-import "./Home.css";
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
-import {
-  MDBMask,
-  MDBRow,
-  MDBCol,
-  MDBIcon,
-  MDBBtn,
-  MDBView,
-  MDBContainer,
-  MDBCard,
-  MDBCardBody,
-  MDBInput,
-  MDBAnimation,
-  MDBModalFooter
-} from "mdbreact";
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
+class Home extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            UserEmail: "",
+            Password: "",
+            isAuth: "",
+            id:"",
+            test:"ravinga"
 
-export default class Home extends React.Component {
-  constructor(props){
-    super(props);
-    this.state={
-        UserEmail:'',
-        Password:'',
-         
-     }
-    this.handleChange=this.handleChange.bind(this);
-    this.handleSubmit=this.handleSubmit.bind(this);
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handleChange(event){
-        this.setState({[event.target.name]:event.target.value})
-    }
-    handleSubmit(event){
-      event.preventDefault();
-      console.log(this.state);
-      // axios.post( "http://localhost:3000/user/register/", this.state)
-      //     .then(response => {
-      //         console.log(response)
-      //     })
-      //     .catch(error => {
-      //         console.log(error)
-      //     })
-    }
-  
 
-  render() {   
-   
-    return (
-      <div name="classicformpage">
-        
-        {/* <MDBView> */}
-          {/* <MDBMask className="d-flex justify-content-center align-items-center gradient"> */}
+    //Handling Functions
+    handleChange(event) {
+        event.preventDefault();
+        this.setState({ [event.target.name]: event.target.value });
+    }
+    handleSubmit(event) {
+        event.preventDefault();
+        console.log(this.state);    //
+        // this.props.history.push('/redirected/');
+        axios.post( "http://localhost:3000/user/login", this.state)
+          .then(response => {       
+              var checkMessage = response.data.message;
+              if(checkMessage=="Unauthorized"){
+                this.setState({isAuth:false});
+                alert("Enter correct Details");                  
+              }else{
+                  if(checkMessage=="Authorized"){
+                      this.setState({isAuth:true});
+                      this.setState({id:response.data.result.UserId})
+                      localStorage.setItem("UserId",response.data.result.UserId)
+                      //Redirect based on the UserType
+                      if(response.data.result.sessionType=="Client"){
+                        this.props.history.push('/client/profile/');//
+                      }else if(response.data.result.sessionType=="Worker"){
+                        this.props.history.push('/worker/profile/');
+                      }
+                      console.log(this.state)
+                  }
+              }           
+          })
+          .catch(error => {
+              console.log(error)//
+              alert("Enter correct Details")//
+          })
+    }
+    render() {
+        return (
             <MDBContainer>
-              <MDBRow>
-                <MDBAnimation
-                  type="fadeInLeft"
-                  delay=".3s"
-                  className="white-text text-center text-md-left col-md-6 mt-xl-5 mb-5"
-                >
-                  <h1 className="h1-responsive font-weight-bold">
-                    Meet Your Worker And Customer!
-                  </h1>
-                  <hr className="hr-light" />
-                  <h6 className="mb-4">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Rem repellendus quasi fuga nesciunt dolorum nulla magnam
-                    veniam sapiente, fugiat! Commodi sequi non animi ea dolor
-                    molestiae, quisquam iste, maiores. Nulla.
-                  </h6>
-                  <MDBBtn outline color="white">
-                    Learn More
-                  </MDBBtn>
-                </MDBAnimation>
+                <MDBRow>
+                    {/* Description */}
+                    <MDBCol md="6">.col-md-8</MDBCol>
+                    {/* Login Form */}
+                    <MDBCol md="6">
+                        <MDBContainer>
+                            {/* <MDBRow>
+                            <MDBCol md="6"> */}
+                            <MDBAnimation type="fadeInRight" delay=".3s">
+                            <MDBCard>
+                                <MDBCardBody>
+                                    <form onSubmit={this.handleSubmit}>
+                                        <p className="h4 text-center py-4">Log In</p>
+                                        <div className="grey-text">
+                                            <MDBInput
+                                                label="Your Email"
+                                                icon="envelope"
+                                                group
+                                                text-color="indigo"
+                                                type="email"
+                                                validate
+                                                error="wrong"
+                                                success="right"
+                                                name="UserEmail"
+                                                onChange={this.handleChange}
+                                            />
+                                            <MDBInput
+                                                label="Your Password"
+                                                icon="lock"
+                                                group
+                                                type="password"
+                                                validate
+                                                error="wrong"
+                                                success="right"
+                                                name="Password"
+                                                onChange={this.handleChange}
+                                            />
+                                        </div>
+                                        <div className="text-center py-4 mt-3">
+                                            <MDBBtn color="cyan" type="submit">
+                                                Log In
+                                            </MDBBtn>
+                                        </div>
+                                    </form>
+                                </MDBCardBody>
 
-                <MDBCol md="6" xl="5" className="mb-4">
-                  <MDBAnimation type="fadeInRight" delay=".3s">
-                    <MDBCard id="classic-card">
-                      <MDBCardBody className="white-text">
-                        <h3 className="text-center">
-                          <MDBIcon icon="user" /> Log In
-                        </h3>
-                        <hr className="hr-light" />
-                        <MDBInput
-                                    label="Your Email"
-                                    icon="envelope"
-                                    group
-                                    type="email"
-                                    validate
-                                    error="wrong"
-                                    success="right"
-                                    name="UserEmail"
-                                    onChange={this.handleChange}
-                                />
-                                <MDBInput
-                                    label="Your password"
-                                    icon="lock"
-                                    group
-                                    type="password"
-                                    validate
-                                    error="wrong"
-                                    success="right"
-                                    name="Password"
-                                    onChange={this.handleChange}
-                                />                                                    
-                                
-                        <div className="text-center mt-4 black-text">
-                          <MDBBtn color="white"  >
-                            <Link to="/worker/profile/">Log In</Link>        
-                      
-                          </MDBBtn>
-                          <hr className="hr-light" />
-                     </div>
-                      </MDBCardBody>
-                      <MDBModalFooter className="mx-5 pt-3 mb-1">
-                      <p className="font-small grey-text d-flex justify-content-end">
-                            Not a member?
-                        <a><Link to="/SignIn/"> Sign Up</Link></a>             
-                    </p>
-                    </MDBModalFooter>
-                    </MDBCard>
-                  </MDBAnimation>
-                </MDBCol>
-              </MDBRow>
+                                {/* foot note */}
+                                <MDBModalFooter className="mx-5 pt-3 mb-1">
+                                    <p className="font-small grey-text d-flex justify-content-end">
+                                        Not a member?
+                                <a className="blue-text ml-1"><Link to="/signin/">Sign Up</Link></a>
+                                    </p>
+                                </MDBModalFooter>
+                            </MDBCard>
+                            </MDBAnimation>
+                            {/* </MDBCol>
+                            </MDBRow> */}
+                        </MDBContainer>
+                    </MDBCol>
+                </MDBRow>
             </MDBContainer>
-          {/* </MDBMask> */}
-        {/* </MDBView> */}
-        <h1>hi</h1>
-      </div>
-    );
-  }
+        );
+    }
 }
 
+export default Home;

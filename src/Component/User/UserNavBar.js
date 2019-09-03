@@ -1,9 +1,25 @@
 import React, { Component } from "react";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse } from "mdbreact";
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
-
+import axios from 'axios';
 
 export default class UserNavBar extends Component {
+  constructor(props){
+    super(props);
+    this.handleClick=this.handleClick.bind(this);
+  }
+  handleClick(){
+    axios.post( "http://localhost:3000/user/logout")
+          .then(response => {       
+              console.log(response.data,"************************")   //  
+              localStorage.setItem("UserId","null") ;
+                    
+          })
+          .catch(error => {
+              console.log(error)//             
+          })
+          
+  }
 state = {
   isOpen: false
 };
@@ -31,11 +47,14 @@ render() {
             <MDBNavItem>
               <MDBNavLink to="/client/order/">Order Detail</MDBNavLink>
             </MDBNavItem> 
+          </MDBNavbarNav>
+          <MDBNavbarNav right>
+            <MDBNavItem>
+              <button onClick={this.handleClick}><Link to="/">logout</Link></button>
+            </MDBNavItem>
           </MDBNavbarNav>          
         </MDBCollapse>
-      </MDBNavbar>
-
-   
+      </MDBNavbar>  
     </Router>
     );
   }

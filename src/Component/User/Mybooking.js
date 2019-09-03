@@ -17,7 +17,7 @@ class MyBooking extends React.Component{
     }
     componentDidMount(){
         //Get Accepted jobs for the client
-        axios.get('http://localhost:3000/completedorders/owner/upcomingjobs/3')
+        axios.get('http://localhost:3000/completedorders/owner/upcomingjobs/'+localStorage.getItem('UserId'))
         .then(response => {
             console.log(response.data.result[0])
             //get the response sent by the API. setState to the response data this.setState({posts:response.data})
@@ -29,7 +29,7 @@ class MyBooking extends React.Component{
         })
 
         // Get the completed jobs list
-        axios.get('http://localhost:3000/completedorders/owner/completedorders/3')
+        axios.get('http://localhost:3000/completedorders/owner/completedorders/'+localStorage.getItem('UserId'))
         .then(response => {        
             //get the response sent by the API. setState to the response data this.setState({posts:response.data})
             this.setState({completedBooking:response.data.result[0]})
@@ -40,7 +40,7 @@ class MyBooking extends React.Component{
         })
 
         //Get the Cancelled Job list
-        axios.get('http://localhost:3000/completedorders/owner/cancelledjobs/3')
+        axios.get('http://localhost:3000/completedorders/owner/cancelledjobs/'+localStorage.getItem('UserId'))
         .then(response => {        
             //get the response sent by the API. setState to the response data this.setState({posts:response.data})
             this.setState({cancalledBooking:response.data.result[0]})
