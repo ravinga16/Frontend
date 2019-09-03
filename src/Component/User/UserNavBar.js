@@ -13,6 +13,8 @@ export default class UserNavBar extends Component {
           .then(response => {       
               console.log(response.data,"************************")   //  
               localStorage.setItem("UserId","null") ;
+              localStorage.setItem("sessionEmail","null") ;
+              localStorage.setItem("sessionType","null") ;
                     
           })
           .catch(error => {

@@ -25,10 +25,10 @@ class Home extends React.Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state);    //
+       
         // this.props.history.push('/redirected/');
         axios.post( "http://localhost:3000/user/login", this.state)
-          .then(response => {       
+          .then(response => {   
               var checkMessage = response.data.message;
               if(checkMessage=="Unauthorized"){
                 this.setState({isAuth:false});
@@ -37,14 +37,16 @@ class Home extends React.Component {
                   if(checkMessage=="Authorized"){
                       this.setState({isAuth:true});
                       this.setState({id:response.data.result.UserId})
-                      localStorage.setItem("UserId",response.data.result.UserId)
+                      localStorage.setItem("UserId",response.data.result.UserId);
+                      localStorage.setItem("sessionEmail",response.data.result.sessionEmail);
+                      localStorage.setItem("sessionType",response.data.result.sessionType);
                       //Redirect based on the UserType
                       if(response.data.result.sessionType=="Client"){
                         this.props.history.push('/client/profile/');//
-                      }else if(response.data.result.sessionType=="Worker"){
+                      }else if(response.data.result.sessionType=="worker"){
                         this.props.history.push('/worker/profile/');
                       }
-                      console.log(this.state)
+                      
                   }
               }           
           })

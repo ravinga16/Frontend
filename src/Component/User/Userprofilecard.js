@@ -53,6 +53,7 @@ class Userprofilecard extends React.Component{
         event.preventDefault();
         console.log(this.state);
         let a={
+            
             fname:"ravi",
             lname:"perera",
             baseL:"kol"

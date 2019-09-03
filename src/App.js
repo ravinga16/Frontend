@@ -6,6 +6,7 @@ import MyBooking from './Component/User/Mybooking';
 import Workerprofile from './Component/WorkerFinal/Workerprofile';
 import Home from './Component/Home';
 import SignIn from './Component/SignIn';
+import BookLaterForm from './Component/User/bookLaterForm';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/"  component={Home} ></Route>       
         <Route path="/signin/" component={SignIn}></Route>
         <Route path="/client/profile/" component={UserProfile}></Route>
+        <Route path="/client/search/" component={BookLaterForm}></Route>
         <Route path ="/client/order/" component={MyBooking}></Route>
         <Route path="/worker/profile/" component={Workerprofile}></Route>  
     </Switch>        
