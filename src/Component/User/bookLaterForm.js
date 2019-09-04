@@ -65,15 +65,8 @@ class BookLaterForm extends React.Component{
             <MDBContainer>
               <MDBRow>
                 <MDBCol md="4">
-                  <form onSubmit={this.handleSubmit}>
+                  <form onSubmit={this.handleSubmit}>                  
                     
-                    <Select
-                       value={this.state.skillSelected}
-                        onChange={this.onChangeSkillSelected}
-                        options={availableSkills}
-                        placeholder="Skill Required"
-                     />
-                    <br></br>  
 
                     <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
                     Order Date
