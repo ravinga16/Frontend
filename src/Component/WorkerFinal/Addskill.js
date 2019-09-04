@@ -9,11 +9,9 @@ let availableSkills = [
 export default class Addskill extends React.Component{
     constructor(props){
         super(props);
-        this.state={"skillObj" : [ ],
-                    skillId:'',
+        this.state={skillId:'',
                     description:"",
                     hrate:"",
-                    workerId:7,
                     skillSelected:''                
                 }
     
@@ -59,21 +57,38 @@ export default class Addskill extends React.Component{
   
     handleSubmit(event){
         event.preventDefault();
-        this.setState(state => ({
-            // skillObj : 122
-            "skillObj": state.skillObj.concat({"skillId":this.state.skillId,"description":this.state.description,"hrate":this.state.hrate})
-        }),()=>{
-            console.log("after concat ",this.state)
-            let varUrl= "http://localhost:3000/worker/skill/"+ this.state.workerId;
-            axios.post( varUrl, this.state)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        console.log("user adding skill", this.state);
+        // this.setState(state => ({
+        //     // skillObj : 122
+        //     "skillObj": state.skillObj.concat({"skillId":this.state.skillId,"description":this.state.description,"hrate":this.state.hrate})
+        // }),()=>{
+        //     console.log("after concat ",this.state)
+        
+        //     axios.post( varUrl, this.state)
+        //     .then(response => {
+        //         console.log(response)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+        // })
+
+        
+        //Preparing the skill object modal to send to the backend
+        let skillObject = {"skillObj" : [ {
+            "skillId": this.state.skillId,
+            "description" : this.state.description,
+            "hrate" : this.state.hrate
+        }]}
+        let varUrl= "http://localhost:3000/worker/skill/"+ localStorage.getItem("UserId");
+        axios.post( varUrl, skillObject)
+        .then(response=>{
+            console.log(response.data)
         })
-        console.log("ssssssssss",this.state)
+        .catch(error=>{
+            console.log(error)
+        })
+
     }
     render(){
         return(

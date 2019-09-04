@@ -3,6 +3,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody} from "mdbre
 import axios from 'axios';
 import Select from 'react-select';
 import UserNavBar from './UserNavBar';
+import AvailableWorkerCard from './AvailableWorkerCard';
 
 
 let availableSkills = [
@@ -35,11 +36,12 @@ export default class Search extends React.Component{
     }
     //getting all the skills available in the website
     componentDidMount(){
-        axios.get('http://localhost:3000/dataservices/getallskills')
-        .then(response => {
-        
+        // axios.create({ withCredentials: true, }).get('http://localhost:3000/dataservices/getallskills')
+        axios.get('http://localhost:3000/dataservices/getallskills',{withCredentials:true})
+        // fetch('http://localhost:3000/dataservices/getallskills',{credentials:'include'})
+        // .then(response=>response.json())
+        .then(response => {        
             //get the response sent by the API. setState to the response data this.setState({posts:response.data})
-            // console.log(response.data.recordsets[0]);
                 let i = 0;
                 let tempArray = {};
                 for (i; i < response.data.recordsets[0].length; i++) {
@@ -48,7 +50,6 @@ export default class Search extends React.Component{
                     availableSkills.push(tempArray);
                     tempArray = {}
                 } 
-                // console.log(availableSkills,"availableSkills");
         })
         .catch(error => {
             console.log(error);
@@ -94,11 +95,12 @@ export default class Search extends React.Component{
     handleSubmit(e){
         e.preventDefault();
         document.getElementById("sendRequest").style.display="block";
+        document.getElementById("booklaterlist").style.display="block";
         console.log("book later details", this.state)//object sending with the axios
-        axios.post('http://localhost:3000/bookLater/search',this.state)
+        axios.create({withCredentials:true}).post('http://localhost:3000/bookLater/search',this.state)
         .then(response => {
             console.log("search worker button press")
-            this.setState({availableWorkers:response.data.result})
+            this.setState({availableWorkers:response.data.result.Workers})
             console.log(this.state.availableWorkers)
         })
         .catch(error => {
@@ -119,50 +121,50 @@ export default class Search extends React.Component{
     }
     render(){
         return(
-            <div>
+            <container>
                 <UserNavBar/>
                 {/* default form to display */}
+                <MDBContainer>
                 <MDBRow>
-                <MDBCard id="one" style={{ width: "50%",marginLeft:"22%" ,marginTop:"15px"}}>
-                <MDBCardBody>
-                <form>
-                    <p className="h4 text-center mb-4">Required Job Details</p>                 
-                    <Select
-                        required
-                       value={this.state.skillSelected}
-                        onChange={this.onChangeSkillSelected}
-                        options={availableSkills}
-                        placeholder="Job Type" />
-                    <br></br>
+                    <MDBCard id="one" style={{ width: "50%",marginLeft:"22%" ,marginTop:"15px"}}>
+                    <MDBCardBody>
+                    <form>
+                        <p className="h4 text-center mb-4">Required Job Details</p>                 
+                        <Select
+                            required
+                        value={this.state.skillSelected}
+                            onChange={this.onChangeSkillSelected}
+                            options={availableSkills}
+                            placeholder="Job Type" />
+                        <br></br>
 
-                    <Select
-                       value={this.state.paymentSelected}
-                        onChange={this.onChangePaymentSelected}
-                        options={availablePaymentMethod}
-                        placeholder="Payment Method"   />
-                    <br></br>
+                        <Select
+                        value={this.state.paymentSelected}
+                            onChange={this.onChangePaymentSelected}
+                            options={availablePaymentMethod}
+                            placeholder="Payment Method"   />
+                        <br></br>
 
-                    <label   htmlFor="defaultFormRegisterConfirmEx" className="grey-text" > Description </label>
-                    <input
-                    type="text"
-                    name="description"                
-                    className="form-control"  />
-                    <br />    
-                    <div class="row">   <MDBBtn  style={{marginLeft:"40%"}}color="unique" onClick={this.handleBookNow}>  Book Now </MDBBtn>  </div> 
-                    <div class="row">   <MDBBtn  style={{marginLeft:"40%"}} color="unique" onClick={this.handleBookLater}>  Book Later </MDBBtn></div>             
-                   
-                </form>
-                </MDBCardBody>                
-                </MDBCard>
-
+                        <label   htmlFor="defaultFormRegisterConfirmEx" className="grey-text" > Description </label>
+                        <input
+                        type="text"
+                        name="description"                
+                        className="form-control"  />
+                        <br />    
+                        <div class="row"><MDBBtn  style={{backgroundColor:"#008080",width:"100%"}} onClick={this.handleBookNow}>  Book Now </MDBBtn>  </div> 
+                        <div class="row"><MDBBtn  style={{backgroundColor:"#008080",width:"100%"}}  onClick={this.handleBookLater}>  Book Later </MDBBtn></div>             
+                    
+                    </form>
+                    </MDBCardBody>                
+                    </MDBCard>
                 </MDBRow>
 
                 {/*  Depend on book now, book later*/}               
 
                 <MDBRow>
                     {/* if user selected book later option */}
-                    <MDBCol size="6">
-                        <MDBCard id="booklater" style={{ width: "55%",  display: "none", marginTop: "15px" }}>
+                    <MDBCol size="6" id="booklater" style={{ width: "55%",  display: "none", marginTop: "30px" }}>
+                        <MDBCard >
                             <MDBCardBody>
                                 <form onSubmit={this.handleSubmit}>
                                     <label htmlFor="defaultFormRegisterNameEx" className="grey-text">  Order Date  </label>
@@ -186,14 +188,18 @@ export default class Search extends React.Component{
                                         name="endTime"
                                         onChange={this.handleChange}  />
                                     <br />
-                                    <div class="row"><MDBBtn color="unique" type="submit"> Search Worker  </MDBBtn>  </div>
-                                    <div class="row"><MDBBtn id="sendRequest" color="unique" type="submit" style={{display:"none"}} onClick={this.handleSendRequest}> Send Request  </MDBBtn></div>
+                                    <div class="row"><MDBBtn color="unique" type="submit" style={{backgroundColor:"#008080",width:"100%"}}> Search Worker  </MDBBtn>  </div>
+                                    <div class="row"><MDBBtn id="sendRequest" color="unique" type="submit" style={{backgroundColor:"#008080",width:"100%",display:"none"}} onClick={this.handleSendRequest}> Send Request  </MDBBtn></div>
                                                                             
                                 </form>
                             </MDBCardBody>
                         </MDBCard>                     
                       </MDBCol>
-                    <MDBCol size="6" id="booklaterlist" style={{ width: "75%",  display: "none", marginTop: "15px" }}>available workers list</MDBCol>
+                    <MDBCol size="6" id="booklaterlist" style={{ width: "75%",  display: "none", marginTop: "15px" }}>
+                        {
+                            this.state.availableWorkers.length ? this.state.availableWorkers.map(worker => <AvailableWorkerCard key={worker.workerId} workerId={worker.workerId} firstName={worker.firstName}  lastName={worker.lastName} baseLocation={worker.baseLocation} rate={worker.rate} skillDescription={worker.skillDescription} hourlyCharge={worker.hourlyCharge}  />):null
+                        }
+                    </MDBCol>
                      {/* if user select book now option */}
                     <MDBCard id="map" style={{ display: "none" }}>
                             <MDBCardBody>
@@ -201,11 +207,9 @@ export default class Search extends React.Component{
                             </MDBCardBody>
                         </MDBCard>
                 </MDBRow>
-
-                <MDBRow>
-
-                </MDBRow>
-            </div>
+                </MDBContainer>
+             
+            </container>
         )
     }
 }

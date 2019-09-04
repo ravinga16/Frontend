@@ -5,6 +5,7 @@ class Profilecard extends React.Component{
   constructor(props){
     super(props);
     this.state={
+      useremail:"",
       fname:"",
       lname:"",
       baseL:"",
@@ -22,7 +23,7 @@ class Profilecard extends React.Component{
   }
   //get worker details and update profileCard
   componentDidMount(){
-    axios.get('http://localhost:3000/worker/profile/5')
+    axios.get('http://localhost:3000/worker/profile/143')
     .then(response => {
        
         //get the response sent by the API. setState to the response data this.setState({posts:response.data})

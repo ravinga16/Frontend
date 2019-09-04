@@ -10,7 +10,7 @@ class Userprofilecard extends React.Component{
           fname:"",
           lname:"",
           baseL:"",
-          imgURL:"",
+          imgURL:"null",
           contactno:""       
         
         }
@@ -18,18 +18,22 @@ class Userprofilecard extends React.Component{
         this.handleUpdate=this.handleUpdate.bind(this);
         this.handleCancel=this.handleCancel.bind(this);
         this.handleChange=this.handleChange.bind(this);
-    
+        this.handleDone=this.handleDone.bind(this);
+       
       }
      //once the profile card is mounted
       componentDidMount(){
-          let userId = localStorage.getItem('UserId');
-        let url = "http://localhost:3000/client/profile/"+userId;
-        console.log(url);
-        axios.get(url)
-        .then(response => {        
-         console.log(response.data.result.recordsets[0][0]);
+        let userId = localStorage.getItem('UserId');
+        let url = "http://localhost:3000/client/profile/"+userId;    
+        axios.get(url,{withCredentials:true})
+        .then(response => { 
+         console.log("componentdidmount method called");      
+         //setting all the received details at the beginning
          this.setState({useremail:response.data.result.recordsets[0][0].UserEmail}) ;
-         this.setState({contactno:response.data.result.recordsets[0][0].ContactNumber})  
+         this.setState({fname:response.data.result.recordsets[0][0].FirstName});
+         this.setState({lname:response.data.result.recordsets[0][0].LastName}) ;
+         this.setState({baseL:response.data.result.recordsets[0][0].BaseLocation}) ;
+         this.setState({contactno:response.data.result.recordsets[0][0].ContactNumber}) ;  
           
         })
         .catch(error => {
@@ -51,23 +55,22 @@ class Userprofilecard extends React.Component{
       //when update button click
       handleUpdate(event){
         event.preventDefault();
-        console.log(this.state);
-        let a={
-            
-            fname:"ravi",
-            lname:"perera",
-            baseL:"kol"
-        }
-        //http://localhost:3000/client/profile
-        axios.post("http://localhost:3000/client/profile", a)
+        console.log("update button event");
+        console.log(this.state)  ;       
+        axios.create({withCredentials:true}).put('http://localhost:3000/client/profile/57', this.state)
         .then(response => {        
-         console.log(response.data);
-         
+          console.log("response.data",response.data); 
+          document.getElementById('editProfile').style.display="none";
+          document.getElementById('profile').style.display="block";              
         })
         .catch(error => {
             console.log(error)
-        })
+        })        
 
+      }
+      handleDone(e){       
+        document.getElementById('editProfile').style.display="none";    
+        document.getElementById('profile').style.display="block";    
       }
       handleChange(e){        
           if(e.target.value!=""){
@@ -75,8 +78,7 @@ class Userprofilecard extends React.Component{
           }
                   
       }
-        render(){
-          
+        render(){          
             return (
                 <MDBCol>
                   <MDBCard style={{ width: "30rem" }} id="profile"style={{display:"block"}}>
@@ -140,8 +142,9 @@ class Userprofilecard extends React.Component{
                             
                         
                         <div class="row">
-                            <div class="col-md-5"><MDBBtn href="#" onClick={this.handleUpdate}>Update</MDBBtn></div> 
-                            <div class="col-md-5"><MDBBtn href="#" onClick={this.handleCancel}>Cancel</MDBBtn></div>  
+                            <div class="col-md-5"><MDBBtn  id="update" onClick={this.handleUpdate}>Update</MDBBtn></div> 
+                            <div class="col-md-5"><MDBBtn id="cancel" style={{display:"block"}} onClick={this.handleCancel}>Cancel</MDBBtn></div>  
+                            {/* <div class="col-md-5"><MDBBtn id="done" style={{display:"none"}}onClick={this.handleDone}>Done</MDBBtn></div>  */}
                         </div>                         
                         </form>  
 

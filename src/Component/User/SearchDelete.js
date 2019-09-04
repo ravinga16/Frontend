@@ -12,13 +12,17 @@ export default class SearchDelete extends React.Component{
         }
     }
     componentDidMount() {
-        fetch('http://localhost:3000/dataservices/getallskills', { credentials: 'include' })
-          .then(response => console.log(response.json()))
-          .then(data => this.setState({ data }));
-      }
+        axios.create({withCredentials:true}).get('http://localhost:3000/dataservices/getallskills',{withCredentials:true})        
+        .then(response => {
+                console.log(response.data)
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
     render(){
         return(
             <h1>hi</h1>
         )
     }
-}
+    }

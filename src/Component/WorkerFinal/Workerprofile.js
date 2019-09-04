@@ -15,7 +15,8 @@ export default class Workerprofile extends React.Component{
         }
     }
     componentDidMount(){
-        axios.get('http://localhost:3000/worker/profile/7')
+        let varURL = "http://localhost:3000/worker/profile/" + localStorage.getItem("UserId");
+        axios.get(varURL)
         .then(response => {           
             //get the response sent by the API. setState to the response data this.setState({posts:response.data})
             this.setState({skills:response.data.result.recordsets[1]});   
