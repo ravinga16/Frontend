@@ -5,13 +5,14 @@ class Profilecard extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      useremail:"",
-      fname:"",
-      lname:"",
-      baseL:"",
-      imgURL:"",
-      status:"",
-      contactno:"",
+      UserEmail:"",
+      FirstName:'',
+      LastName:"",
+      BaseLocation:"",
+      Status:"",
+      Rate:"",
+      ContactNumber:"",
+      UserEmail:"",
       personalData:[],
       skills:[]
     }
@@ -23,7 +24,9 @@ class Profilecard extends React.Component{
   }
   //get worker details and update profileCard
   componentDidMount(){
-    axios.get('http://localhost:3000/worker/profile/143')
+    console.log("mounteddddddddddddddddddddddddddddddd");
+    let varUrl = "http://localhost:3000/worker/profile/"+localStorage.getItem("UserId");
+    axios.get(varUrl)
     .then(response => {
        
         //get the response sent by the API. setState to the response data this.setState({posts:response.data})
@@ -46,9 +49,11 @@ class Profilecard extends React.Component{
   }
   handleUpdate(event){
     event.preventDefault();
+    this.componentDidMount();
     console.log(this.state);
   }
   handleChange(e){
+    e.preventDefault();
     if (e.target.name != "Availability"){
       this.setState({[e.target.name]:e.target.value})
     }else{
@@ -75,6 +80,10 @@ class Profilecard extends React.Component{
                   <MDBCardTitle>Ravinga Sewwandi Perera</MDBCardTitle>
                   <MDBCardText>
                     I am capable of gas negima. Energic soul.<br></br>
+                    <div class="row">
+                      <div class="col-md-5">Email</div>
+                      <div class="col-md-5"><input name="UserEmail" style={{marginTop:"10px"}}placeholder={this.state.personalData.UserEmail} disabled></input><br></br></div>
+                    </div>
                     <div class="row">
                       <div class="col-md-5">FirstName</div>
                       <div class="col-md-5"><input name="FirstName" style={{marginTop:"10px"}}placeholder={this.state.personalData.FirstName} disabled></input><br></br></div>

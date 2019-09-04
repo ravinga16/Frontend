@@ -1,9 +1,15 @@
 import React from 'react';
+import Upcoming from './Upcoming';
+import WorkerNavBar from './WorkerNavBar';
 
 export default class appointment extends React.Component{
     render(){
         return(
-            <h1>Appointment class</h1>
+            <div>
+                <WorkerNavBar/>
+                <Upcoming/>
+            </div>
+            
         )
     }
 }

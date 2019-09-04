@@ -2,16 +2,17 @@ import React from 'react';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
 import axios from 'axios';
 
-class Userprofilecard extends React.Component{
+class WorkerProfileCard extends React.Component{
     constructor(props){
         super(props);
         this.state={
-          useremail:"",
-          fname:"",
-          lname:"",
-          baseL:"",     
-          contactno:""       
-        
+            fname:"",
+            lname :"",
+            baseL:"",
+            contactno:"", 
+            status:"",
+            personalData:[],
+            skills:[]       
         }
         this.handleEdit=this.handleEdit.bind(this);
         this.handleUpdate=this.handleUpdate.bind(this);
@@ -23,16 +24,14 @@ class Userprofilecard extends React.Component{
      //once the profile card is mounted
       componentDidMount(){
         let userId = localStorage.getItem('UserId');
-        let url = "http://localhost:3000/client/profile/"+userId;    
+        let url = "http://localhost:3000/worker/profile/"+userId;    
         axios.get(url,{withCredentials:true})
         .then(response => { 
-         console.log("componentdidmount method called");      
-         //setting all the received details at the beginning
-         this.setState({useremail:response.data.result.recordsets[0][0].UserEmail}) ;
-         this.setState({fname:response.data.result.recordsets[0][0].FirstName});
-         this.setState({lname:response.data.result.recordsets[0][0].LastName}) ;
-         this.setState({baseL:response.data.result.recordsets[0][0].BaseLocation}) ;
-         this.setState({contactno:response.data.result.recordsets[0][0].ContactNumber}) ;  
+         console.log("componentdidmount method called");   
+        this.setState({personalData:response.data.result.recordsets[0][0]})
+        this.setState({skills:response.data.result.recordsets[1]})
+        console.log(this.state.personalData.FirstName)
+        console.log(this.state.skills)          
           
         })
         .catch(error => {
@@ -55,16 +54,21 @@ class Userprofilecard extends React.Component{
       handleUpdate(event){
         event.preventDefault();
         console.log("update button event");
-        console.log(this.state)  ;       
-        axios.create({withCredentials:true}).put('http://localhost:3000/client/profile/57', this.state)
+        console.log(this.state)  ;
+        let a = {
+            "fname":"aa",
+            "lname":"sdasd",
+            "baseL":"dkfjfksjf"
+        } 
+        axios.put('http://localhost:3000/worker/profile/146', a)
         .then(response => {        
           console.log("response.data",response.data); 
-          document.getElementById('editProfile').style.display="none";
-          document.getElementById('profile').style.display="block";              
+                      
         })
         .catch(error => {
             console.log(error)
-        })        
+        }) 
+               
 
       }
       handleDone(e){       
@@ -87,25 +91,35 @@ class Userprofilecard extends React.Component{
                       <MDBCardText>
                         <div class="row">
                           <div class="col-md-5">User Email</div>
-                          <div class="col-md-5"><input name="UserEmail" style={{marginTop:"10px"}} placeholder={this.state.useremail} disabled></input><br></br></div>
+                          <div class="col-md-5"><input name="UserEmail" style={{marginTop:"10px"}} placeholder={this.state.personalData.UserEmail} disabled></input><br></br></div>
                         </div>
 
                         <div class="row">
                           <div class="col-md-5">FirstName</div>
-                          <div class="col-md-5"><input name="FirstName" style={{marginTop:"10px"}} placeholder={this.state.fname} disabled></input><br></br></div>
+                          <div class="col-md-5"><input name="FirstName" style={{marginTop:"10px"}} placeholder={this.state.personalData.FirstName} disabled></input><br></br></div>
                         </div>
                         <div class="row">
                           <div class="col-md-5">LastName</div>
-                          <div class="col-md-5"><input name="LastName" style={{marginTop:"10px"}} placeholder={this.state.lname} disabled></input><br></br></div>
+                          <div class="col-md-5"><input name="LastName" style={{marginTop:"10px"}} placeholder={this.state.personalData.LastName} disabled></input><br></br></div>
                         </div>
                         <div class="row">
                           <div class="col-md-5">BaseLocation</div>
-                          <div class="col-md-5"><input name="BaseLocation" style={{marginTop:"10px"}}placeholder={this.state.baseL} disabled></input><br></br></div>
+                          <div class="col-md-5"><input name="BaseLocation" style={{marginTop:"10px"}}placeholder={this.state.personalData.BaseLocation} disabled></input><br></br></div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-5">Status</div>
+                          <div class="col-md-5"><input name="Status" style={{marginTop:"10px"}}placeholder={this.state.personalData.Status} disabled></input><br></br></div>
                         </div>
 
                         <div class="row">
                           <div class="col-md-5">ContactNumber</div>
-                          <div class="col-md-5"><input name="ContactNumber" style={{marginTop:"10px"}} placeholder={this.state.contactno} disabled></input><br></br></div>
+                          <div class="col-md-5"><input name="ContactNumber" style={{marginTop:"10px"}} placeholder={this.state.ContactNumber} disabled></input><br></br></div>
+                        </div> 
+
+                        <div class="row">
+                          <div class="col-md-5">Rate</div>
+                          <div class="col-md-5"><input name="Rate" style={{marginTop:"10px"}} placeholder={this.state.contactno} disabled></input><br></br></div>
                         </div> 
                         </MDBCardText>
                       <MDBBtn href="#" onClick={this.handleEdit}>Edit Profile</MDBBtn>                  
@@ -121,19 +135,19 @@ class Userprofilecard extends React.Component{
                         <form>
                             <div class="row">
                             <div class="col-md-5">FirstName</div>
-                            <div class="col-md-5"><input name="fname" value={this.state.FirstName} style={{marginTop:"10px"}} placeholder={this.state.fname} onChange={this.handleChange}></input><br></br></div>
+                            <div class="col-md-5"><input name="fname" value={this.state.fname} style={{marginTop:"10px"}} placeholder={this.state.fname} onChange={this.handleChange}></input><br></br></div>
                             </div>
                             <div class="row">
                             <div class="col-md-5">LastName</div>
-                            <div class="col-md-5"><input name="lname" value={this.state.LastName}style={{marginTop:"10px"}} placeholder={this.state.lname} onChange={this.handleChange}></input><br></br></div>
+                            <div class="col-md-5"><input name="lname" value={this.state.lname}style={{marginTop:"10px"}} placeholder={this.state.lname} onChange={this.handleChange}></input><br></br></div>
                             </div>
                             <div class="row">
                             <div class="col-md-5">BaseLocation</div>
-                            <div class="col-md-5"><input name="baseL" value={this.state.BaseLocation}  style={{marginTop:"10px"}} placeholder={this.state.baseL} onChange={this.handleChange}></input><br></br></div>
+                            <div class="col-md-5"><input name="baseL" value={this.state.baseL}  style={{marginTop:"10px"}} placeholder={this.state.baseL} onChange={this.handleChange}></input><br></br></div>
                             </div>
                             <div class="row">
                             <div class="col-md-5">ContactNumber</div>
-                            <div class="col-md-5"><input name="contactno" value={this.state.ContactNumber} style={{marginTop:"10px"}} placeholder={this.state.contactno}  onChange={this.handleChange}></input><br></br></div>
+                            <div class="col-md-5"><input name="contactno" value={this.state.contactno} style={{marginTop:"10px"}} placeholder={this.state.contactno}  onChange={this.handleChange}></input><br></br></div>
                             </div>             
                                                                 
                         
@@ -155,4 +169,4 @@ class Userprofilecard extends React.Component{
         }
 }
 
-export default Userprofilecard;
+export default WorkerProfileCard;

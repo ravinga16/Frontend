@@ -7,22 +7,22 @@ import axios from 'axios';
 export default class WorkerNavBar extends React.Component {
   constructor(props){
     super(props);
-    this.handleClick=this.handleClick.bind(this);
+    // this.handleClick=this.handleClick.bind(this);
   }
-  handleClick(){
-    axios.post( "http://localhost:3000/user/logout")
-          .then(response => {       
-              console.log(response.data,"************************")   //  
-              localStorage.setItem("UserId","null") ;
-              localStorage.setItem("sessionEmail","null") ;
-              localStorage.setItem("sessionType","null") ;
+  // handleClick(){
+  //   axios.post( "http://localhost:3000/user/logout")
+  //         .then(response => {       
+  //             console.log(response.data,"************************")   //  
+  //             localStorage.setItem("UserId","null") ;
+  //             localStorage.setItem("sessionEmail","null") ;
+  //             localStorage.setItem("sessionType","null") ;
                     
-          })
-          .catch(error => {
-              console.log(error)//             
-          })
+  //         })
+  //         .catch(error => {
+  //             console.log(error)//             
+  //         })
           
-  }
+  // }
 state = {
   isOpen: false
 };
@@ -48,6 +48,9 @@ render() {
             <MDBNavItem>
               <MDBNavLink to="/worker/appointment/">Appointments</MDBNavLink>
             </MDBNavItem>
+            <MDBNavItem>
+              <MDBNavLink to="/worker/request/">Job Request</MDBNavLink>
+            </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right>
             <MDBNavItem>
@@ -63,10 +66,7 @@ render() {
           </MDBNavbarNav>   */}
         </MDBCollapse>
       </MDBNavbar>
-      <Switch>
-          {/* <Route path="/worker/" component={Profile} /> */}
-          <Route path="/worker/appointment/" component={appointment}/>
-      </Switch>
+      
     </Router>
     );
   }

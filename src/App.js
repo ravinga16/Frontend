@@ -8,6 +8,8 @@ import Home from './Component/Home';
 import SignIn from './Component/SignIn';
 import Search from './Component/User/Search';
 import SearchDelete from './Component/User/SearchDelete';
+import appointment from './Component/WorkerFinal/appointment';
+import Request from './Component/WorkerFinal/Request';
 
 function App() {
   return (
@@ -19,7 +21,12 @@ function App() {
         {/* <Route path="/client/search/" component={SearchDelete}></Route> */}
         <Route path="/client/search/" component={Search}></Route>
         <Route path ="/client/order/" component={MyBooking}></Route>
-        <Route path="/worker/profile/" component={Workerprofile}></Route>  
+        <Route path="/worker/profile/" component={Workerprofile}></Route> 
+        <Route path="/worker/appointment/" component={appointment}></Route> 
+        <Route path="/worker/request/" component={Request}></Route> 
+        
+        
+
     </Switch>        
    </Router>   
  
