@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 let startedOrderList = [];
+
 class UpcomingJobCard extends React.Component{
     constructor(props){
         super(props);
@@ -61,6 +62,8 @@ class UpcomingJobCard extends React.Component{
             "StartTime":currentTime
         }
         startedOrderList.push(startJob);
+        //save to the local storage
+        localStorage.setItem("startTime",currentTime)
         console.log(startedOrderList);
         axios.create({withCredentials:true}).put("http://localhost:3000/ordersWorker/startOrder", startJob)
         .then(response=>{

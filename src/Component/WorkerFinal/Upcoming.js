@@ -21,6 +21,12 @@ class Upcoming extends React.Component{
             console.log(response.data.result[0])
             this.setState({UpcomingJobs:response.data.result[0]})            
         })
+
+        if(localStorage.getItem("startTime")!=null){
+            document.getElementById("ongoing").style.display="block"
+        }
+
+
     }
 
     
@@ -71,7 +77,9 @@ class Upcoming extends React.Component{
                         {/* </MDBTableBody> */}
                     </MDBTable>
                 </div>
-                
+                        <div id ="ongoing" style={{display:"none"}}>
+                            <h1>{localStorage.getItem("startTime")}</h1>
+                        </div>                
             </div>
             
                    
@@ -81,6 +89,5 @@ class Upcoming extends React.Component{
     }
 }
  
-
 
 export default Upcoming;
