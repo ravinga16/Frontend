@@ -52,6 +52,7 @@ class UpcomingJobCard extends React.Component{
      //start button event
      startJob(OrderId, e){
         e.preventDefault();
+        document.getElementById(OrderId).style.display="block";
         let tempDate = new Date();
         let currentTime = tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds();
      
@@ -61,10 +62,10 @@ class UpcomingJobCard extends React.Component{
         }
         startedOrderList.push(startJob);
         console.log(startedOrderList);
-        // axios.create({withCredentials:true}).put("http://localhost:3000/ordersWorker/startOrder", startJob)
-        // .then(response=>{
-        //     console.log(response.data)
-        // })
+        axios.create({withCredentials:true}).put("http://localhost:3000/ordersWorker/startOrder", startJob)
+        .then(response=>{
+            console.log(response.data)
+        })
        
          
      }
@@ -89,10 +90,10 @@ class UpcomingJobCard extends React.Component{
 
         console.log(endJob)
 
-        // axios.create({withCredentials:true}).put("http://localhost:3000/ordersWorker/startOrder", endJob)
-        // .then(response=>{
-        //     console.log(response.data)
-        // })
+        axios.create({withCredentials:true}).put("http://localhost:3000/ordersWorker/endOrder", endJob)
+        .then(response=>{
+            console.log(response.data)
+        })
 
          
      }
@@ -100,7 +101,7 @@ class UpcomingJobCard extends React.Component{
     
     render(){
         return (
-            <tr id={this.props.OrderId} >
+            <tr  >
                 <td>{this.props.OrderId}</td>
                 <td>{this.props.ContactNumber}</td>
                 <td>{this.props.SkillTitle}</td>
@@ -115,7 +116,7 @@ class UpcomingJobCard extends React.Component{
                 <td>{this.props.HourlyCharge}</td>           
                 <td><button onClick={(e) => this.cancelJob(this.props.OrderId, e)}>Cancel</button></td>
                 <td><button onClick={(e) => this.startJob(this.props.OrderId, e)}>Start</button></td>
-                <td><button id="this.props.OrderId" onClick={(e) => this.endJob(this.props.OrderId, e)} >End</button></td>                    
+                <td><button id={this.props.OrderId} onClick={(e) => this.endJob(this.props.OrderId, e)} style={{display:"none"}} >End</button></td>                    
             </tr>
  
           )

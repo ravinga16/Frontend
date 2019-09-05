@@ -17,9 +17,30 @@ class WorkerProfileCard extends React.Component{
         this.handleEdit=this.handleEdit.bind(this);
         this.handleUpdate=this.handleUpdate.bind(this);
         this.handleCancel=this.handleCancel.bind(this);
-        this.handleChange=this.handleChange.bind(this);
+        // this.handleChange=this.handleChange.bind(this);
         this.handleDone=this.handleDone.bind(this);
+
+        this.handlefname= this.handlefname.bind(this);
+        this.handlelname=this.handlelname.bind(this);
+        this.handlebasel=this.handlebasel.bind(this);
+        this.handlecontactno=this.handlecontactno.bind(this);
        
+      }
+
+      handlefname(e){
+        this.setState({fname:e.target.value})
+      }
+
+      handlelname(e){
+        this.setState({lname:e.target.value})
+      }
+
+      handlebasel(e){
+        this.setState({baseL:e.target.value})
+      }
+
+      handlecontactno(e){
+        this.setState({contactno:e.target.value})
       }
      //once the profile card is mounted
       componentDidMount(){
@@ -50,17 +71,22 @@ class WorkerProfileCard extends React.Component{
         document.getElementById('editProfile').style.display="none";
         document.getElementById('profile').style.display="block";
       }
+
       //when update button click
       handleUpdate(event){
         event.preventDefault();
         console.log("update button event");
         console.log(this.state)  ;
+
         let a = {
-            "fname":"aa",
-            "lname":"sdasd",
-            "baseL":"dkfjfksjf"
-        } 
-        axios.put('http://localhost:3000/worker/profile/146', a)
+          fname: this.state.fname,
+          lname:this.state.lname,
+          baseL: this.state.baseL,
+          contactno : this.state.contactno
+         
+      }
+      console.log(a)
+        axios.put('http://localhost:3000/worker/profile/143', a)
         .then(response => {        
           console.log("response.data",response.data); 
                       
@@ -75,12 +101,15 @@ class WorkerProfileCard extends React.Component{
         document.getElementById('editProfile').style.display="none";    
         document.getElementById('profile').style.display="block";    
       }
-      handleChange(e){        
-          if(e.target.value!=""){
-            this.setState({[e.target.name]:e.target.value})
-          }
+
+      // handleChange(e){        
+      //     if(e.target.value!=""){
+      //       this.setState({[e.target.name]:e.target.value})
+      //     }
                   
-      }
+      // }
+
+
         render(){          
             return (
                 <MDBCol>
@@ -135,19 +164,19 @@ class WorkerProfileCard extends React.Component{
                         <form>
                             <div class="row">
                             <div class="col-md-5">FirstName</div>
-                            <div class="col-md-5"><input name="fname" value={this.state.fname} style={{marginTop:"10px"}} placeholder={this.state.fname} onChange={this.handleChange}></input><br></br></div>
+                            <div class="col-md-5"><input value={this.state.fname} style={{marginTop:"10px"}} onChange={this.handlefname}></input><br></br></div>
                             </div>
                             <div class="row">
                             <div class="col-md-5">LastName</div>
-                            <div class="col-md-5"><input name="lname" value={this.state.lname}style={{marginTop:"10px"}} placeholder={this.state.lname} onChange={this.handleChange}></input><br></br></div>
+                            <div class="col-md-5"><input value={this.state.lname}style={{marginTop:"10px"}} placeholder={this.state.lname} onChange={this.handlelname}></input><br></br></div>
                             </div>
                             <div class="row">
                             <div class="col-md-5">BaseLocation</div>
-                            <div class="col-md-5"><input name="baseL" value={this.state.baseL}  style={{marginTop:"10px"}} placeholder={this.state.baseL} onChange={this.handleChange}></input><br></br></div>
+                            <div class="col-md-5"><input value={this.state.baseL}  style={{marginTop:"10px"}} placeholder={this.state.baseL} onChange={this.handlebasel}></input><br></br></div>
                             </div>
                             <div class="row">
                             <div class="col-md-5">ContactNumber</div>
-                            <div class="col-md-5"><input name="contactno" value={this.state.contactno} style={{marginTop:"10px"}} placeholder={this.state.contactno}  onChange={this.handleChange}></input><br></br></div>
+                            <div class="col-md-5"><input  value={this.state.contactno} style={{marginTop:"10px"}} placeholder={this.state.contactno}  onChange={this.handlecontactno}></input><br></br></div>
                             </div>             
                                                                 
                         
@@ -157,7 +186,7 @@ class WorkerProfileCard extends React.Component{
                         <div class="row">
                             <div class="col-md-5"><MDBBtn  id="update" onClick={this.handleUpdate}>Update</MDBBtn></div> 
                             <div class="col-md-5"><MDBBtn id="cancel" style={{display:"block"}} onClick={this.handleCancel}>Cancel</MDBBtn></div>  
-                            {/* <div class="col-md-5"><MDBBtn id="done" style={{display:"none"}}onClick={this.handleDone}>Done</MDBBtn></div>  */}
+                       
                         </div>                         
                         </form>  
 

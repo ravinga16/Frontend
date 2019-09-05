@@ -28,7 +28,7 @@ class Upcoming extends React.Component{
         return (
             <div>
                 <WorkerNavBar/>
-                <div style={{width: "90%", marginLeft: "5%" , marginTop:"2.5%", borderStyle:"solid", borderWidth:"3px",borderColor:"#00796b"}}>
+                <div style={{width: "90%", marginLeft: "5%" , marginTop:"2.5%"}}>
                     <MDBTable>
                         <MDBTableHead color="teal darken-2" style={{color:"white", width: "90%"}} >
                             <tr>
@@ -49,7 +49,7 @@ class Upcoming extends React.Component{
                                 <th>End Job</th>
                             </tr>
                         </MDBTableHead>
-                        <MDBTableBody>
+                        {/* <MDBTableBody> */}
                             {
                                 this.state.UpcomingJobs.length ? this.state.UpcomingJobs.map(job => <UpcomingJobCard key={job.OrderId}
                                     OrderId={job.OrderId}
@@ -68,7 +68,7 @@ class Upcoming extends React.Component{
                             }
                           
                            
-                        </MDBTableBody>
+                        {/* </MDBTableBody> */}
                     </MDBTable>
                 </div>
                 
