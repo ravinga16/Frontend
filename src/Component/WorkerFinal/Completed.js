@@ -25,8 +25,7 @@ export default class Completed extends React.Component {
         return (
             <div > 
                 <WorkerNavBar />
-                <div style={{ width: "100%", marginLeft: "5%" , marginTop:"2.5%", borderStyle:"solid", borderWidth:"3px",borderColor:"#00796b"}}>
-
+                <div style={{ width: "90%", marginLeft: "2%" , marginTop:"2.5%"}}>
                     <MDBTable>
                         <MDBTableHead color="teal darken-2" style={{ color: "white" }}>
                             <tr>

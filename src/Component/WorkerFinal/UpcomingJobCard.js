@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 
-
+let startedOrderList = [];
 class UpcomingJobCard extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            reason:''
+            reason:'' ,
+            isEnabled:true           
         }
         this.cancelJob=this.cancelJob.bind(this);
         this.startJob=this.startJob.bind(this);
@@ -51,14 +52,47 @@ class UpcomingJobCard extends React.Component{
      //start button event
      startJob(OrderId, e){
         e.preventDefault();
+        let tempDate = new Date();
+        let currentTime = tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds();
+     
         let startJob  = {
-            "OrderId": 1124,
-            "StartTime":"16:15"
+            "OrderId": OrderId,
+            "StartTime":currentTime
         }
-        axios.create({withCredentials:true}).put("http://localhost:3000/ordersWorker/startOrder", startJob)
-        .then(response=>{
-            console.log(response.data)
-        })
+        startedOrderList.push(startJob);
+        console.log(startedOrderList);
+        // axios.create({withCredentials:true}).put("http://localhost:3000/ordersWorker/startOrder", startJob)
+        // .then(response=>{
+        //     console.log(response.data)
+        // })
+       
+         
+     }
+
+      //end button event
+      endJob(OrderId, e){
+        e.preventDefault();
+        let tempDate = new Date();
+        let startTime;
+        let endTime = tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds();
+        for(let i=0;i<startedOrderList.length;i++){
+            if(startedOrderList[i].OrderId==OrderId){
+                startTime = startedOrderList[i].StartTime
+            }
+        }
+
+        let endJob  = {
+            "OrderId": OrderId,
+            "StartTime":startTime,
+            "EndTime":endTime
+        }
+
+        console.log(endJob)
+
+        // axios.create({withCredentials:true}).put("http://localhost:3000/ordersWorker/startOrder", endJob)
+        // .then(response=>{
+        //     console.log(response.data)
+        // })
 
          
      }
@@ -81,8 +115,7 @@ class UpcomingJobCard extends React.Component{
                 <td>{this.props.HourlyCharge}</td>           
                 <td><button onClick={(e) => this.cancelJob(this.props.OrderId, e)}>Cancel</button></td>
                 <td><button onClick={(e) => this.startJob(this.props.OrderId, e)}>Start</button></td>
-                <td><button onClick={(e) => this.endJob(this.props.OrderId, e)}>End</button></td>
-                    
+                <td><button id="this.props.OrderId" onClick={(e) => this.endJob(this.props.OrderId, e)} >End</button></td>                    
             </tr>
  
           )

@@ -25,7 +25,7 @@ export default class Request extends React.Component{
         return(
             <div>
                 <WorkerNavBar/>
-                <div style={{ width: "90%", marginLeft: "5%" , marginTop:"2.5%", borderStyle:"solid", borderWidth:"3px",borderColor:"#006064 "}}>
+                <div style={{ width: "90%", marginLeft: "5%" , marginTop:"2.5%"}}>
                 <MDBTable>
                 <MDBTableHead color=" cyan darken-4" textWhite>
                     <tr>
