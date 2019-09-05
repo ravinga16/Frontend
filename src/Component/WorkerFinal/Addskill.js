@@ -12,7 +12,10 @@ export default class Addskill extends React.Component{
         this.state={skillId:'',
                     description:"",
                     hrate:"",
-                    skillSelected:''                
+                    skillSelected:'' ,
+                    todayTotal:'',
+                    upcomingTotal:'',
+                    jobRequstTotal:'',              
                 }
     
         
@@ -63,17 +66,7 @@ export default class Addskill extends React.Component{
         //     "skillObj": state.skillObj.concat({"skillId":this.state.skillId,"description":this.state.description,"hrate":this.state.hrate})
         // }),()=>{
         //     console.log("after concat ",this.state)
-        
-        //     axios.post( varUrl, this.state)
-        //     .then(response => {
-        //         console.log(response)
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
-        // })
 
-        
         //Preparing the skill object modal to send to the backend
         let skillObject = {"skillObj" : [ {
             "skillId": this.state.skillId,
@@ -106,6 +99,7 @@ export default class Addskill extends React.Component{
                             onChange={this.onChangeSkillSelected}
                             options={availableSkills}
                             placeholder="Skills"
+                            
                           />
                         <br></br>  <br></br>              
                         <input
@@ -122,6 +116,7 @@ export default class Addskill extends React.Component{
                             className="form-control"
                             placeholder="Hourly Rate"
                             onChange={this.handleChange}
+                            required
                         />
                         <div className="text-center mt-4">
                             <MDBBtn color="indigo" type="submit" >ADD</MDBBtn>

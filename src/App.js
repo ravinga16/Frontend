@@ -10,6 +10,8 @@ import Search from './Component/User/Search';
 import SearchDelete from './Component/User/SearchDelete';
 import appointment from './Component/WorkerFinal/appointment';
 import Request from './Component/WorkerFinal/Request';
+import Completed from './Component/WorkerFinal/Completed';
+import Upcoming from './Component/WorkerFinal/Upcoming';
 
 function App() {
   return (
@@ -21,9 +23,13 @@ function App() {
         {/* <Route path="/client/search/" component={SearchDelete}></Route> */}
         <Route path="/client/search/" component={Search}></Route>
         <Route path ="/client/order/" component={MyBooking}></Route>
+        
         <Route path="/worker/profile/" component={Workerprofile}></Route> 
         <Route path="/worker/appointment/" component={appointment}></Route> 
+        <Route path="/worker/completed/" component={Completed}></Route> 
         <Route path="/worker/request/" component={Request}></Route> 
+        <Route path="/worker/upcoming/" component={Upcoming}></Route>
+  
         
         
 

@@ -85,6 +85,7 @@ class Userprofilecard extends React.Component{
                     <MDBCardBody>
                       <MDBCardTitle>Ravinga Sewwandi Perera</MDBCardTitle>
                       <MDBCardText>
+                        <form>
                         <div class="row">
                           <div class="col-md-5">User Email</div>
                           <div class="col-md-5"><input name="UserEmail" style={{marginTop:"10px"}} placeholder={this.state.useremail} disabled></input><br></br></div>
@@ -106,9 +107,11 @@ class Userprofilecard extends React.Component{
                         <div class="row">
                           <div class="col-md-5">ContactNumber</div>
                           <div class="col-md-5"><input name="ContactNumber" style={{marginTop:"10px"}} placeholder={this.state.contactno} disabled></input><br></br></div>
-                        </div> 
-                        </MDBCardText>
-                      <MDBBtn href="#" onClick={this.handleEdit}>Edit Profile</MDBBtn>                  
+                        </div>                         
+                      <MDBBtn href="#" onClick={this.handleEdit}>Edit Profile</MDBBtn> 
+                        </form>
+                        
+                      </MDBCardText>                 
                     </MDBCardBody>
                   </MDBCard>
     
@@ -118,7 +121,7 @@ class Userprofilecard extends React.Component{
                       <MDBCardTitle>Ravinga Sewwandi Perera</MDBCardTitle>
                       <MDBCardText>
                    
-                        <form>
+                        <form onSubmit={this.handleUpdate}>
                             <div class="row">
                             <div class="col-md-5">FirstName</div>
                             <div class="col-md-5"><input name="fname" value={this.state.FirstName} style={{marginTop:"10px"}} placeholder={this.state.fname} onChange={this.handleChange}></input><br></br></div>
@@ -141,7 +144,7 @@ class Userprofilecard extends React.Component{
                             
                         
                         <div class="row">
-                            <div class="col-md-5"><MDBBtn  id="update" onClick={this.handleUpdate}>Update</MDBBtn></div> 
+                            <div class="col-md-5"><MDBBtn  id="update" type="submit" >Update</MDBBtn></div> 
                             <div class="col-md-5"><MDBBtn id="cancel" style={{display:"block"}} onClick={this.handleCancel}>Cancel</MDBBtn></div>  
                             {/* <div class="col-md-5"><MDBBtn id="done" style={{display:"none"}}onClick={this.handleDone}>Done</MDBBtn></div>  */}
                         </div>                         

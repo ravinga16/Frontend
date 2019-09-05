@@ -1,6 +1,6 @@
 import React from "react";
 import {
-MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline} from "mdbreact";
+MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline, MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem} from "mdbreact";
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import appointment from './appointment';
 import axios from 'axios';
@@ -43,11 +43,21 @@ render() {
           <MDBNavbarNav left>
             {/* <MDBNavItem active> */}
             <MDBNavItem >
-              <MDBNavLink to="/worker/">Home</MDBNavLink>
+              <MDBNavLink to="/worker/profile/">Home</MDBNavLink>
             </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink to="/worker/appointment/">Appointments</MDBNavLink>
+           {/*  */}
+           <MDBNavItem>
+              <MDBDropdown>
+                <MDBDropdownToggle nav caret>
+                  <span className="mr-2">Appointment</span>
+                </MDBDropdownToggle>
+                <MDBDropdownMenu>
+                  <MDBDropdownItem><Link to="/worker/upcoming/">Upcoming Jobs</Link></MDBDropdownItem>
+                  <MDBDropdownItem><Link to="/worker/completed/">Completed Jobs</Link></MDBDropdownItem>                 
+                </MDBDropdownMenu>
+              </MDBDropdown>
             </MDBNavItem>
+            {/*  */}
             <MDBNavItem>
               <MDBNavLink to="/worker/request/">Job Request</MDBNavLink>
             </MDBNavItem>

@@ -1,36 +1,34 @@
-import React from 'react';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
-import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-import UpcomingJobCard from './UpcomingJobCard';
+import React from "react";
 import axios from 'axios';
-import WorkerNavBar from './WorkerNavBar';
-class Upcoming extends React.Component{
-    constructor(props){
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+import CompletedJobCard from "./CompletedJobCard";
+import WorkerNavBar from "./WorkerNavBar";
+export default class Completed extends React.Component {
+    //get completed jobs list from backend
+    //store to the state
+    //loop through element and display
+    constructor(props) {
         super(props);
-        this.state={
-            UpcomingJobs:[]
-        }   
-
-    }
-    //Getting the upcoming job list for the worker
-    componentDidMount(){
-        // let varUrl = "http://localhost:3000/ordersWorker/getUpComingOrders/"+localStorage.getItem("UserId");        
-        axios.create({withCredentials:true}).get("http://localhost:3000/ordersWorker/getUpComingOrders/"+3)
-        .then(response => {
-            //response.data.result[0] <- this gives [{},{}....]
-            console.log(response.data.result[0])
-            this.setState({UpcomingJobs:response.data.result[0]})            
-        })
+        this.state = {
+            completed: []
+        }
     }
 
-    
-    render(){
+    componentDidMount() {
+        axios.get("http://localhost:3000/ordersWorker/getCompletedOrders/3")
+            .then(response => {
+                console.log(response.data.result)//
+                this.setState({ completed: response.data.result[0] })
+            })
+    }
+    render() {
         return (
-            <div>
-                <WorkerNavBar/>
-                <div style={{width: "90%", marginLeft: "5%" , marginTop:"2.5%", borderStyle:"solid", borderWidth:"3px",borderColor:"#00796b"}}>
+            <div > 
+                <WorkerNavBar />
+                <div style={{ width: "100%", marginLeft: "5%" , marginTop:"2.5%", borderStyle:"solid", borderWidth:"3px",borderColor:"#00796b"}}>
+
                     <MDBTable>
-                        <MDBTableHead color="teal darken-2" style={{color:"white", width: "90%"}} >
+                        <MDBTableHead color="teal darken-2" style={{ color: "white" }}>
                             <tr>
                                 <th>OrderId</th>
                                 <th>ContactNumber</th>
@@ -44,14 +42,11 @@ class Upcoming extends React.Component{
                                 <th>LastName</th>
                                 <th>Duration</th>
                                 <th>HourlyCharge</th>
-                                <th>Cancel Job</th>
-                                <th>Start Job</th>
-                                <th>End Job</th>
                             </tr>
                         </MDBTableHead>
                         <MDBTableBody>
                             {
-                                this.state.UpcomingJobs.length ? this.state.UpcomingJobs.map(job => <UpcomingJobCard key={job.OrderId}
+                                this.state.completed.length ? this.state.completed.map(job => <CompletedJobCard
                                     OrderId={job.OrderId}
                                     ContactNumber={job.ContactNumber}
                                     SkillTitle={job.SkillTitle}
@@ -64,23 +59,15 @@ class Upcoming extends React.Component{
                                     LastName={job.LastName}
                                     Duration={job.Duration}
                                     HourlyCharge={job.HourlyCharge}
+
                                 />) : null
                             }
-                          
-                           
                         </MDBTableBody>
                     </MDBTable>
                 </div>
-                
             </div>
-            
-                   
-          
-            
-          )
+
+
+        )
     }
 }
- 
-
-
-export default Upcoming;

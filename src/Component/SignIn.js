@@ -37,7 +37,8 @@ class SignIn extends React.Component{
               console.log(response.data.message)        
              
               if(response.data.message=="User Created"){
-                this.props.history.push('/');
+                // this.props.history.push('/');
+                console.log("user created")
               }else if(response.data.message=="User Already Exists"){
                   alert("User Name Already Taken. Check Another");
               }

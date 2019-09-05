@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import RequestCard from './RequestCard';
-
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+import WorkerNavBar from './WorkerNavBar';
 
 export default class Request extends React.Component{
     constructor(props){
@@ -12,6 +13,8 @@ export default class Request extends React.Component{
     }
 
     componentDidMount(){
+    
+        // axios.get("http://localhost:3000/requests/pool/worker/"+localStorage.getItem("UserId"))
         axios.get("http://localhost:3000/requests/pool/worker/3")
         .then(response=>{
             console.log(response.data.result[0])//
@@ -21,18 +24,40 @@ export default class Request extends React.Component{
     render(){
         return(
             <div>
-                 {
-                    this.state.request.length ? this.state.request.map(req => <RequestCard
-                        ClientId={req.ClientId}
-                        StartTime={req.StartTime}
-                        ExpectedEndTime={req.ExpectedEndTime}
-                        OrderDate={req.OrderDate}
-                        OrderLocation={req.OrderLocation}
-                        SkillId={req.SkillId}
-                   
-                    />) : null
-                }
+                <WorkerNavBar/>
+                <div style={{ width: "90%", marginLeft: "5%" , marginTop:"2.5%", borderStyle:"solid", borderWidth:"3px",borderColor:"#006064 "}}>
+                <MDBTable>
+                <MDBTableHead color=" cyan darken-4" textWhite>
+                    <tr>
+                        <th>RequestId</th>
+                        <th>CreatedDate</th>
+                        <th>ClientId</th>
+                        <th>StartTime</th>
+                        <th>ExpectedEndTime</th>
+                        <th>OrderDate</th>
+                        <th>OrderLocation</th>
+                        <th>SkillId</th>                   
+                        <th>Accept</th> 
+                    </tr>
+                </MDBTableHead>
+                <MDBTableBody>
+                    {
+                        this.state.request.length? this.state.request.map(req => <RequestCard 
+                            RequestId={req.RequestId}
+                            ClientId={req.ClientId}
+                            StartTime={req.StartTime}
+                            ExpectedEndTime={req.ExpectedEndTime}
+                            OrderDate={req.OrderDate}
+                            OrderLocation={req.OrderLocation}
+                            SkillId={req.SkillId} />):null                        
+                    }
+               
+                </MDBTableBody>
+             </MDBTable>
+                </div>
+            
             </div>
+            
         )
     }
 }

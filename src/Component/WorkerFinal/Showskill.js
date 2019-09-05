@@ -5,12 +5,17 @@ export default class Showskill extends React.Component{
     constructor(props){
       super(props);
       this.state={
-        
+          skillId:"" 
       }
-      this.handleDelete=this.handleDelete.bind(this);
+ 
     }
-    handleDelete(){
-      
+    deleteSkill(SkillId, e){
+      e.preventDefault();
+      console.log(SkillId)
+      axios.create({withCredentials:true}).delete("http://localhost:3000/worker/skill/143", { data: { "skillId": SkillId } })
+      .then(response=>{
+        console.log(response.data);
+      })
     }
     render(){
       
@@ -24,7 +29,7 @@ export default class Showskill extends React.Component{
                       <div class="col-md-5">{this.props.Description}
                    <br></br>
                    {this.props.HourlyCharge}</div>
-                      <div class="col-md-5"> <MDBBtn >Delete</MDBBtn></div>
+                      <div class="col-md-5"> <button onClick={(e) => this.deleteSkill(this.props.SkillId, e)} style={{height:"45px", width:"80px"}}>Delete</button></div>
                     </div>
                    
                   </MDBCardText>
