@@ -1,5 +1,5 @@
 import React from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBCardTitle } from "mdbreact";
+import {  MDBRow, MDBCol, MDBCardTitle } from "mdbreact";
 import AcceptedBooking from "./Acceptedbooking";
 import CancelledBooking from "./Cancelledbooking";
 import CompletedBooking from "./Completedbooking";

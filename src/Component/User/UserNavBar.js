@@ -8,19 +8,20 @@ export default class UserNavBar extends Component {
     super(props);
     this.handleClick=this.handleClick.bind(this);
   }
+  
   handleClick(){
     axios.post( "http://localhost:3000/user/logout")
           .then(response => {       
               console.log(response.data,"************************")   //  
-              localStorage.setItem("UserId","null") ;
-              localStorage.setItem("sessionEmail","null") ;
-              localStorage.setItem("sessionType","null") ;
+              localStorage.removeItem("UserId") ;
+              localStorage.removeItem("sessionEmail") ;
+              localStorage.removeItem("sessionType") ;
                     
           })
           .catch(error => {
               console.log(error)//             
           })
-          
+                    
   }
 state = {
   isOpen: false

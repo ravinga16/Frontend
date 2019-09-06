@@ -20,10 +20,10 @@ function App() {
     <Switch>
         <Route exact path="/"  component={Home} ></Route>       
         <Route path="/signin/" component={SignIn}></Route>
-        <Route path="/client/profile/" component={UserProfile}></Route>
+        <PrivateRoute path="/client/profile/" component={UserProfile}></PrivateRoute>
         {/* <Route path="/client/search/" component={SearchDelete}></Route> */}
-        <Route path="/client/search/" component={Search}></Route>
-        <Route path ="/client/order/" component={MyBooking}></Route>
+        <PrivateRoute path="/client/search/" component={Search}></PrivateRoute>
+        <PrivateRoute path ="/client/order/" component={MyBooking}></PrivateRoute>
         
         <PrivateRoute path="/worker/profile/" component={Workerprofile}></PrivateRoute> 
         <PrivateRoute path="/worker/appointment/" component={appointment}></PrivateRoute> 

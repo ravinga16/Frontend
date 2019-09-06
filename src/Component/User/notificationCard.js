@@ -7,9 +7,9 @@ export default class NotificationCard extends React.Component{
         return (
      
               <div style={{ width: "30rem" ,marginTop:"25px"}}>             
-                 <Notification title="pol gas negima" amount="90"/>
-                 <Notification title="gas bada gema" amount="90"/>
-                 <Notification title="painting the house" amount="900"/>        
+                 <Notification title="" amount=""/>
+                 <Notification title="" amount=""/>
+                 <Notification title="" amount=""/>        
               </div>
  
           )

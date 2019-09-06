@@ -31,7 +31,7 @@ class SignIn extends React.Component{
     }
     handleSubmit(event){
         event.preventDefault();
-        console.log(this.state);    //
+        console.log("signin component state object ,",this.state);    //
         axios.post( "http://localhost:3000/user/register/", this.state)
           .then(response => {
               console.log(response.data.message)        

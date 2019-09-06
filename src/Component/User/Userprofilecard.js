@@ -81,19 +81,19 @@ class Userprofilecard extends React.Component{
     handleSubmit(e){
         e.preventDefault();
 
-        if(this.state.firstName==""){
-          this.setState({firstName:this.state.personalData.FirstName})
-        }
-        if(this.state.lastName==""){
-          this.setState({lastName:this.state.personalData.LastName})
-        }
-        if(this.state.skillSelected==undefined){
-          this.setState({skillSelected:this.state.personalData.BaseLocation})
-        }
+        // if(this.state.firstName==""){
+        //   this.setState({firstName:this.state.personalData.FirstName})
+        // }
+        // if(this.state.lastName==""){
+        //   this.setState({lastName:this.state.personalData.LastName})
+        // }
+        // if(this.state.skillSelected==undefined){
+        //   this.setState({skillSelected:this.state.personalData.BaseLocation})
+        // }
        
-        if(this.state.contactNumber==""){
-          this.setState({contactNumber:this.state.personalData.ContactNumber})
-        }
+        // if(this.state.contactNumber==""){
+        //   this.setState({contactNumber:this.state.personalData.ContactNumber})
+        // }
         const workerDetails = {
             fname: this.state.firstName,
             lname: this.state.lastName,
@@ -201,6 +201,7 @@ class Userprofilecard extends React.Component{
                           name="firstName"
                           onChange={this.handleChange}
                           className="form-control"
+                          required
                         />
                         <br />
 
@@ -211,6 +212,7 @@ class Userprofilecard extends React.Component{
                           name="lastName"
                           onChange={this.handleChange}
                           className="form-control"
+                          required
                         />
                         <br />
 
@@ -230,6 +232,7 @@ class Userprofilecard extends React.Component{
                           name="contactNumber"
                           onChange={this.handleChange}
                           className="form-control"
+                          required
                         />
                         <br />
 
