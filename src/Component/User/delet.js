@@ -27,7 +27,7 @@ export default class Search extends React.Component{
             startTime:'',
             endTime:'',
             availableWorkers:[],
-            result:[0]
+            result:[]
         }
         this.handleBookLater=this.handleBookLater.bind(this);
         this.handleBookNow=this.handleBookNow.bind(this);
@@ -111,21 +111,10 @@ export default class Search extends React.Component{
         axios.create({withCredentials:true}).post('http://localhost:3000/bookLater/search', searchWorkerReq)
         .then(response => {
             console.log("search worker button press")
-            console.log(response.data)
-            if(response.data.message=="No workers available"){
-                alert("No workers available")
-                document.getElementById('sendRequest').style.display="none";
-            }else if(response.data.message=="OK"){
-                if(response.data.result.Workers.length > 0){
-                    this.setState({result:response.data.result})
-                    this.setState({availableWorkers:response.data.result.Workers})
-                }
-            }
             // this.setState({availableWorkers:response.data.result.Workers})
-
-            
-            // console.log(this.state.result.length)
-            
+           
+            this.setState({result:response.data.result})
+            this.setState({availableWorkers:response.data.result.Workers})
         })
         .catch(error => {
             console.log(error);
@@ -223,8 +212,6 @@ export default class Search extends React.Component{
                         {
                             this.state.availableWorkers.length ? this.state.availableWorkers.map(worker => <AvailableWorkerCard key={worker.workerId} workerId={worker.workerId} firstName={worker.firstName}  lastName={worker.lastName} baseLocation={worker.baseLocation} rate={worker.rate} skillDescription={worker.skillDescription} hourlyCharge={worker.hourlyCharge}  />):null
                         }
-
-              
                     </MDBCol>
                      {/* if user select book now option */}
                     <MDBCard id="map" style={{ display: "none" }}>

@@ -21,7 +21,7 @@ export default class Showskill extends React.Component{
       
         return (
             <MDBCol style={{marginTop:"15px"}}>
-              <MDBCard style={{ width: "30rem" }}>                
+              <MDBCard style={{ width: "100%" }}>                
                 <MDBCardBody>
                   <MDBCardTitle>{this.props.SkillTitle} {this.props.SkillId}</MDBCardTitle>
                   <MDBCardText>

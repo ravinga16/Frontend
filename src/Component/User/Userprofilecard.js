@@ -1,154 +1,244 @@
 import React from 'react';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
 import axios from 'axios';
-
+import Select from 'react-select';
+let baselocations = [];
 class Userprofilecard extends React.Component{
     constructor(props){
         super(props);
         this.state={
-          useremail:"",
-          fname:"",
-          lname:"",
-          baseL:"",     
-          contactno:""       
-        
+          skillSelected:'',
+          firstName:"",
+          lastName:"",
+          baseLocation:"",
+          contactNumber:"",
+          personalData:[],
         }
-        this.handleEdit=this.handleEdit.bind(this);
-        this.handleUpdate=this.handleUpdate.bind(this);
-        this.handleCancel=this.handleCancel.bind(this);
         this.handleChange=this.handleChange.bind(this);
-        this.handleDone=this.handleDone.bind(this);
+        this.handleSubmit=this.handleSubmit.bind(this);
+        this.handleEdit=this.handleEdit.bind(this);
+        this.handleCancel=this.handleCancel.bind(this);
        
       }
      //once the profile card is mounted
       componentDidMount(){
-        let userId = localStorage.getItem('UserId');
-        let url = "http://localhost:3000/client/profile/"+userId;    
-        axios.get(url,{withCredentials:true})
-        .then(response => { 
-         console.log("componentdidmount method called");      
-         //setting all the received details at the beginning
-         this.setState({useremail:response.data.result.recordsets[0][0].UserEmail}) ;
-         this.setState({fname:response.data.result.recordsets[0][0].FirstName});
-         this.setState({lname:response.data.result.recordsets[0][0].LastName}) ;
-         this.setState({baseL:response.data.result.recordsets[0][0].BaseLocation}) ;
-         this.setState({contactno:response.data.result.recordsets[0][0].ContactNumber}) ;  
-          
-        })
-        .catch(error => {
-            console.log(error)
-        })
-     }
-     //handling events
-     
-     //when edit profile button click
-      handleEdit(){
-        document.getElementById('profile').style.display="none";
-        document.getElementById('editProfile').style.display="block";
-      }
-      //when cancel button click
-      handleCancel(){
-        document.getElementById('editProfile').style.display="none";
-        document.getElementById('profile').style.display="block";
-      }
-      //when update button click
-      handleUpdate(event){
-        event.preventDefault();
-        console.log("update button event");
-        console.log(this.state)  ;       
-        axios.create({withCredentials:true}).put('http://localhost:3000/client/profile/57', this.state)
-        .then(response => {        
-          console.log("response.data",response.data); 
-          document.getElementById('editProfile').style.display="none";
-          document.getElementById('profile').style.display="block";              
-        })
-        .catch(error => {
-            console.log(error)
-        })        
 
+        //base location
+        axios
+            .get("http://localhost:3000/dataservices/getalllocations", {
+                withCredentials: true
+            })
+            .then(res => {
+                let i = 0;
+                let tempArray = {};
+                for (i; i < res.data.recordsets[0].length; i++) {
+                tempArray["value"] = i;
+                tempArray["label"] = res.data.recordsets[0][i].DivisionalSecretary;
+                baselocations.push(tempArray);
+                tempArray = {};
+                }
+                
+            })
+            .catch(function(error) {
+                // console.log(error);
+            });
+
+          //
+          let userId = localStorage.getItem('UserId');
+          let url = "http://localhost:3000/client/profile/"+57;    
+          axios.get(url,{withCredentials:true})
+          .then(response => {               
+              this.setState({personalData:response.data.result.recordsets[0][0]})
+              
+          })
+          .catch(error => {
+              console.log(error)
+          })
+  
+     }
+     //handling events     
+
+     //onChange function
+      onChangeSkillSelected = (skillSelected) => {
+        this.setState({ skillSelected });      
       }
-      handleDone(e){       
-        document.getElementById('editProfile').style.display="none";    
-        document.getElementById('profile').style.display="block";    
-      }
-      handleChange(e){        
-          if(e.target.value!=""){
-            this.setState({[e.target.name]:e.target.value})
-          }
-                  
-      }
+
+      handleEdit(e){
+        e.preventDefault();
+        document.getElementById("show").style.display="none";
+        document.getElementById("edit").style.display="block";
+    }
+
+    handleCancel(e){
+        e.preventDefault();
+        document.getElementById("edit").style.display="none";
+        document.getElementById("show").style.display="block"
+    }
+    handleChange(e){
+        e.preventDefault()
+        this.setState({[e.target.name]:e.target.value})
+    }
+    handleSubmit(e){
+        e.preventDefault();
+
+        if(this.state.firstName==""){
+          this.setState({firstName:this.state.personalData.FirstName})
+        }
+        if(this.state.lastName==""){
+          this.setState({lastName:this.state.personalData.LastName})
+        }
+        if(this.state.skillSelected==undefined){
+          this.setState({skillSelected:this.state.personalData.BaseLocation})
+        }
+       
+        if(this.state.contactNumber==""){
+          this.setState({contactNumber:this.state.personalData.ContactNumber})
+        }
+        const workerDetails = {
+            fname: this.state.firstName,
+            lname: this.state.lastName,
+            baseL: this.state.skillSelected.label,
+            contactno: this.state.contactNumber
+          };
+          axios
+            .put("http://localhost:3000/client/profile/" + 57, workerDetails, {
+              withCredentials: true
+            })
+            .then(res => {
+              console.log(res);
+              
+            });
+
+        this.componentDidMount()
+        document.getElementById("edit").style.display="none";
+        document.getElementById("show").style.display="block";
+        
+    }
         render(){          
             return (
                 <MDBCol>
                   <MDBCard style={{ width: "30rem" }} id="profile"style={{display:"block"}}>
                     <MDBCardImage className="img-fluid" src="http://simpleicon.com/wp-content/uploads/user1.png" waves />
-                    <MDBCardBody>
-                      <MDBCardTitle>Ravinga Sewwandi Perera</MDBCardTitle>
+                    <MDBCardBody>                     
                       <MDBCardText>
-                        <form>
-                        <div class="row">
-                          <div class="col-md-5">User Email</div>
-                          <div class="col-md-5"><input name="UserEmail" style={{marginTop:"10px"}} placeholder={this.state.useremail} disabled></input><br></br></div>
-                        </div>
+                      <form id="show" style={{ display: "block" }}>
+                                <p className="h4 text-center mb-4">PROFILE DETAILS</p>
 
-                        <div class="row">
-                          <div class="col-md-5">FirstName</div>
-                          <div class="col-md-5"><input name="FirstName" style={{marginTop:"10px"}} placeholder={this.state.fname} disabled></input><br></br></div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-5">LastName</div>
-                          <div class="col-md-5"><input name="LastName" style={{marginTop:"10px"}} placeholder={this.state.lname} disabled></input><br></br></div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-5">BaseLocation</div>
-                          <div class="col-md-5"><input name="BaseLocation" style={{marginTop:"10px"}}placeholder={this.state.baseL} disabled></input><br></br></div>
-                        </div>
 
-                        <div class="row">
-                          <div class="col-md-5">ContactNumber</div>
-                          <div class="col-md-5"><input name="ContactNumber" style={{marginTop:"10px"}} placeholder={this.state.contactno} disabled></input><br></br></div>
-                        </div>                         
-                      <MDBBtn href="#" onClick={this.handleEdit}>Edit Profile</MDBBtn> 
-                        </form>
-                        
-                      </MDBCardText>                 
-                    </MDBCardBody>
-                  </MDBCard>
-    
-                  <MDBCard style={{ width: "30rem" }} id="editProfile" style={{display:"none"}}>
-                    <MDBCardImage className="img-fluid" src="http://simpleicon.com/wp-content/uploads/user1.png" waves />
-                    <MDBCardBody>
-                      <MDBCardTitle>Ravinga Sewwandi Perera</MDBCardTitle>
-                      <MDBCardText>
-                   
-                        <form onSubmit={this.handleUpdate}>
-                            <div class="row">
-                            <div class="col-md-5">FirstName</div>
-                            <div class="col-md-5"><input name="fname" value={this.state.FirstName} style={{marginTop:"10px"}} placeholder={this.state.fname} onChange={this.handleChange}></input><br></br></div>
-                            </div>
-                            <div class="row">
-                            <div class="col-md-5">LastName</div>
-                            <div class="col-md-5"><input name="lname" value={this.state.LastName}style={{marginTop:"10px"}} placeholder={this.state.lname} onChange={this.handleChange}></input><br></br></div>
-                            </div>
-                            <div class="row">
-                            <div class="col-md-5">BaseLocation</div>
-                            <div class="col-md-5"><input name="baseL" value={this.state.BaseLocation}  style={{marginTop:"10px"}} placeholder={this.state.baseL} onChange={this.handleChange}></input><br></br></div>
-                            </div>
-                            <div class="row">
-                            <div class="col-md-5">ContactNumber</div>
-                            <div class="col-md-5"><input name="contactno" value={this.state.ContactNumber} style={{marginTop:"10px"}} placeholder={this.state.contactno}  onChange={this.handleChange}></input><br></br></div>
-                            </div>             
-                                                                
-                        
-                            <br></br>
-                            
-                        
-                        <div class="row">
-                            <div class="col-md-5"><MDBBtn  id="update" type="submit" >Update</MDBBtn></div> 
-                            <div class="col-md-5"><MDBBtn id="cancel" style={{display:"block"}} onClick={this.handleCancel}>Cancel</MDBBtn></div>  
-                            {/* <div class="col-md-5"><MDBBtn id="done" style={{display:"none"}}onClick={this.handleDone}>Done</MDBBtn></div>  */}
-                        </div>                         
-                        </form>  
+                                <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
+                                   Email   </label>
+                                <input
+                                    type="email"
+                                    name="UserEmail"
+                                    onChange={this.handleChange}
+                                    value={this.state.personalData.UserEmail}
+                                    className="form-control"
+                                    disabled
+                                />
+                                <br />
+
+                                <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
+                                    First Name   </label>
+                                <input
+                                    type="text"
+                                    name="firstName"
+                                    onChange={this.handleChange}
+                                    value={this.state.personalData.FirstName}
+                                    className="form-control"
+                                    disabled
+                                />
+                                <br />
+
+                                <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
+                                    Last Name   </label>
+                                <input
+                                    type="text"
+                                    name="lastName"
+                                    onChange={this.handleChange}
+                                    value={this.state.personalData.LastName}
+                                    className="form-control"
+                                    disabled
+                                />
+                                <br />
+
+                                <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
+                                    Base Location       </label>
+                                <input
+                                    type="text"
+                                    name="baseLocation"
+                                    onChange={this.handleChange}
+                                    value={this.state.personalData.BaseLocation}
+                                    className="form-control"
+                                    disabled
+                                />
+                                <br />
+
+                                <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
+                                    Contact Number     </label>
+                                <input
+                                    type="text"
+                                    name="contactNumber"
+                                    onChange={this.handleChange}
+                                    value={this.state.personalData.ContactNumber}
+                                    className="form-control"
+                                    disabled
+                                />
+                                <br />
+                                <div className="text-center mt-4">
+                                    <button onClick={this.handleEdit}> Edit Profile   </button>
+
+                                </div>
+                            </form>
+                            {/* //////////////////////////////////// */}
+
+                      <form id="edit" onSubmit={this.handleSubmit} style={{ display: "none" }}>
+                        <p className="h4 text-center mb-4">Sign up</p>
+
+                        <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
+                          First Name  </label>
+                        <input
+                          type="text"
+                          name="firstName"
+                          onChange={this.handleChange}
+                          className="form-control"
+                        />
+                        <br />
+
+                        <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
+                          Last Name      </label>
+                        <input
+                          type="text"
+                          name="lastName"
+                          onChange={this.handleChange}
+                          className="form-control"
+                        />
+                        <br />
+
+                        <Select
+                          value={this.state.skillSelected}
+                          onChange={this.onChangeSkillSelected}
+                          options={baselocations}
+                          placeholder="Skills"
+                          required
+                        />
+                        <br></br>  <br></br>
+
+                        <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
+                          Contact Number       </label>
+                        <input
+                          type="text"
+                          name="contactNumber"
+                          onChange={this.handleChange}
+                          className="form-control"
+                        />
+                        <br />
+
+
+                        <div className="text-center mt-4">
+                          <button type="submit">  Update      </button>
+                          <button onClick={this.handleCancel}>      Cancel        </button>
+                        </div>
+                      </form>
 
                       </MDBCardText>               
                     </MDBCardBody>

@@ -8,10 +8,40 @@ class Upcoming extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            UpcomingJobs:[]
+            UpcomingJobs:[],
+            startedJobId:"",
+            startTime:"",
+            endTime:""
         }   
-
+        this.endJob=this.endJob.bind(this);
+        
     }
+
+
+    
+    endJob(e){
+        e.preventDefault();
+        //getting finishing time
+        let tempDate = new Date();
+        let endTime = tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds();
+      
+        //req.body to send
+        let endJob  = {
+            "OrderId": localStorage.getItem("startedOrderId"),
+            "StartTime":localStorage.getItem("startTime"),
+            "EndTime":endTime
+        }        
+        //setting the end time for the local storage
+                
+        //end the job
+        axios.create({withCredentials:true}).put("http://localhost:3000/ordersWorker/endOrder", endJob)
+        .then(response=>{
+            console.log(response.data)
+        })
+        localStorage.removeItem("startedOrderId");
+        localStorage.removeItem("startTime");    
+        this.forceUpdate() 
+     }
     //Getting the upcoming job list for the worker
     componentDidMount(){
         // let varUrl = "http://localhost:3000/ordersWorker/getUpComingOrders/"+localStorage.getItem("UserId");        
@@ -21,8 +51,9 @@ class Upcoming extends React.Component{
             console.log(response.data.result[0])
             this.setState({UpcomingJobs:response.data.result[0]})            
         })
-
-        if(localStorage.getItem("startTime")!=null){
+        
+        //check if order started and display the started job details
+        if(localStorage.getItem("startedOrderId")!=null){
             document.getElementById("ongoing").style.display="block"
         }
 
@@ -51,11 +82,10 @@ class Upcoming extends React.Component{
                                 <th>Duration</th>
                                 <th>HourlyCharge</th>
                                 <th>Cancel Job</th>
-                                <th>Start Job</th>
-                                <th>End Job</th>
+                                <th>Start Job</th>                         
                             </tr>
                         </MDBTableHead>
-                        {/* <MDBTableBody> */}
+                        <MDBTableBody>
                             {
                                 this.state.UpcomingJobs.length ? this.state.UpcomingJobs.map(job => <UpcomingJobCard key={job.OrderId}
                                     OrderId={job.OrderId}
@@ -74,12 +104,22 @@ class Upcoming extends React.Component{
                             }
                           
                            
-                        {/* </MDBTableBody> */}
+                        </MDBTableBody>
                     </MDBTable>
                 </div>
-                        <div id ="ongoing" style={{display:"none"}}>
-                            <h1>{localStorage.getItem("startTime")}</h1>
-                        </div>                
+                <div id="ongoing" style={{ display: "none" , marginLeft:"45%", marginTop:"20px"}}>
+                    <MDBCard style={{ width: "32rem" }}>
+                        <MDBCardBody>
+                            <MDBCardTitle><h1>Ongoing Job Details</h1></MDBCardTitle>
+                            <MDBCardText>
+                                Order ID : {localStorage.getItem("startedOrderId")}
+                                <br></br>
+                                Started Time : {localStorage.getItem("startTime")}
+                            </MDBCardText>
+                            <button onClick={this.endJob} style={{width:"90%", height:"50px", backgroundColor:"#3F729B"}}>Finish Job</button>
+                        </MDBCardBody>
+                    </MDBCard>
+                </div>                
             </div>
             
                    

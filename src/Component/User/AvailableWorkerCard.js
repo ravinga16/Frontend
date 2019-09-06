@@ -8,6 +8,7 @@ class AvailableWorkerCard extends React.Component{
                 <MDBCardBody>
                 <MDBCardTitle>{this.props.firstName} {this.props.lastName}</MDBCardTitle>
                 <MDBCardText>
+   
                 workerId:{this.props.workerId} <br></br>
                 firstName:{this.props.firstName} <br></br>
                 lastName:{this.props.lastName}<br></br>

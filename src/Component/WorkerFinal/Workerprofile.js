@@ -8,6 +8,8 @@ import Showskill from "./Showskill";
 import Summarycard from "./summarycard";
 import axios from 'axios';
 import WorkerProfileCard from "./WorkerProfileCard";
+import NewProCard from "./NewProCard";
+import NewStatus from "./NewStatus";
 export default class Workerprofile extends React.Component{
     constructor(props){
         super(props);
@@ -34,17 +36,17 @@ export default class Workerprofile extends React.Component{
         // <MDBContainer>
             <div>
             <WorkerNavBar/>
-            <MDBRow>
-                <MDBCol md="4"><WorkerProfileCard/></MDBCol>
+            <MDBRow style={{marginTop:"20px"}}>
+                <MDBCol md="4"><NewStatus/></MDBCol>
                 <MDBCol md="4">
-                    <Addskill/>
-                    {
-                        this.state.skills.length? this.state.skills.map(skill => <Showskill SkillTitle={skill.SkillTitle} Description={skill.Description} HourlyCharge={skill.HourlyCharge} SkillId={skill.SkillId}/>):null
-                    }
-                
+                    <NewProCard/>
                 </MDBCol>
                 <MDBCol md="4">
-                    <Table/>          
+                    <Addskill/>
+                        {
+                            this.state.skills.length? this.state.skills.map(skill => <Showskill SkillTitle={skill.SkillTitle} Description={skill.Description} HourlyCharge={skill.HourlyCharge} SkillId={skill.SkillId}/>):null
+                        }
+                            
               </MDBCol>
             </MDBRow>
             </div>

@@ -45,61 +45,46 @@ class UpcomingJobCard extends React.Component{
                     document.getElementById(OrderId).style.display="none"
                 }
             })
+            this.forceUpdate();
         }else{
             alert("try again with a valid reason")
         }     
      }
 
      //start button event
-     startJob(OrderId, e){
+    startJob(OrderId, e) {
         e.preventDefault();
-        document.getElementById(OrderId).style.display="block";
-        let tempDate = new Date();
-        let currentTime = tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds();
-     
-        let startJob  = {
-            "OrderId": OrderId,
-            "StartTime":currentTime
-        }
-        startedOrderList.push(startJob);
-        //save to the local storage
-        localStorage.setItem("startTime",currentTime)
-        console.log(startedOrderList);
-        axios.create({withCredentials:true}).put("http://localhost:3000/ordersWorker/startOrder", startJob)
-        .then(response=>{
-            console.log(response.data)
-        })
-       
-         
-     }
+        // document.getElementById(OrderId).style.display="block";
 
-      //end button event
-      endJob(OrderId, e){
-        e.preventDefault();
+        //Getting starting time
         let tempDate = new Date();
-        let startTime;
-        let endTime = tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds();
-        for(let i=0;i<startedOrderList.length;i++){
-            if(startedOrderList[i].OrderId==OrderId){
-                startTime = startedOrderList[i].StartTime
+        let currentTime = tempDate.getHours() + ':' + tempDate.getMinutes() + ':' + tempDate.getSeconds();
+
+        //check if another ongoing job available
+        if (localStorage.getItem("startedOrderId") != null) {
+            alert("There is another ongoing job")
+        } else {
+            //check no job started. if not set the localstorage value
+            if (localStorage.getItem("startedOrderId") == null && localStorage.getItem("startTime") == null) {
+                alert("no ongoing jobs now...");
+                localStorage.setItem("startedOrderId", OrderId);
+                localStorage.setItem("startTime", currentTime);
+                //create the req.body to send
+                let startJob = {
+                    "OrderId": OrderId,
+                    "StartTime": currentTime
+                }
+            
+                
+                axios.create({ withCredentials: true }).put("http://localhost:3000/ordersWorker/startOrder", startJob)
+                    .then(response => {
+                        console.log(response.data)
+                })
+               
             }
-        }
 
-        let endJob  = {
-            "OrderId": OrderId,
-            "StartTime":startTime,
-            "EndTime":endTime
-        }
-
-        console.log(endJob)
-
-        axios.create({withCredentials:true}).put("http://localhost:3000/ordersWorker/endOrder", endJob)
-        .then(response=>{
-            console.log(response.data)
-        })
-
-         
-     }
+        }    // startedOrderList.push(startJob);
+    }      
 
     
     render(){
@@ -119,7 +104,7 @@ class UpcomingJobCard extends React.Component{
                 <td>{this.props.HourlyCharge}</td>           
                 <td><button onClick={(e) => this.cancelJob(this.props.OrderId, e)}>Cancel</button></td>
                 <td><button onClick={(e) => this.startJob(this.props.OrderId, e)}>Start</button></td>
-                <td><button id={this.props.OrderId} onClick={(e) => this.endJob(this.props.OrderId, e)} style={{display:"none"}} >End</button></td>                    
+                            
             </tr>
  
           )

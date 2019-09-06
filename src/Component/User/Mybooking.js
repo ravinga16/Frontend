@@ -3,6 +3,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBCardTitle } from "mdbreact";
 import AcceptedBooking from "./Acceptedbooking";
 import CancelledBooking from "./Cancelledbooking";
 import CompletedBooking from "./Completedbooking";
+import RequestedBooking from "./RequestedBooking"
 import UserNavBar from "./UserNavBar";
 import axios from 'axios';
 
@@ -12,7 +13,8 @@ class MyBooking extends React.Component{
         this.state={
             acceptedBooking:[],
             completedBooking:[],
-            cancalledBooking:[]
+            cancalledBooking:[],
+            requests:[]
         }
     }
     componentDidMount(){
@@ -49,10 +51,21 @@ class MyBooking extends React.Component{
         .catch(error => {
             console.log(error)
         })
+
+        //Get the  Job requests sent
+        axios.get('http://localhost:3000/requests/pool/worker/'+localStorage.getItem('UserId'))
+        .then(response => {        
+            //get the response sent by the API. setState to the response data this.setState({posts:response.data})
+            this.setState({requests:response.data.result[1]})
+            console.log("requests",this.state.requests)
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
     render(){
         var MDBCardTitleStyle = {
-            marginLeft:"200px",
+            marginLeft:"100px",
             color:"black",
             fontWeight:"bold",
             fontSize:"20px"
@@ -60,25 +73,31 @@ class MyBooking extends React.Component{
         var MDBColStyle={
           
         }
-        const {acceptedBooking, completedBooking, cancalledBooking} = this.state
+        const {acceptedBooking, completedBooking, cancalledBooking, requests} = this.state
         return (
-            <div>
+            <div stye={{width:"90%" }}>
                 <UserNavBar/>
                 {/* <MDBContainer style={{marginTop:"15px"}}> */}
                 <MDBRow style={{marginTop:"15px"}}> 
-                    <MDBCol md="4" style={MDBColStyle}><MDBCardTitle style={MDBCardTitleStyle}>Accepted Jobs</MDBCardTitle>
+                    <MDBCol md="3" style={MDBColStyle}><MDBCardTitle style={MDBCardTitleStyle}>Accepted Jobs</MDBCardTitle>
                         {
                             acceptedBooking.length?acceptedBooking.map(booking => <AcceptedBooking key={booking.OrderId} OrderId={booking.OrderId} OrderDate={booking.OrderDate} StartTime={booking.StartTime} WorkerId={booking.WorkerId} Name={booking.FirstName+" "+booking.LastName} Rate={booking.Rate} BaseLocation={booking.BaseLocation} />):null
                         }
                     </MDBCol>
-                    <MDBCol md="4" style={MDBColStyle}><MDBCardTitle style={MDBCardTitleStyle}>Completed Jobs</MDBCardTitle>
+                    <MDBCol md="3" style={MDBColStyle}><MDBCardTitle style={MDBCardTitleStyle}>Completed Jobs</MDBCardTitle>
                         {
                             completedBooking.length?completedBooking.map(booking => <CompletedBooking key={booking.OrderId} OrderId={booking.OrderId} WorkerId={booking.WorkerId} OrderDate={booking.OrderDate} StartTime={booking.StartTime} EndTime={booking.EndTime} FinalPrice={booking.FinalPrice} Name={booking.FirstName+" "+booking.LastName} BaseLocation={booking.BaseLocation} />):null
                         }
                     </MDBCol>
-                    <MDBCol md="4" style={MDBColStyle}><MDBCardTitle style={MDBCardTitleStyle}>Cancelled Jobs</MDBCardTitle>
+                    <MDBCol md="3" style={MDBColStyle}><MDBCardTitle style={MDBCardTitleStyle}>Cancelled Jobs</MDBCardTitle>
                         {
                             cancalledBooking.length?cancalledBooking.map(booking => <CancelledBooking key={booking.OrderId} OrderId={booking.OrderId} WorkerId={booking.WorkerId} OrderDate={booking.OrderDate} CancellationReason={booking.CancellationReason} />):null
+                        }
+                    </MDBCol>
+
+                    <MDBCol md="3" style={MDBColStyle}><MDBCardTitle style={MDBCardTitleStyle}>Booking Requests</MDBCardTitle>
+                        {
+                            requests.length?requests.map(booking => <RequestedBooking key={booking.RequestId} RequestId={booking.RequestId} WorkerId={booking.WorkerId}  />):null
                         }
                     </MDBCol>
                 </MDBRow>

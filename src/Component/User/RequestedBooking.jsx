@@ -1,7 +1,8 @@
 import React from 'react';
 import { MDBContainer, MDBCollapse, MDBCard, MDBCardBody, MDBBtn } from "mdbreact";
+import axios from 'axios';
 
-export default class CancelledBooking extends React.Component{
+export default class RequestedBooking extends React.Component{
     state={
         collapseID: "collapse3"
       }
@@ -10,7 +11,16 @@ export default class CancelledBooking extends React.Component{
         this.setState(prevState => ({
           collapseID: prevState.collapseID !== collapseID ? collapseID : ""
         }));
-      
+
+        //Cancel request button event
+        cancelRequest(RequestId, e){
+            e.preventDefault()
+            console.log("cancelling req id", RequestId);
+            axios.create({withCredentials:true}).delete("http://localhost:3000/requests/delete/"+RequestId)
+            .then(response=>{
+                console.log(response.data)
+            })
+        }
       render() {
       const { collapseID } = this.state;
         return (
@@ -25,9 +35,9 @@ export default class CancelledBooking extends React.Component{
                   <MDBCardBody>
                   <form style={{ textAlign: "left",display:"block" ,fontSize:"13px"}} name="showProfile">                              
                               <div class="row">
-                                  <div class="col-md-5">Order Id: </div>
+                                  <div class="col-md-5">Request Id: </div>
                                   <div class="col-md-5">
-                                      <input type="text" name="OrderId" placeholder={this.props.OrderId} disabled></input>
+                                      <input type="text" name="RequestId" placeholder={this.props.RequestId} disabled></input>
                               </div>
                               </div><br></br> 
                                 {/*  */}
@@ -37,20 +47,8 @@ export default class CancelledBooking extends React.Component{
                                       <input type="text" name="WorkerId" placeholder={this.props.WorkerId} disabled></input>
                               </div>
                               </div><br></br> 
-                                {/*  */}
-                                <div class="row">
-                                  <div class="col-md-5">OrderDate: </div>
-                                  <div class="col-md-5">
-                                      <input type="text" name="OrderDate" placeholder={this.props.OrderDate} disabled></input>
-                              </div>
-                              </div><br></br>
-                               {/*  */}
-                               <div class="row">
-                                  <div class="col-md-5"> Cancellation Reason: </div>
-                                  <div class="col-md-5">
-                                      <input type="text" name="CancellationReason" placeholder={this.props.CancellationReason} disabled></input>
-                              </div>
-                              </div><br></br> 
+                              <button onClick={(e)=> this.cancelRequest(this.props.RequestId, e)}> Delete Requst</button>
+                                
                                
                   </form>
       

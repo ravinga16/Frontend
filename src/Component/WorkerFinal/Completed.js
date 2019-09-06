@@ -33,14 +33,16 @@ export default class Completed extends React.Component {
                                 <th>ContactNumber</th>
                                 <th>SkillTitle</th>
                                 <th>OrderDate</th>
-                                <th>ExpectedStartTime</th>
-                                <th>ExpectedEndTime</th>
-                                <th>ExpectedPrice</th>
+                                <th>StartTime</th>
+                                <th>EndTime</th>
+                                <th>FinalPrice</th>
                                 <th>OrderLoaction</th>
                                 <th>FirstName</th>
                                 <th>LastName</th>
                                 <th>Duration</th>
                                 <th>HourlyCharge</th>
+                                <th>Rate</th>
+                                <th>Review</th>
                             </tr>
                         </MDBTableHead>
                         <MDBTableBody>
@@ -50,14 +52,16 @@ export default class Completed extends React.Component {
                                     ContactNumber={job.ContactNumber}
                                     SkillTitle={job.SkillTitle}
                                     OrderDate={job.OrderDate}
-                                    ExpectedStartTime={job.ExpectedStartTime}
-                                    ExpectedEndTime={job.ExpectedEndTime}
-                                    ExpectedPrice={job.ExpectedPrice}
+                                    StartTime={job.StartTime}
+                                    EndTime={job.EndTime}
+                                    FinalPrice={job.FinalPrice}
                                     OrderLoaction={job.OrderLoaction}
                                     FirstName={job.FirstName}
                                     LastName={job.LastName}
                                     Duration={job.Duration}
                                     HourlyCharge={job.HourlyCharge}
+                                    Rate={job.Rate}
+                                    Review={job.Review}
 
                                 />) : null
                             }

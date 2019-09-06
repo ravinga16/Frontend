@@ -16,7 +16,7 @@ export default class AcceptedBooking extends React.Component{
         return (
           <MDBContainer>
             <MDBContainer className="mt-3">
-              <MDBCard className="mt-3" style={{ width: "30rem" }}>
+              <MDBCard className="mt-3" style={{ width: "20rem" }}>
                 <button onClick={this.toggleCollapse("collapse1")} style={{backgroundColor:"#01579b", color:"white", height:"38px"}}>
                   {this.props.title} job Id 
                   <i className={ collapseID==="collapse1" ? "fa fa-angle-down rotate-icon" : "fa fa-angle-down" } />

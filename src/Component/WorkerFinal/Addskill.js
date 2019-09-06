@@ -86,7 +86,7 @@ export default class Addskill extends React.Component{
     render(){
         return(
             <MDBCol>
-            <MDBCard style={{ width: "30rem" }}>        
+            <MDBCard style={{ width: "100%" }}>        
                 <MDBCardBody>
                 <MDBContainer>
                     <MDBRow>

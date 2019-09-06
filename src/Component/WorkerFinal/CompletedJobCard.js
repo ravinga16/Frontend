@@ -10,14 +10,16 @@ render() {
             <td>{this.props.ContactNumber}</td>
             <td>{this.props.SkillTitle}</td>
             <td>{this.props.OrderDate}</td>
-            <td>{this.props.ExpectedStartTime}</td>
-            <td> {this.props.ExpectedEndTime}</td>
-            <td>{this.props.ExpectedPrice}</td>
+            <td>{this.props.StartTime}</td>
+            <td> {this.props.EndTime}</td>
+            <td>{this.props.FinalPrice}</td>
             <td>{this.props.OrderLoaction}</td>
             <td>{this.props.FirstName}</td>
             <td>{this.props.LastName}</td>
             <td>{this.props.Duration}</td>
             <td>{this.props.HourlyCharge}</td>
+            <td>{this.props.Rate}</td>
+            <td>{this.props.Review}</td>
         </tr>   
      );
   }
