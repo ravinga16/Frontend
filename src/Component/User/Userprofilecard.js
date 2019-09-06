@@ -45,7 +45,7 @@ class Userprofilecard extends React.Component{
 
           //
           let userId = localStorage.getItem('UserId');
-          let url = "http://localhost:3000/client/profile/"+57;    
+          let url = "http://localhost:3000/client/profile/"+localStorage.getItem("UserId");    
           axios.get(url,{withCredentials:true})
           .then(response => {               
               this.setState({personalData:response.data.result.recordsets[0][0]})
@@ -101,7 +101,7 @@ class Userprofilecard extends React.Component{
             contactno: this.state.contactNumber
           };
           axios
-            .put("http://localhost:3000/client/profile/" + 57, workerDetails, {
+            .put("http://localhost:3000/client/profile/" + localStorage.getItem("UserId"), workerDetails, {
               withCredentials: true
             })
             .then(res => {
@@ -233,6 +233,7 @@ class Userprofilecard extends React.Component{
                           onChange={this.handleChange}
                           className="form-control"
                           required
+                          
                         />
                         <br />
 

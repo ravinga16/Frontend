@@ -90,7 +90,7 @@ class NewProCard extends React.Component{
           };
           console.log("*******************",workerDetails)
           axios
-            .put("http://localhost:3000/worker/profile/" + 143, workerDetails, {
+            .put("http://localhost:3000/worker/profile/" + localStorage.getItem("UserId"), workerDetails, {
               withCredentials: true
             })
             .then(res => {

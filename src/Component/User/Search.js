@@ -21,13 +21,16 @@ export default class Search extends React.Component{
             skillSelected:'',
             paymentSelected:'',
             paymentName:'', 
-            clientId:3,
+            clientId:localStorage.getItem("UserId"),
             skillId:'',            
             orderDate:'',
             startTime:'',
             endTime:'',
             availableWorkers:[],
-            result:[0]
+            result:[0],
+
+            booknowWorkers:[0],
+            booknowResult:[0]
         }
         this.handleBookLater=this.handleBookLater.bind(this);
         this.handleBookNow=this.handleBookNow.bind(this);
@@ -84,12 +87,33 @@ export default class Search extends React.Component{
         }
        
     }
+
     handleBookNow(){
+        
         if(this.state.skillId==""){
             alert("Enter a Valid Job Type")
         }else{
             document.getElementById("map").style.display="block";
-            document.getElementById("booklater").style.display="none";
+            let bookNowReq = {
+                jobType:this.state.skillId,
+                // clientId:localStorage.getItem("UserId"),
+                coordinate : null
+            }
+            axios.create({withCredentials:true}).post("http://localhost:3000/booknow/booknow", bookNowReq)
+            .then(response => {
+                console.log("book now req response :", response.data.result.workers.length)
+                if(response.data.result.workers.length==0){
+                    alert("No available Workers")
+                }else{
+                    console.log("response.data.result.workers", response.data.result.workers)
+                    this.setState({booknowWorkers:response.data.result.workers})
+                    console.log("state",this.state.booknowWorkers)
+                    ////////////////////////////////////////////////
+
+                }
+            })
+           
+          
         }
         
         
@@ -120,11 +144,7 @@ export default class Search extends React.Component{
                     this.setState({result:response.data.result})
                     this.setState({availableWorkers:response.data.result.Workers})
                 }
-            }
-            // this.setState({availableWorkers:response.data.result.Workers})
-
-            
-            // console.log(this.state.result.length)
+            }          
             
         })
         .catch(error => {
@@ -175,7 +195,7 @@ export default class Search extends React.Component{
                         name="description"                
                         className="form-control"  />
                         <br />    
-                        <div class="row"><MDBBtn  style={{backgroundColor:"#008080",width:"100%"}} onClick={this.handleBookNow} disabled>  Book Now </MDBBtn>  </div> 
+                        <div class="row"><MDBBtn  style={{backgroundColor:"#008080",width:"100%"}} onClick={this.handleBookNow} >  Book Now </MDBBtn>  </div> 
                         <div class="row"><MDBBtn  style={{backgroundColor:"#008080",width:"100%"}}  onClick={this.handleBookLater} >  Book Later </MDBBtn></div>             
                     
                     </form>
@@ -222,14 +242,20 @@ export default class Search extends React.Component{
                     <MDBCol size="6" id="booklaterlist" style={{ width: "75%",  display: "none", marginTop: "15px" }}>
                         {
                             this.state.availableWorkers.length ? this.state.availableWorkers.map(worker => <AvailableWorkerCard key={worker.workerId} workerId={worker.workerId} firstName={worker.firstName}  lastName={worker.lastName} baseLocation={worker.baseLocation} rate={worker.rate} skillDescription={worker.skillDescription} hourlyCharge={worker.hourlyCharge}  />):null
-                        }
-
-              
+                        }       
+                               
                     </MDBCol>
+
+                    
                      {/* if user select book now option */}
                     <MDBCard id="map" style={{ display: "none" }}>
-                            <MDBCardBody>
-                                <h1>map</h1>
+                            <MDBCardBody style={{width:"100%"}}>
+                    
+                                    {
+                                        this.state.booknowWorkers.length ? this.state.booknowWorkers.map(worker =><AvailableWorkerCard key={worker.WorkerId} workerId={worker.WorkerId} firstName={worker.FirstName} rate={worker.Rate} hourlyCharge={worker.HourlyCharge} />) : null
+                                    }
+                                    <button>Send Request</button>
+                              
                             </MDBCardBody>
                         </MDBCard>
                 </MDBRow>

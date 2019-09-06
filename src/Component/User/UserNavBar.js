@@ -12,7 +12,7 @@ export default class UserNavBar extends Component {
   handleClick(){
     axios.post( "http://localhost:3000/user/logout")
           .then(response => {       
-              console.log(response.data,"************************")   //  
+               
               localStorage.removeItem("UserId") ;
               localStorage.removeItem("sessionEmail") ;
               localStorage.removeItem("sessionType") ;

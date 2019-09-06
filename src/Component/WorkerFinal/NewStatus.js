@@ -33,14 +33,14 @@ class NewStatus extends React.Component{
             let statusReq = {
                 "status":1
             }
-            axios.put("http://localhost:3000/worker/status/143", statusReq)
+            axios.put("http://localhost:3000/worker/status/"+localStorage.getItem("UserId"), statusReq)
             document.getElementById("statusshow").style.display="block";
             document.getElementById("statusedit").style.display="none";
         }else{
             let statusReq = {
                 "status":0
             }
-            axios.put("http://localhost:3000/worker/status/143", statusReq)
+            axios.put("http://localhost:3000/worker/status/"+localStorage.getItem("UserId"), statusReq)
             document.getElementById("statusshow").style.display="block";
             document.getElementById("statusedit").style.display="none";
         }

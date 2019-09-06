@@ -44,8 +44,8 @@ class WorkerProfileCard extends React.Component{
       }
      //once the profile card is mounted
       componentDidMount(){
-        let userId = localStorage.getItem('UserId');
-        let url = "http://localhost:3000/worker/profile/"+userId;    
+       
+        let url = "http://localhost:3000/worker/profile/"+localStorage.getItem("UserId");    
         axios.get(url,{withCredentials:true})
         .then(response => { 
          console.log("componentdidmount method called");   
@@ -86,7 +86,7 @@ class WorkerProfileCard extends React.Component{
          
       }
       console.log(a)
-        axios.put('http://localhost:3000/worker/profile/143', a)
+        axios.put('http://localhost:3000/worker/profile/'+localStorage.getItem("UserId"), a)
         .then(response => {        
           console.log("response.data",response.data); 
                       
