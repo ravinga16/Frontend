@@ -37,6 +37,7 @@ export default class Search extends React.Component{
         this.handleSubmit=this.handleSubmit.bind(this);
         this.handleChange=this.handleChange.bind(this);
         this.handleSendRequest=this.handleSendRequest.bind(this);
+        this.handleBookNowSendReq=this.handleBookNowSendReq.bind(this);
     }
     //getting all the skills available in the website
     componentDidMount(){
@@ -105,10 +106,10 @@ export default class Search extends React.Component{
                 if(response.data.result.workers.length==0){
                     alert("No available Workers")
                 }else{
-                    console.log("response.data.result.workers", response.data.result.workers)
+                    console.log("response.data.result", response.data.result)
                     this.setState({booknowWorkers:response.data.result.workers})
                     console.log("state",this.state.booknowWorkers)
-                    ////////////////////////////////////////////////
+                   
 
                 }
             })
@@ -162,6 +163,11 @@ export default class Search extends React.Component{
         .catch(error => {
             console.log(error);
         })
+    }
+
+    //booknow sending request
+    handleBookNowSendReq(e){
+
     }
     render(){
         return(
@@ -254,7 +260,7 @@ export default class Search extends React.Component{
                                     {
                                         this.state.booknowWorkers.length ? this.state.booknowWorkers.map(worker =><AvailableWorkerCard key={worker.WorkerId} workerId={worker.WorkerId} firstName={worker.FirstName} rate={worker.Rate} hourlyCharge={worker.HourlyCharge} />) : null
                                     }
-                                    <button>Send Request</button>
+                                    <button onClick={this.handleBookNowSendReq}>Send Request</button>
                               
                             </MDBCardBody>
                         </MDBCard>

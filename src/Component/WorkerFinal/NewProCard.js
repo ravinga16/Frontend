@@ -13,6 +13,7 @@ class NewProCard extends React.Component{
             baseLocation:"",
             contactNumber:"",
             personalData:[],
+            personalDataDuplicate:[],
             skillSelected:'',
             
         }
@@ -25,12 +26,14 @@ class NewProCard extends React.Component{
 
     //once the profile card is mounted
     componentDidMount(){
-        let userId = localStorage.getItem('UserId');
-        let url = "http://localhost:3000/worker/profile/"+143;    
+ 
+        let url = "http://localhost:3000/worker/profile/"+localStorage.getItem("UserId");    
         axios.get(url,{withCredentials:true})
-        .then(response => { 
-            
+        .then(response => {           
             this.setState({personalData:response.data.result.recordsets[0][0]})
+            if(this.state.personalData.FirstName==null){
+                alert("no data")
+            }
      
         })
         .catch(error => {
@@ -131,7 +134,7 @@ class NewProCard extends React.Component{
                                     type="text"
                                     name="lastName"
                                     onChange={this.handleChange}
-                                    value={this.state.personalData.LastName}
+                                    // value={this.state.personalData.LastName}
                                     className="form-control"
                                     disabled
                                 />
@@ -143,7 +146,7 @@ class NewProCard extends React.Component{
                                     type="text"
                                     name="baseLocation"
                                     onChange={this.handleChange}
-                                    value={this.state.personalData.BaseLocation}
+                                    // value={this.state.personalData.BaseLocation}
                                     className="form-control"
                                     disabled
                                 />
@@ -155,7 +158,7 @@ class NewProCard extends React.Component{
                                     type="text"
                                     name="contactNumber"
                                     onChange={this.handleChange}
-                                    value={this.state.personalData.ContactNumber}
+                                    // value={this.state.personalData.ContactNumber}
                                     className="form-control"
                                     disabled
                                 />
@@ -167,7 +170,7 @@ class NewProCard extends React.Component{
                                     type="text"
                                     name="status"
                                     onChange={this.handleChange}
-                                    value={this.state.personalData.Status == false ? "OffLine" : "Online"}
+                                    // value={this.state.personalData.Status == false ? "OffLine" : "Online"}
                                     className="form-control"
                                     disabled
                                 />
