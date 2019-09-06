@@ -134,7 +134,7 @@ class NewProCard extends React.Component{
                                     type="text"
                                     name="lastName"
                                     onChange={this.handleChange}
-                                    // value={this.state.personalData.LastName}
+                                    value={this.state.personalData.LastName}
                                     className="form-control"
                                     disabled
                                 />
@@ -146,7 +146,7 @@ class NewProCard extends React.Component{
                                     type="text"
                                     name="baseLocation"
                                     onChange={this.handleChange}
-                                    // value={this.state.personalData.BaseLocation}
+                                    value={this.state.personalData.BaseLocation}
                                     className="form-control"
                                     disabled
                                 />
@@ -158,7 +158,7 @@ class NewProCard extends React.Component{
                                     type="text"
                                     name="contactNumber"
                                     onChange={this.handleChange}
-                                    // value={this.state.personalData.ContactNumber}
+                                    value={this.state.personalData.ContactNumber}
                                     className="form-control"
                                     disabled
                                 />
@@ -170,7 +170,7 @@ class NewProCard extends React.Component{
                                     type="text"
                                     name="status"
                                     onChange={this.handleChange}
-                                    // value={this.state.personalData.Status == false ? "OffLine" : "Online"}
+                                    value={this.state.personalData.Status == false ? "OffLine" : "Online"}
                                     className="form-control"
                                     disabled
                                 />
