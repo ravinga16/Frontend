@@ -28,6 +28,7 @@ export default class NotificationCard extends React.Component{
                                 {noti.msg}<br></br>
                                 {noti.NotificationId}<br></br>
                            </MDBCardBody>
+                           <h1>changed</h1>
                        </MDBCard>
 
                    </div>): null
