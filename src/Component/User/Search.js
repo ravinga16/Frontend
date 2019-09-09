@@ -131,6 +131,7 @@ export default class Search extends React.Component{
             coordinate:null,
             clientId: this.state.clientId 
         }
+        console.log("book later req:", searchWorkerReq)
         axios.create({withCredentials:true}).post('http://localhost:3000/bookLater/search', searchWorkerReq)
         .then(response => {
             console.log("search worker button press")
@@ -199,7 +200,7 @@ export default class Search extends React.Component{
                         name="description"                
                         className="form-control"  />
                         <br />    
-                        <div class="row"><MDBBtn  style={{backgroundColor:"#008080",width:"100%"}} onClick={this.handleBookNow} >  Book Now </MDBBtn>  </div> 
+                        <div class="row"><MDBBtn  style={{backgroundColor:"#008080",width:"100%"}} onClick={this.handleBookNow}  disabled>  Book Now </MDBBtn>  </div> 
                         <div class="row"><MDBBtn  style={{backgroundColor:"#008080",width:"100%"}}  onClick={this.handleBookLater} >  Book Later </MDBBtn></div>             
                     
                     </form>
@@ -220,21 +221,24 @@ export default class Search extends React.Component{
                                         type="date"
                                         className="form-control"
                                         name="orderDate"
-                                        onChange={this.handleChange} />
+                                        onChange={this.handleChange}
+                                        required />
                                     <br />
                                     <label htmlFor="defaultFormRegisterNameEx" className="grey-text">   Start Time</label>
                                     <input
                                         type="time"
                                         className="form-control"
                                         name="startTime"
-                                        onChange={this.handleChange} />
+                                        onChange={this.handleChange}
+                                        required />
                                     <br />
                                     <label htmlFor="defaultFormRegisterNameEx" className="grey-text"> End Time  </label>
                                     <input
                                         type="time"
                                         className="form-control"
                                         name="endTime"
-                                        onChange={this.handleChange}  />
+                                        onChange={this.handleChange} 
+                                        required />
                                     <br />
                                     <div class="row"><MDBBtn color="unique" type="submit" style={{backgroundColor:"#008080",width:"100%"}}> Search Worker  </MDBBtn>  </div>
                                     <div class="row"><MDBBtn id="sendRequest" color="unique" onClick={this.handleSendRequest} style={{backgroundColor:"#008080",width:"100%",display:"none"}} onClick={this.handleSendRequest}> Send Request  </MDBBtn></div>

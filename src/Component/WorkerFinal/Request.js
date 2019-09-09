@@ -10,16 +10,26 @@ export default class Request extends React.Component{
         this.state={
             request:[]
         }
+        this.convertTime=this.convertTime.bind(this)
+        this.convertDate=this.convertDate.bind(this)
     }
 
-    componentDidMount(){
-    
+    componentDidMount(){    
         // axios.get("http://localhost:3000/requests/pool/worker/"+localStorage.getItem("UserId"))
         axios.get("http://localhost:3000/requests/pool/worker/"+localStorage.getItem("UserId"))
         .then(response=>{
             console.log("request data:", response.data.result[0])//
             this.setState({request:response.data.result[0]})
         })
+    }
+
+    //converting date and time
+    convertTime(time){        
+        return(<p>{new Date(time).toUTCString().split(" ")[4]}</p>)
+    }
+
+    convertDate(OrderDate){        
+        return(<p>{new Date(OrderDate).toUTCString().split(" ").slice(1, 4).join(" ")}</p>)
     }
     render(){
         return(
@@ -45,9 +55,9 @@ export default class Request extends React.Component{
                         this.state.request.length? this.state.request.map(req => <RequestCard 
                             RequestId={req.RequestId}
                             ClientId={req.ClientId}
-                            StartTime={req.StartTime}
-                            ExpectedEndTime={req.ExpectedEndTime}
-                            OrderDate={req.OrderDate}
+                            StartTime={this.convertTime(req.StartTime)}
+                            ExpectedEndTime={this.convertTime(req.ExpectedEndTime) }
+                            OrderDate={this.convertDate(req.OrderDate)}
                             OrderLocation={req.OrderLocation}
                             SkillId={req.SkillId} />):null                        
                     }

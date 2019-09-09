@@ -96,7 +96,7 @@ class Home extends React.Component {
                                             />
                                         </div>
                                         <div className="text-center py-4 mt-3">
-                                            <MDBBtn color="cyan" type="submit">
+                                            <MDBBtn id="loginbutton" color="cyan" type="submit">
                                                 Log In
                                             </MDBBtn>
                                         </div>

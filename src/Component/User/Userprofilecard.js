@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBBtn, MDBCard, MDBCardBody,   MDBCardText, MDBCol } from 'mdbreact';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
 import axios from 'axios';
 import Select from 'react-select';
 let baselocations = [];
@@ -97,6 +97,7 @@ class Userprofilecard extends React.Component{
               console.log(res);
               
             });
+            window.location.reload();
 
         // this.componentDidMount()
         document.getElementById("edit").style.display="none";
@@ -107,7 +108,7 @@ class Userprofilecard extends React.Component{
             return (
                 <MDBCol>
                   <MDBCard style={{ width: "30rem" }} id="profile"style={{display:"block"}}>
-                    
+                 
                     <MDBCardBody>                     
                       <MDBCardText>
                       <form id="show" style={{ display: "block" }}>
@@ -174,7 +175,7 @@ class Userprofilecard extends React.Component{
                                 />
                                 <br />
                                 <div className="text-center mt-4">
-                                    <button id="edit" onClick={this.handleEdit}> Edit Profile   </button>
+                                    <button id="editbutton" onClick={this.handleEdit}> Edit Profile   </button>
 
                                 </div>
                             </form>

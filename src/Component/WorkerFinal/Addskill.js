@@ -61,11 +61,7 @@ export default class Addskill extends React.Component{
     handleSubmit(event){
         event.preventDefault();
         console.log("user adding skill", this.state);
-        // this.setState(state => ({
-        //     // skillObj : 122
-        //     "skillObj": state.skillObj.concat({"skillId":this.state.skillId,"description":this.state.description,"hrate":this.state.hrate})
-        // }),()=>{
-        //     console.log("after concat ",this.state)
+        
 
         //Preparing the skill object modal to send to the backend
         let skillObject = {"skillObj" : [ {
@@ -81,6 +77,7 @@ export default class Addskill extends React.Component{
         .catch(error=>{
             console.log(error)
         })
+        window.location.reload();
 
     }
     render(){

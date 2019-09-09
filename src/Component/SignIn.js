@@ -38,7 +38,7 @@ class SignIn extends React.Component{
               console.log(response.data.message)        
              
               if(response.data.message=="User Created"){
-                // this.props.history.push('/');
+                this.props.history.push('/');
                 console.log("user created")
               }else if(response.data.message=="User Already Exists"){
                   alert("User Name Already Taken. Check Another");
@@ -63,16 +63,17 @@ class SignIn extends React.Component{
                             <p className="h4 text-center py-4">Sign Up</p>
                             <div className="grey-text">
                                 {/* selection whether user or client */}
-                                <label style={{marginLeft:"10%"}}>
-                                    <input type="radio"  name ="UserType" value="Customer" onChange={this.handleWorkerType} required/>Customer       
+                                <label style={{marginLeft:"10%"}} id="customersign">
+                                    <input type="radio"   name ="UserType" value="Customer" onChange={this.handleWorkerType} required/>Customer       
                                 </label>
                                 
                                 <label style={{marginLeft:"60%"}}>
-                                    <input type="radio" name ="UserType" value="Worker"  onChange={this.handleWorkerType} required />Worker
+                                    <input type="radio" id="workersign" name ="UserType" value="Worker"  onChange={this.handleWorkerType} required />Worker
                                 </label>
 
                                 {/*  */}
                                     <MDBInput
+                                        id="emailsignup"
                                         label="Your Email"
                                         icon="envelope"
                                         group
@@ -86,6 +87,7 @@ class SignIn extends React.Component{
                                         required
                                     />
                                     <MDBInput
+                                        id="passwordsign"
                                         label="Your Password"
                                         icon="lock"
                                         group
@@ -98,6 +100,7 @@ class SignIn extends React.Component{
                                         required
                                     />                                                    
                                     <MDBInput
+                                        id="contactnumbersignup"
                                         label="Your Contact Number"
                                         icon="phone"
                                         group
@@ -109,7 +112,7 @@ class SignIn extends React.Component{
                                     />       
                             </div>
                             <div className="text-center py-4 mt-3">
-                            <MDBBtn color="cyan" type="submit">
+                            <MDBBtn  id="registersignup" color="cyan" type="submit">
                                 Register
                             </MDBBtn>
                             </div>

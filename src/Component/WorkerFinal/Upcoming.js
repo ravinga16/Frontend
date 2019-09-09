@@ -20,31 +20,6 @@ class Upcoming extends React.Component{
     }
 
 
-    
-    // endJob(e){
-    //     e.preventDefault();
-    //     //getting finishing time
-    //     let tempDate = new Date();
-    //     let endTime = tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds();
-      
-    //     //req.body to send
-    //     let endJob  = {
-    //         "OrderId": localStorage.getItem("startedOrderId"),
-    //         "StartTime":localStorage.getItem("startTime"),
-    //         "EndTime":endTime
-    //     }        
-    //     //setting the end time for the local storage
-                
-    //     //end the job
-    //     axios.create({withCredentials:true}).put("http://localhost:3000/ordersWorker/endOrder", endJob)
-    //     .then(response=>{
-    //         console.log(response.data)
-    //     })
-    //     localStorage.removeItem("startedOrderId");
-    //     localStorage.removeItem("startTime");    
-    //     this.forceUpdate() 
-    //  }
-
     //Getting the upcoming job list for the worker
     componentDidMount(){    
         axios.create({withCredentials:true}).get("http://localhost:3000/ordersWorker/getUpComingOrders/"+localStorage.getItem("UserId"))
