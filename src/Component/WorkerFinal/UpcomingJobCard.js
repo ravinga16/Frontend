@@ -57,8 +57,8 @@ class UpcomingJobCard extends React.Component{
         // document.getElementById(OrderId).style.display="block";
 
         //Getting starting time
-        let tempDate = new Date();
-        let currentTime = tempDate.getHours() + ':' + tempDate.getMinutes() + ':' + tempDate.getSeconds();
+        const tempDate = new Date();
+        const currentTime = tempDate.getHours() + ':' + tempDate.getMinutes() + ':' + tempDate.getSeconds();
 
         //check if another ongoing job available
         if (localStorage.getItem("startedOrderId") != null) {
@@ -83,8 +83,11 @@ class UpcomingJobCard extends React.Component{
 
     
     render(){
+        const tempDate = new Date();
+        const currentDate = tempDate.getFullYear()+ ".0" + (tempDate.getMonth()+1)+ ".0" + tempDate.getDate()
+        console.log("current date:",currentDate)
         return (
-            <tr  >
+            <tr style={{backgroundColor : (this.props.OrderDate == currentDate) ? "#ef5350 " : "white"}}>
                 <td>{this.props.OrderId}</td>
                 <td>{this.props.ContactNumber}</td>
                 <td>{this.props.SkillTitle}</td>

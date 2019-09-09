@@ -1,10 +1,10 @@
 import React from 'react';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText } from 'mdbreact';
 
-class AvailableWorkerCard extends React.Component{
+class BooknowAvailableWorkerCard extends React.Component{
     render(){
         return(          
-            <MDBCard style={{ width: "100%" ,marginTop:"15px" , backgroundColor:"#e3f2fd "}}>                
+            <MDBCard >                
                 <MDBCardBody>
                 <MDBCardTitle>{this.props.firstName} {this.props.lastName}</MDBCardTitle>
                 <MDBCardText>   
@@ -24,4 +24,4 @@ class AvailableWorkerCard extends React.Component{
 }
 
 
-export default AvailableWorkerCard;
+export default BooknowAvailableWorkerCard;
