@@ -70,6 +70,7 @@ class Home extends React.Component {
                                         <p className="h4 text-center py-4">Log In</p>
                                         <div className="grey-text">
                                             <MDBInput
+                                                id="email"
                                                 label="Your Email"
                                                 icon="envelope"
                                                 group
@@ -82,6 +83,7 @@ class Home extends React.Component {
                                                 onChange={this.handleChange}
                                             />
                                             <MDBInput
+                                                id="password"
                                                 label="Your Password"
                                                 icon="lock"
                                                 group

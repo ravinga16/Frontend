@@ -21,6 +21,7 @@ export default class UserNavBar extends Component {
           .catch(error => {
               console.log(error)//             
           })
+          window.location.reload();
                     
   }
 state = {

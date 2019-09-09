@@ -4,6 +4,7 @@ import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import UpcomingJobCard from './UpcomingJobCard';
 import axios from 'axios';
 import WorkerNavBar from './WorkerNavBar';
+import OngoingJobCard from './OngoingJobCard';
 class Upcoming extends React.Component{
     constructor(props){
         super(props);
@@ -14,35 +15,35 @@ class Upcoming extends React.Component{
             startTime:"",
             endTime:""
         }   
-        this.endJob=this.endJob.bind(this);
+        // this.endJob=this.endJob.bind(this);
         
     }
 
 
     
-    endJob(e){
-        e.preventDefault();
-        //getting finishing time
-        let tempDate = new Date();
-        let endTime = tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds();
+    // endJob(e){
+    //     e.preventDefault();
+    //     //getting finishing time
+    //     let tempDate = new Date();
+    //     let endTime = tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds();
       
-        //req.body to send
-        let endJob  = {
-            "OrderId": localStorage.getItem("startedOrderId"),
-            "StartTime":localStorage.getItem("startTime"),
-            "EndTime":endTime
-        }        
-        //setting the end time for the local storage
+    //     //req.body to send
+    //     let endJob  = {
+    //         "OrderId": localStorage.getItem("startedOrderId"),
+    //         "StartTime":localStorage.getItem("startTime"),
+    //         "EndTime":endTime
+    //     }        
+    //     //setting the end time for the local storage
                 
-        //end the job
-        axios.create({withCredentials:true}).put("http://localhost:3000/ordersWorker/endOrder", endJob)
-        .then(response=>{
-            console.log(response.data)
-        })
-        localStorage.removeItem("startedOrderId");
-        localStorage.removeItem("startTime");    
-        this.forceUpdate() 
-     }
+    //     //end the job
+    //     axios.create({withCredentials:true}).put("http://localhost:3000/ordersWorker/endOrder", endJob)
+    //     .then(response=>{
+    //         console.log(response.data)
+    //     })
+    //     localStorage.removeItem("startedOrderId");
+    //     localStorage.removeItem("startTime");    
+    //     this.forceUpdate() 
+    //  }
 
     //Getting the upcoming job list for the worker
     componentDidMount(){    
@@ -114,30 +115,17 @@ class Upcoming extends React.Component{
                     </MDBTable>
                 </div>
                 <div id="ongoing" style={{ display: "none" , marginLeft:"45%", marginTop:"20px"}}>
-                    <MDBCard style={{ width: "32rem" }}>
-                        <MDBCardBody style={{textAlign:"center"}}>
-                            <MDBCardTitle><h1>Ongoing Job Details</h1></MDBCardTitle>
-                            <MDBCardText >
-                                <div style={{width:"100%", height:"40px", backgroundColor:"#0277bd"}} >
-                                    OrderId : {this.state.ongoingJobDetails.OrderId} <br></br>
-                                    Name : {this.state.ongoingJobDetails.FirstName} {this.state.ongoingJobDetails.LastName}<br></br>
-                                    ContactNumber : {this.state.ongoingJobDetails.ContactNumber}<br></br>
-                                    SkillTitle : {this.state.ongoingJobDetails.SkillTitle}<br></br>
-                                </div> <br></br>                                                    
-                                
-
-                                <div style={{width:"100%", height:"40px", backgroundColor:"#2BBBAD"}} >
-                                    OrderDate : {this.state.ongoingJobDetails.OrderDate}<br></br> 
-                                    StartTime : {this.state.ongoingJobDetails.StartTime}<br></br>
-                                    ExpectedEndTime : {this.state.ongoingJobDetails.ExpectedEndTime}<br></br>
-                                    Duration : {this.state.ongoingJobDetails.Duration}<br></br>
-                                </div> <br></br>                             
-                                
-                                
-                            </MDBCardText>
-                            <button onClick={this.endJob} style={{width:"100%", height:"50px", backgroundColor:"#3F729B"}}>Finish Job</button>
-                        </MDBCardBody>
-                    </MDBCard>
+                    <OngoingJobCard
+                    OrderId = {this.state.ongoingJobDetails.OrderId} 
+                    ContactNumber = {this.state.ongoingJobDetails.ContactNumber}
+                    SkillTitle ={this.state.ongoingJobDetails.SkillTitle}
+                    OrderDate = {this.state.ongoingJobDetails.OrderDate}
+                     StartTime = {this.state.ongoingJobDetails.StartTime}                             
+                    ExpectedEndTime = {this.state.ongoingJobDetails.ExpectedEndTime}
+                    FirstName = {this.state.ongoingJobDetails.FirstName}
+                    LastName={this.state.ongoingJobDetails.LastName}
+                    Duration ={this.state.ongoingJobDetails.Duration}
+                    />
                 </div>                
             </div>
             

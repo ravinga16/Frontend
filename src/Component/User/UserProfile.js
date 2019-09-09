@@ -23,7 +23,7 @@ render() {
         <MDBRow>
           <MDBCol md="6"><Userprofilecard/></MDBCol>
           <MDBCol md="6"><NotificationCard/></MDBCol>
-          {/* <MDBCol md="4">.col-md-4</MDBCol> */}
+    
         </MDBRow>
       </MDBContainer>
       

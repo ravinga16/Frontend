@@ -17,9 +17,11 @@ export default class WorkerNavBar extends React.Component {
               localStorage.removeItem("sessionEmail") ;
               localStorage.removeItem("sessionType") ;                    
           })
+          
           .catch(error => {
               console.log(error)//             
           })
+          window.location.reload();
           
   }
 state = {

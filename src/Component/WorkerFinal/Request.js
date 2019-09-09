@@ -17,7 +17,7 @@ export default class Request extends React.Component{
         // axios.get("http://localhost:3000/requests/pool/worker/"+localStorage.getItem("UserId"))
         axios.get("http://localhost:3000/requests/pool/worker/"+localStorage.getItem("UserId"))
         .then(response=>{
-            console.log(response.data.result[0])//
+            console.log("request data:", response.data.result[0])//
             this.setState({request:response.data.result[0]})
         })
     }

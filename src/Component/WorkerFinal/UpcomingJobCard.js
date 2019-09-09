@@ -45,7 +45,7 @@ class UpcomingJobCard extends React.Component{
                     document.getElementById(OrderId).style.display="none"
                 }
             })
-            this.forceUpdate();
+            window.location.reload()
         }else{
             alert("try again with a valid reason")
         }     
@@ -65,8 +65,7 @@ class UpcomingJobCard extends React.Component{
             alert("There is another ongoing job")
         } else {
             //check no job started. if not set the localstorage value
-            if (localStorage.getItem("startedOrderId") == null && localStorage.getItem("startTime") == null) {
-                alert("no ongoing jobs now...");
+            if (localStorage.getItem("startedOrderId") == null ) {
                 localStorage.setItem("startedOrderId", OrderId);          
                 //create the req.body to send
                 let startJob = {
@@ -76,7 +75,8 @@ class UpcomingJobCard extends React.Component{
                 axios.create({ withCredentials: true }).put("http://localhost:3000/ordersWorker/startOrder", startJob)
                     .then(response => {
                         console.log(response.data)
-                })               
+                })
+                window.location.reload()               
             }
         }    // startedOrderList.push(startJob);
     }      
