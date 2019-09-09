@@ -9,20 +9,19 @@ export default class WorkerNavBar extends React.Component {
     super(props);
     // this.handleClick=this.handleClick.bind(this);
   }
-  // handleClick(){
-  //   axios.post( "http://localhost:3000/user/logout")
-  //         .then(response => {       
-  //             console.log(response.data,"************************")   //  
-  //             localStorage.setItem("UserId","null") ;
-  //             localStorage.setItem("sessionEmail","null") ;
-  //             localStorage.setItem("sessionType","null") ;
-                    
-  //         })
-  //         .catch(error => {
-  //             console.log(error)//             
-  //         })
+  handleClick(){
+    axios.post( "http://localhost:3000/user/logout")
+          .then(response => {       
+              console.log("response.data in log out worker", response.data)   //  
+              localStorage.removeItem("UserId") ;
+              localStorage.removeItem("sessionEmail") ;
+              localStorage.removeItem("sessionType") ;                    
+          })
+          .catch(error => {
+              console.log(error)//             
+          })
           
-  // }
+  }
 state = {
   isOpen: false
 };
@@ -62,18 +61,12 @@ render() {
               <MDBNavLink to="/worker/request/">Job Request</MDBNavLink>
             </MDBNavItem>
           </MDBNavbarNav>
+
           <MDBNavbarNav right>
-            <MDBNavItem>
-              <MDBFormInline waves>
-              <MDBNavLink to="/">Log Out</MDBNavLink>
-              </MDBFormInline>
-            </MDBNavItem>
-          </MDBNavbarNav>
-          {/* <MDBNavbarNav right>
             <MDBNavItem>
               <button onClick={this.handleClick}><Link to="/">logout</Link></button>
             </MDBNavItem>
-          </MDBNavbarNav>   */}
+          </MDBNavbarNav>  
         </MDBCollapse>
       </MDBNavbar>
       

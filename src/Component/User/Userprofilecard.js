@@ -40,14 +40,14 @@ class Userprofilecard extends React.Component{
                 
             })
             .catch(function(error) {
-                // console.log(error);
+                console.log(error);
             });
 
-          //
-          let userId = localStorage.getItem('UserId');
-          let url = "http://localhost:3000/client/profile/"+57;    
+          //retrieving personal data  
+          let url = "http://localhost:3000/client/profile/"+localStorage.getItem("UserId");    
           axios.get(url,{withCredentials:true})
-          .then(response => {               
+          .then(response => { 
+            console.log("Personal data array :", response.data.result.recordsets[0][0].FirstName)              
               this.setState({personalData:response.data.result.recordsets[0][0]})
               
           })
@@ -63,10 +63,10 @@ class Userprofilecard extends React.Component{
         this.setState({ skillSelected });      
       }
 
-      handleEdit(e){
-        e.preventDefault();
-        document.getElementById("show").style.display="none";
-        document.getElementById("edit").style.display="block";
+    handleEdit(e){
+      e.preventDefault();
+      document.getElementById("show").style.display="none";
+      document.getElementById("edit").style.display="block";
     }
 
     handleCancel(e){
@@ -78,30 +78,19 @@ class Userprofilecard extends React.Component{
         e.preventDefault()
         this.setState({[e.target.name]:e.target.value})
     }
+
+    //update profile event
     handleSubmit(e){
         e.preventDefault();
-
-        // if(this.state.firstName==""){
-        //   this.setState({firstName:this.state.personalData.FirstName})
-        // }
-        // if(this.state.lastName==""){
-        //   this.setState({lastName:this.state.personalData.LastName})
-        // }
-        // if(this.state.skillSelected==undefined){
-        //   this.setState({skillSelected:this.state.personalData.BaseLocation})
-        // }
-       
-        // if(this.state.contactNumber==""){
-        //   this.setState({contactNumber:this.state.personalData.ContactNumber})
-        // }
         const workerDetails = {
             fname: this.state.firstName,
             lname: this.state.lastName,
             baseL: this.state.skillSelected.label,
             contactno: this.state.contactNumber
           };
+          //update client profile details
           axios
-            .put("http://localhost:3000/client/profile/" + 57, workerDetails, {
+            .put("http://localhost:3000/client/profile/" + localStorage.getItem("UserId"), workerDetails, {
               withCredentials: true
             })
             .then(res => {
@@ -109,7 +98,7 @@ class Userprofilecard extends React.Component{
               
             });
 
-        this.componentDidMount()
+        // this.componentDidMount()
         document.getElementById("edit").style.display="none";
         document.getElementById("show").style.display="block";
         
@@ -220,7 +209,7 @@ class Userprofilecard extends React.Component{
                           value={this.state.skillSelected}
                           onChange={this.onChangeSkillSelected}
                           options={baselocations}
-                          placeholder="Skills"
+                          placeholder="Base Location"
                           required
                         />
                         <br></br>  <br></br>

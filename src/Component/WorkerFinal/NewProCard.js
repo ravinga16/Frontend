@@ -26,7 +26,7 @@ class NewProCard extends React.Component{
     //once the profile card is mounted
     componentDidMount(){
         let userId = localStorage.getItem('UserId');
-        let url = "http://localhost:3000/worker/profile/"+143;    
+        let url = "http://localhost:3000/worker/profile/"+localStorage.getItem("UserId");    
         axios.get(url,{withCredentials:true})
         .then(response => { 
             
@@ -88,9 +88,9 @@ class NewProCard extends React.Component{
             baseL: this.state.skillSelected.label,
             contactno: this.state.contactNumber
           };
-          console.log("*******************",workerDetails)
+    
           axios
-            .put("http://localhost:3000/worker/profile/" + 143, workerDetails, {
+            .put("http://localhost:3000/worker/profile/" + localStorage.getItem("UserId"), workerDetails, {
               withCredentials: true
             })
             .then(res => {
@@ -179,7 +179,7 @@ class NewProCard extends React.Component{
 
                                 </div>
                             </form>
-                            {/* // /////////////////////////////////////////////////////////////////////////////////////////////// */}
+                            {/* // ////////////////////////////////////////form to display when edit profile event/////////////////////////////////////////////////////// */}
 
                             <form id="edit" onSubmit={this.handleSubmit} style={{ display: "none" }}>
                                 <p className="h4 text-center mb-4">Sign up</p>
@@ -191,6 +191,7 @@ class NewProCard extends React.Component{
                                     name="firstName"
                                     onChange={this.handleChange}
                                     className="form-control"
+                                    required
                                 />
                                 <br />
 
@@ -201,6 +202,7 @@ class NewProCard extends React.Component{
                                     name="lastName"
                                     onChange={this.handleChange}
                                     className="form-control"
+                                    required
                                 />
                                 <br />
 
@@ -208,7 +210,8 @@ class NewProCard extends React.Component{
                                     value={this.state.skillSelected}
                                     onChange={this.onChangeSkillSelected}
                                     options={baselocations}
-                                    placeholder="Skills"
+                                    placeholder="Base Location"
+                                    required
 
                                 />
                                 <br></br>  <br></br> 
@@ -220,6 +223,7 @@ class NewProCard extends React.Component{
                                     name="contactNumber"
                                     onChange={this.handleChange}
                                     className="form-control"
+                                    required
                                 />
                                 <br />
 

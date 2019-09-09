@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
-import Notification from './notification';
+import Notification from './Notification';
 
 export default class NotificationCard extends React.Component{
     render(){

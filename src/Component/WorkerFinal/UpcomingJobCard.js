@@ -67,22 +67,17 @@ class UpcomingJobCard extends React.Component{
             //check no job started. if not set the localstorage value
             if (localStorage.getItem("startedOrderId") == null && localStorage.getItem("startTime") == null) {
                 alert("no ongoing jobs now...");
-                localStorage.setItem("startedOrderId", OrderId);
-                localStorage.setItem("startTime", currentTime);
+                localStorage.setItem("startedOrderId", OrderId);          
                 //create the req.body to send
                 let startJob = {
                     "OrderId": OrderId,
                     "StartTime": currentTime
-                }
-            
-                
+                }                           
                 axios.create({ withCredentials: true }).put("http://localhost:3000/ordersWorker/startOrder", startJob)
                     .then(response => {
                         console.log(response.data)
-                })
-               
+                })               
             }
-
         }    // startedOrderList.push(startJob);
     }      
 

@@ -21,7 +21,7 @@ export default class Search extends React.Component{
             skillSelected:'',
             paymentSelected:'',
             paymentName:'', 
-            clientId:3,
+            clientId:localStorage.getItem("UserId"),
             skillId:'',            
             orderDate:'',
             startTime:'',
@@ -38,9 +38,7 @@ export default class Search extends React.Component{
     //getting all the skills available in the website
     componentDidMount(){
         // axios.create({ withCredentials: true, }).get('http://localhost:3000/dataservices/getallskills')
-        axios.get('http://localhost:3000/dataservices/getallskills',{withCredentials:true})
-        // fetch('http://localhost:3000/dataservices/getallskills',{credentials:'include'})
-        // .then(response=>response.json())
+        axios.get('http://localhost:3000/dataservices/getallskills',{withCredentials:true})        
         .then(response => {        
             //get the response sent by the API. setState to the response data this.setState({posts:response.data})
                 let i = 0;

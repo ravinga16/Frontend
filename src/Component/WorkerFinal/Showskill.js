@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
+import {  MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
 import axios from 'axios';
 export default class Showskill extends React.Component{
     constructor(props){
@@ -9,10 +9,11 @@ export default class Showskill extends React.Component{
       }
  
     }
+    //Delete a skill
     deleteSkill(SkillId, e){
       e.preventDefault();
       console.log(SkillId)
-      axios.create({withCredentials:true}).delete("http://localhost:3000/worker/skill/143", { data: { "skillId": SkillId } })
+      axios.create({withCredentials:true}).delete("http://localhost:3000/worker/skill/"+localStorage.getItem("UserId"), { data: { "skillId": SkillId } })
       .then(response=>{
         console.log(response.data);
       })
@@ -23,7 +24,7 @@ export default class Showskill extends React.Component{
             <MDBCol style={{marginTop:"15px"}}>
               <MDBCard style={{ width: "100%" }}>                
                 <MDBCardBody>
-                  <MDBCardTitle>{this.props.SkillTitle} {this.props.SkillId}</MDBCardTitle>
+                  <MDBCardTitle>{this.props.SkillTitle} </MDBCardTitle>
                   <MDBCardText>
                     <div class="row">
                       <div class="col-md-5">{this.props.Description}

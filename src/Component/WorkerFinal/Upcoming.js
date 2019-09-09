@@ -9,6 +9,7 @@ class Upcoming extends React.Component{
         super(props);
         this.state={
             UpcomingJobs:[],
+            ongoingJobDetails:[],
             startedJobId:"",
             startTime:"",
             endTime:""
@@ -42,19 +43,24 @@ class Upcoming extends React.Component{
         localStorage.removeItem("startTime");    
         this.forceUpdate() 
      }
+
     //Getting the upcoming job list for the worker
-    componentDidMount(){
-        // let varUrl = "http://localhost:3000/ordersWorker/getUpComingOrders/"+localStorage.getItem("UserId");        
-        axios.create({withCredentials:true}).get("http://localhost:3000/ordersWorker/getUpComingOrders/"+3)
+    componentDidMount(){    
+        axios.create({withCredentials:true}).get("http://localhost:3000/ordersWorker/getUpComingOrders/"+localStorage.getItem("UserId"))
         .then(response => {
-            //response.data.result[0] <- this gives [{},{}....]
             console.log(response.data.result[0])
             this.setState({UpcomingJobs:response.data.result[0]})            
         })
         
         //check if order started and display the started job details
         if(localStorage.getItem("startedOrderId")!=null){
-            document.getElementById("ongoing").style.display="block"
+            axios.get("http://localhost:3000/ordersWorker/getOngoingOrders/"+localStorage.getItem("UserId"), {withCredentials:true})
+            .then(response => {                
+                this.setState({ongoingJobDetails:response.data.result[0][0]})
+                console.log("ongoingJobDetails", this.state.ongoingJobDetails)
+                document.getElementById("ongoing").style.display="block"
+            })
+            
         }
 
 
@@ -109,14 +115,27 @@ class Upcoming extends React.Component{
                 </div>
                 <div id="ongoing" style={{ display: "none" , marginLeft:"45%", marginTop:"20px"}}>
                     <MDBCard style={{ width: "32rem" }}>
-                        <MDBCardBody>
+                        <MDBCardBody style={{textAlign:"center"}}>
                             <MDBCardTitle><h1>Ongoing Job Details</h1></MDBCardTitle>
-                            <MDBCardText>
-                                Order ID : {localStorage.getItem("startedOrderId")}
-                                <br></br>
-                                Started Time : {localStorage.getItem("startTime")}
+                            <MDBCardText >
+                                <div style={{width:"100%", height:"40px", backgroundColor:"#0277bd"}} >
+                                    OrderId : {this.state.ongoingJobDetails.OrderId} <br></br>
+                                    Name : {this.state.ongoingJobDetails.FirstName} {this.state.ongoingJobDetails.LastName}<br></br>
+                                    ContactNumber : {this.state.ongoingJobDetails.ContactNumber}<br></br>
+                                    SkillTitle : {this.state.ongoingJobDetails.SkillTitle}<br></br>
+                                </div> <br></br>                                                    
+                                
+
+                                <div style={{width:"100%", height:"40px", backgroundColor:"#2BBBAD"}} >
+                                    OrderDate : {this.state.ongoingJobDetails.OrderDate}<br></br> 
+                                    StartTime : {this.state.ongoingJobDetails.StartTime}<br></br>
+                                    ExpectedEndTime : {this.state.ongoingJobDetails.ExpectedEndTime}<br></br>
+                                    Duration : {this.state.ongoingJobDetails.Duration}<br></br>
+                                </div> <br></br>                             
+                                
+                                
                             </MDBCardText>
-                            <button onClick={this.endJob} style={{width:"90%", height:"50px", backgroundColor:"#3F729B"}}>Finish Job</button>
+                            <button onClick={this.endJob} style={{width:"100%", height:"50px", backgroundColor:"#3F729B"}}>Finish Job</button>
                         </MDBCardBody>
                     </MDBCard>
                 </div>                

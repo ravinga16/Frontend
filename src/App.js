@@ -12,25 +12,29 @@ import appointment from './Component/WorkerFinal/appointment';
 import Request from './Component/WorkerFinal/Request';
 import Completed from './Component/WorkerFinal/Completed';
 import Upcoming from './Component/WorkerFinal/Upcoming';
-import {PrivateRoute} from './PrivateRoute';
+import Tets from './test2'
+// import {Route} from './Route';
 
 function App() {
+
   return (
    <Router>
     <Switch>
         <Route exact path="/"  component={Home} ></Route>       
-        <Route path="/signin/" component={SignIn}></Route>
-        <PrivateRoute path="/client/profile/" component={UserProfile}></PrivateRoute>
+      <Route path="/signin/" component={SignIn}></Route>
+        <Route path="/client/profile/" component={UserProfile}></Route> 
+
         {/* <Route path="/client/search/" component={SearchDelete}></Route> */}
-        <PrivateRoute path="/client/search/" component={Search}></PrivateRoute>
-        <PrivateRoute path ="/client/order/" component={MyBooking}></PrivateRoute>
+
+       <Route path="/client/search/" component={Search}></Route>
+        <Route path ="/client/order/" component={MyBooking}></Route>
         
-        <PrivateRoute path="/worker/profile/" component={Workerprofile}></PrivateRoute> 
-        <PrivateRoute path="/worker/appointment/" component={appointment}></PrivateRoute> 
-        <PrivateRoute path="/worker/completed/" component={Completed}></PrivateRoute> 
-        <PrivateRoute path="/worker/request/" component={Request}></PrivateRoute> 
-        <PrivateRoute path="/worker/upcoming/" component={Upcoming}></PrivateRoute>
-  
+        <Route path="/worker/profile/" component={Workerprofile}></Route> 
+        <Route path="/worker/appointment/" component={appointment}></Route> 
+        <Route path="/worker/completed/" component={Completed}></Route> 
+        <Route path="/worker/request/" component={Request}></Route> 
+        <Route path="/worker/upcoming/" component={Upcoming}></Route>
+   
         
         
 

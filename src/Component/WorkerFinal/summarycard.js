@@ -18,7 +18,7 @@ export default class Summarycard extends React.Component{
         var date = tempDate.getFullYear() + '.0' + (tempDate.getMonth()+1) + '.0' + tempDate.getDate() ;
         console.log(date,"+++++++++++++++++++")
         //upcoming
-        axios.create({withCredentials:true}).get("http://localhost:3000/ordersWorker/getUpComingOrders/"+3)
+        axios.create({withCredentials:true}).get("http://localhost:3000/ordersWorker/getUpComingOrders/"+localStorage.getItem("UserId"))
         .then(response => {
             //response.data.result[0] <- this gives [{},{}....]
             this.setState({upcoming:response.data.result[0].length})
@@ -27,7 +27,7 @@ export default class Summarycard extends React.Component{
         })
 
         //requests
-        axios.get("http://localhost:3000/requests/pool/worker/"+3)
+        axios.get("http://localhost:3000/requests/pool/worker/"+localStorage.getItem("UserId"))
         .then(response=>{
             this.setState({requests:response.data.result[0].length})            
         })

@@ -23,7 +23,7 @@ export default class Workerprofile extends React.Component{
         .then(response => {           
             //get the response sent by the API. setState to the response data this.setState({posts:response.data})
             this.setState({skills:response.data.result.recordsets[1]});   
-            console.log("**************************",this.state.skills)
+   
         })
         .catch(error => {
             console.log(error)

@@ -33,20 +33,20 @@ class NewStatus extends React.Component{
             let statusReq = {
                 "status":1
             }
-            axios.put("http://localhost:3000/worker/status/143", statusReq)
+            axios.put("http://localhost:3000/worker/status/"+localStorage.getItem("UserId"), statusReq)
             document.getElementById("statusshow").style.display="block";
             document.getElementById("statusedit").style.display="none";
         }else{
             let statusReq = {
                 "status":0
             }
-            axios.put("http://localhost:3000/worker/status/143", statusReq)
+            axios.put("http://localhost:3000/worker/status/"+localStorage.getItem("UserId"), statusReq)
             document.getElementById("statusshow").style.display="block";
             document.getElementById("statusedit").style.display="none";
         }
     }
     componentDidMount(){
-        let userId = localStorage.getItem('UserId');
+  
         let url = "http://localhost:3000/worker/profile/"+localStorage.getItem("UserId");    
         axios.get(url,{withCredentials:true})
         .then(response => {             
@@ -71,11 +71,7 @@ class NewStatus extends React.Component{
                             </div>
                             <br></br>
 
-                            <div id="statusshow" style={{ display: "block" }}>
-                                {/* <div class="row" >
-                                    <div class="col-md-5"><input type="radio" name="status" disabled  />Online</div>
-                                    <div class="col-md-5"><input type="radio" name="status" disabled />OffLine</div>
-                                </div> */}
+                            <div id="statusshow" style={{ display: "block" }}>                               
                                 <MDBBtn onClick={this.handleStatus}>Update Status</MDBBtn>
                             </div>
 

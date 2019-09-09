@@ -53,11 +53,8 @@ class SignIn extends React.Component{
 
             <MDBContainer>
             <MDBRow>
-                <MDBCol md="6">.col-md-8</MDBCol>
-                <MDBCol md="6">
-                    <MDBContainer>
-                {/* <MDBRow>
-                    <MDBCol md="6"> */}
+                {/* sign in form */}\
+                <MDBContainer>               
                     <MDBAnimation type="fadeInRight" delay=".3s">
                     <MDBCard>
                         <MDBCardBody>
@@ -65,11 +62,11 @@ class SignIn extends React.Component{
                             <p className="h4 text-center py-4">Sign Up</p>
                             <div className="grey-text">
                                 {/* selection whether user or client */}
-                                <label style={{marginLeft:"70px"}}>
+                                <label style={{marginLeft:"10%"}}>
                                     <input type="radio"  name ="UserType" value="Customer" onChange={this.handleWorkerType} required/>Customer       
                                 </label>
                                 
-                                <label style={{marginLeft:"140px"}}>
+                                <label style={{marginLeft:"60%"}}>
                                     <input type="radio" name ="UserType" value="Worker"  onChange={this.handleWorkerType} required />Worker
                                 </label>
 
@@ -119,10 +116,8 @@ class SignIn extends React.Component{
                         </MDBCardBody>                        
                     </MDBCard>
                     </MDBAnimation>
-                    {/* </MDBCol>
-                </MDBRow> */}
+                   
                 </MDBContainer>
-                </MDBCol>
             </MDBRow>
             </MDBContainer>
 

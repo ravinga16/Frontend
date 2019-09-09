@@ -40,9 +40,10 @@ class Home extends React.Component {
                       localStorage.setItem("UserId",response.data.result.UserId);
                       localStorage.setItem("sessionEmail",response.data.result.sessionEmail);
                       localStorage.setItem("sessionType",response.data.result.sessionType);
+                      console.log("UserId:", localStorage.getItem("UserId"))//
                       //Redirect based on the UserType
                       if(response.data.result.sessionType=="Client"){
-                        this.props.history.push('/client/profile/');//
+                        this.props.history.push('/client/profile/');
                       }else if(response.data.result.sessionType=="worker"){
                         this.props.history.push('/worker/profile/');
                       }
@@ -59,14 +60,10 @@ class Home extends React.Component {
         return (
             <MDBContainer>
                 <MDBRow>
-                    {/* Description */}
-                    <MDBCol md="6">.col-md-8</MDBCol>
-                    {/* Login Form */}
-                    <MDBCol md="6">
-                        <MDBContainer>
-                            {/* <MDBRow>
+                <MDBContainer>
+                        {/* <MDBRow>
                             <MDBCol md="6"> */}
-                            <MDBAnimation type="fadeInRight" delay=".3s">
+                        <MDBAnimation type="fadeInRight" delay=".3s">
                             <MDBCard>
                                 <MDBCardBody>
                                     <form onSubmit={this.handleSubmit}>
@@ -112,11 +109,10 @@ class Home extends React.Component {
                                     </p>
                                 </MDBModalFooter>
                             </MDBCard>
-                            </MDBAnimation>
-                            {/* </MDBCol>
+                        </MDBAnimation>
+                        {/* </MDBCol>
                             </MDBRow> */}
-                        </MDBContainer>
-                    </MDBCol>
+                    </MDBContainer>
                 </MDBRow>
             </MDBContainer>
         );
