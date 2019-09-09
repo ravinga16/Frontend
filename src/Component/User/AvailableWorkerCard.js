@@ -4,11 +4,10 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText } from 'mdbreac
 class AvailableWorkerCard extends React.Component{
     render(){
         return(          
-            <MDBCard style={{ width: "70%" ,marginTop:"15px"}}>                
+            <MDBCard style={{ width: "100%" ,marginTop:"15px"}}>                
                 <MDBCardBody>
                 <MDBCardTitle>{this.props.firstName} {this.props.lastName}</MDBCardTitle>
-                <MDBCardText>
-   
+                <MDBCardText>   
                 workerId:{this.props.workerId} <br></br>
                 firstName:{this.props.firstName} <br></br>
                 lastName:{this.props.lastName}<br></br>

@@ -25,6 +25,7 @@
 //         this.handlebasel=this.handlebasel.bind(this);
 //         this.handlecontactno=this.handlecontactno.bind(this);
        
+<<<<<<< HEAD
 //       }
 
 //       handlefname(e){
@@ -53,6 +54,36 @@
 //         this.setState({skills:response.data.result.recordsets[1]})
 //         console.log(this.state.personalData.FirstName)
 //         console.log(this.state.skills)          
+=======
+      }
+
+      handlefname(e){
+        this.setState({fname:e.target.value})
+      }
+
+      handlelname(e){
+        this.setState({lname:e.target.value})
+      }
+
+      handlebasel(e){
+        this.setState({baseL:e.target.value})
+      }
+
+      handlecontactno(e){
+        this.setState({contactno:e.target.value})
+      }
+     //once the profile card is mounted
+      componentDidMount(){
+       
+        let url = "http://localhost:3000/worker/profile/"+localStorage.getItem("UserId");    
+        axios.get(url,{withCredentials:true})
+        .then(response => { 
+         console.log("componentdidmount method called");   
+        this.setState({personalData:response.data.result.recordsets[0][0]})
+        this.setState({skills:response.data.result.recordsets[1]})
+        console.log(this.state.personalData.FirstName)
+        console.log(this.state.skills)          
+>>>>>>> 849cb0d780f26c3dfe859cae5cfe14fc7516b930
           
 //         })
 //         .catch(error => {
@@ -84,11 +115,19 @@
 //           baseL: this.state.baseL,
 //           contactno : this.state.contactno
          
+<<<<<<< HEAD
 //       }
 //       console.log(a)
 //         axios.put('http://localhost:3000/worker/profile/143', a)
 //         .then(response => {        
 //           console.log("response.data",response.data); 
+=======
+      }
+      console.log(a)
+        axios.put('http://localhost:3000/worker/profile/'+localStorage.getItem("UserId"), a)
+        .then(response => {        
+          console.log("response.data",response.data); 
+>>>>>>> 849cb0d780f26c3dfe859cae5cfe14fc7516b930
                       
 //         })
 //         .catch(error => {

@@ -13,6 +13,7 @@ class NewProCard extends React.Component{
             baseLocation:"",
             contactNumber:"",
             personalData:[],
+            personalDataDuplicate:[],
             skillSelected:'',
             
         }
@@ -25,12 +26,18 @@ class NewProCard extends React.Component{
 
     //once the profile card is mounted
     componentDidMount(){
+<<<<<<< HEAD
         let userId = localStorage.getItem('UserId');
+=======
+ 
+>>>>>>> 849cb0d780f26c3dfe859cae5cfe14fc7516b930
         let url = "http://localhost:3000/worker/profile/"+localStorage.getItem("UserId");    
         axios.get(url,{withCredentials:true})
-        .then(response => { 
-            
+        .then(response => {           
             this.setState({personalData:response.data.result.recordsets[0][0]})
+            if(this.state.personalData.FirstName==null){
+                alert("no data")
+            }
      
         })
         .catch(error => {

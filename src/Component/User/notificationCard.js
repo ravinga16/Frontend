@@ -1,7 +1,11 @@
 import React from 'react';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
+<<<<<<< HEAD
 
 import axios from 'axios';
+=======
+import Notification from './Notification';
+>>>>>>> 849cb0d780f26c3dfe859cae5cfe14fc7516b930
 
 export default class NotificationCard extends React.Component{
     constructor(props){

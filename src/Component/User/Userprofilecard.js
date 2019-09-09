@@ -43,7 +43,12 @@ class Userprofilecard extends React.Component{
                 console.log(error);
             });
 
+<<<<<<< HEAD
           //retrieving personal data  
+=======
+          //
+          let userId = localStorage.getItem('UserId');
+>>>>>>> 849cb0d780f26c3dfe859cae5cfe14fc7516b930
           let url = "http://localhost:3000/client/profile/"+localStorage.getItem("UserId");    
           axios.get(url,{withCredentials:true})
           .then(response => { 
@@ -222,6 +227,7 @@ class Userprofilecard extends React.Component{
                           onChange={this.handleChange}
                           className="form-control"
                           required
+                          
                         />
                         <br />
 
