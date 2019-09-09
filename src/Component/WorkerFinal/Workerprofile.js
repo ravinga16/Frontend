@@ -3,11 +3,11 @@ import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import Profilecard from "./Profilecard";
 import WorkerNavBar from "./WorkerNavBar";
 import Addskill from "./Addskill";
-import Table from "./Table";
+
 import Showskill from "./Showskill";
-import Summarycard from "./summarycard";
+
 import axios from 'axios';
-import WorkerProfileCard from "./WorkerProfileCard";
+
 import NewProCard from "./NewProCard";
 import NewStatus from "./NewStatus";
 export default class Workerprofile extends React.Component{
@@ -23,11 +23,6 @@ export default class Workerprofile extends React.Component{
         .then(response => {           
             //get the response sent by the API. setState to the response data this.setState({posts:response.data})
             this.setState({skills:response.data.result.recordsets[1]});   
-<<<<<<< HEAD
-   
-=======
-
->>>>>>> 849cb0d780f26c3dfe859cae5cfe14fc7516b930
         })
         .catch(error => {
             console.log(error)

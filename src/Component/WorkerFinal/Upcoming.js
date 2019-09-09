@@ -46,12 +46,7 @@ class Upcoming extends React.Component{
     //  }
 
     //Getting the upcoming job list for the worker
-<<<<<<< HEAD
     componentDidMount(){    
-=======
-    componentDidMount(){
-        // let varUrl = "http://localhost:3000/ordersWorker/getUpComingOrders/"+localStorage.getItem("UserId");        
->>>>>>> 849cb0d780f26c3dfe859cae5cfe14fc7516b930
         axios.create({withCredentials:true}).get("http://localhost:3000/ordersWorker/getUpComingOrders/"+localStorage.getItem("UserId"))
         .then(response => {
             console.log(response.data.result[0])

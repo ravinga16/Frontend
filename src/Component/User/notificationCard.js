@@ -1,11 +1,7 @@
 import React from 'react';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
-<<<<<<< HEAD
 
 import axios from 'axios';
-=======
-import Notification from './Notification';
->>>>>>> 849cb0d780f26c3dfe859cae5cfe14fc7516b930
 
 export default class NotificationCard extends React.Component{
     constructor(props){
@@ -24,12 +20,19 @@ export default class NotificationCard extends React.Component{
     }
     render(){
         return (
-     
-              <div>
-                  {
-                      this.state.availableNotification.length? this.state.availableNotification.map(noti => <div key={noti.NotificationId}> {noti.msg}</div>): null
-                  }
-              </div>
+            <div>
+               {
+                   this.state.availableNotification.length? this.state.availableNotification.map(noti => <div>
+                       <MDBCard style={{ width: "30rem", marginTop: "15px" }}>
+                           <MDBCardBody style={{ fontSize: "13px" }}>
+                                {noti.msg}<br></br>
+                                {noti.NotificationId}<br></br>
+                           </MDBCardBody>
+                       </MDBCard>
+
+                   </div>): null
+               }
+            </div>
  
           )
     }

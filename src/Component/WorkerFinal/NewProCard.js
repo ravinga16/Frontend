@@ -26,11 +26,7 @@ class NewProCard extends React.Component{
 
     //once the profile card is mounted
     componentDidMount(){
-<<<<<<< HEAD
-        let userId = localStorage.getItem('UserId');
-=======
- 
->>>>>>> 849cb0d780f26c3dfe859cae5cfe14fc7516b930
+    
         let url = "http://localhost:3000/worker/profile/"+localStorage.getItem("UserId");    
         axios.get(url,{withCredentials:true})
         .then(response => {           

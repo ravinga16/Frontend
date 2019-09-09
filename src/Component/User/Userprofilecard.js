@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
+import { MDBBtn, MDBCard, MDBCardBody,   MDBCardText, MDBCol } from 'mdbreact';
 import axios from 'axios';
 import Select from 'react-select';
 let baselocations = [];
@@ -43,12 +43,7 @@ class Userprofilecard extends React.Component{
                 console.log(error);
             });
 
-<<<<<<< HEAD
           //retrieving personal data  
-=======
-          //
-          let userId = localStorage.getItem('UserId');
->>>>>>> 849cb0d780f26c3dfe859cae5cfe14fc7516b930
           let url = "http://localhost:3000/client/profile/"+localStorage.getItem("UserId");    
           axios.get(url,{withCredentials:true})
           .then(response => { 
@@ -112,7 +107,7 @@ class Userprofilecard extends React.Component{
             return (
                 <MDBCol>
                   <MDBCard style={{ width: "30rem" }} id="profile"style={{display:"block"}}>
-                    <MDBCardImage className="img-fluid" src="http://simpleicon.com/wp-content/uploads/user1.png" waves />
+                    
                     <MDBCardBody>                     
                       <MDBCardText>
                       <form id="show" style={{ display: "block" }}>
