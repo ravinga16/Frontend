@@ -12,7 +12,7 @@ import appointment from './Component/WorkerFinal/appointment';
 import Request from './Component/WorkerFinal/Request';
 import Completed from './Component/WorkerFinal/Completed';
 import Upcoming from './Component/WorkerFinal/Upcoming';
-import Tets from './test2'
+import {PrivateRoute} from './PrivateRoute';
 // import {Route} from './Route';
 
 function App() {
@@ -22,14 +22,14 @@ function App() {
     <Switch>
         <Route exact path="/"  component={Home} ></Route>       
       <Route path="/signin/" component={SignIn}></Route>
-        <Route path="/client/profile/" component={UserProfile}></Route> 
+        <PrivateRoute path="/client/profile/" component={UserProfile}></PrivateRoute> 
 
         {/* <Route path="/client/search/" component={SearchDelete}></Route> */}
 {/* //lklfdlsmflds */}
-       <Route path="/client/search/" component={Search}></Route>
-        <Route path ="/client/order/" component={MyBooking}></Route>
+       <PrivateRoute path="/client/search/" component={Search}></PrivateRoute>
+        <PrivateRoute path ="/client/order/" component={MyBooking}></PrivateRoute>
         
-        <Route path="/worker/profile/" component={Workerprofile}></Route> 
+        <PrivateRoute path="/worker/profile/" component={Workerprofile}></PrivateRoute> 
         <Route path="/worker/appointment/" component={appointment}></Route> 
         <Route path="/worker/completed/" component={Completed}></Route> 
         <Route path="/worker/request/" component={Request}></Route> 
