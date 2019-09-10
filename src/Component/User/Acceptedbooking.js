@@ -2,6 +2,21 @@ import React from 'react';
 import { MDBContainer, MDBCollapse, MDBCard, MDBCardBody, MDBBtn } from "mdbreact";
 
 export default class AcceptedBooking extends React.Component{
+  constructor(props){
+    super(props);
+   
+    this.convertTime=this.convertTime.bind(this)
+    this.convertDate=this.convertDate.bind(this)
+  }
+
+  //converting date and time
+  convertTime(time) {
+    return (<p>{new Date(time).toUTCString().split(" ")[4]}</p>)
+  }
+
+  convertDate(OrderDate) {
+    return (<p>{new Date(OrderDate).toUTCString().split(" ").slice(1, 4).join(" ")}</p>)
+  }
     state={
         collapseID: "collapse3"
       }
@@ -26,43 +41,37 @@ export default class AcceptedBooking extends React.Component{
                   <form style={{ textAlign: "left",display:"block" ,fontSize:"13px"}} name="showProfile">                              
                               <div class="row">
                                   <div class="col-md-5">Order Id: </div>
-                                  <div class="col-md-5">
-                                      <input type="text" name="OrderId" placeholder={this.props.OrderId} disabled></input>
+                                  <div class="col-md-5">{this.props.OrderId}
+                                      {/* <input type="text" name="OrderId" placeholder={this.props.OrderId} disabled></input> */}
                               </div>
                               </div><br></br> 
                                 {/*  */}
                               <div class="row">
                                   <div class="col-md-5">Worker ID: </div>
-                                  <div class="col-md-5">
-                                      <input type="text" name="WorkerId" placeholder={this.props.WorkerId} disabled></input>
+                                  <div class="col-md-5">{this.props.WorkerId}
+                                      {/* <input type="text" name="WorkerId" placeholder={this.props.WorkerId} disabled></input> */}
                               </div>
                               </div><br></br> 
                                 {/*  */}
                               <div class="row">
                                   <div class="col-md-5">Worker Name: </div>
-                                  <div class="col-md-5">
-                                      <input type="text" name="Name" placeholder={this.props.Name} disabled></input>
+                                  <div class="col-md-5">{this.props.Name}
+                                      {/* <input type="text" name="Name" placeholder={this.props.Name} disabled></input> */}
                               </div>
                               </div><br></br> 
                                 {/*  */}
                                 <div class="row">
                                   <div class="col-md-5">Worker Rating: </div>
-                                  <div class="col-md-5">
-                                      <input type="text" name="Rate" placeholder={this.props.Rate} disabled></input>
+                                  <div class="col-md-5">{this.props.Rate}
+                                      {/* <input type="text" name="Rate" placeholder={this.props.Rate} disabled></input> */}
                               </div>
                               </div><br></br>
-                               {/*  */}
-                               <div class="row">
-                                  <div class="col-md-5">Contact Number: </div>
-                                  <div class="col-md-5">
-                                      <input type="text" name="ContactNumber" placeholder="0714454545" disabled></input>
-                              </div>
-                              </div><br></br> 
+                               
                                {/*  */}
                                <div class="row">
                                   <div class="col-md-5">Start Time: </div>
-                                  <div class="col-md-5">
-                                      <input type="text" name="StartTime" placeholder={this.props.StartTime} disabled></input>
+                                  <div class="col-md-5">{this.props.StartTime} 
+                                      {/* <input type="text" name="StartTime" placeholder={this.props.StartTime} disabled></input> */}
                               </div>
                               </div><br></br> 
                   </form>
