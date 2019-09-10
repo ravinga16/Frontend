@@ -27,7 +27,7 @@ export default class NotificationCard extends React.Component{
                            show
                            fade
                            iconClassName="text-primary"
-                           title="Bootstrap"
+                           title="Notification"
                            message={noti.msg,noti.NotificationId}
                         //    text="11 mins ago"
                        />

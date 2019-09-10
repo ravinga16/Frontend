@@ -29,8 +29,8 @@ export default class Search extends React.Component{
             availableWorkers:[],
             result:[0],
 
-            booknowWorkers:[0],
-            booknowResult:[0]
+            booknowWorkers:[],            
+            workerIds:[]
         }
         this.handleBookLater=this.handleBookLater.bind(this);
         this.handleBookNow=this.handleBookNow.bind(this);
@@ -83,33 +83,78 @@ export default class Search extends React.Component{
         }else{
             document.getElementById("booklater").style.display="block";
             document.getElementById("map").style.display="none";
-        }
-       
+        }       
     }
 
-    handleBookNow(){        
-        if(this.state.skillId==""){
-            alert("Enter a Valid Job Type")
-        }else{
-            document.getElementById("map").style.display="block";
-            let bookNowReq = {
-                jobType:this.state.skillId,
-                clientId:localStorage.getItem("UserId"),
-                coordinate : "Colombo"
-            }
-            axios.create({withCredentials:true}).post("http://localhost:3000/booknow/booknow", bookNowReq)
-            .then(response => {
-                console.log("book now req response :", response.data.result.workers.length)
-                if(response.data.result.workers.length==0){
-                    alert("No available Workers")
-                }else{
-                    console.log("response.data.result", response.data.result)
-                    this.setState({booknowWorkers:response.data.result.workers})
-                    console.log("this.state.booknowWorkers",this.state.booknowWorkers)                
+    // handleBookNow(){        
+    //     if(this.state.skillId==""){
+    //         alert("Enter a Valid Job Type")
+    //     }else{
+    //         document.getElementById("map").style.display="block";
+    //         let bookNowReq = {
+    //             jobType:this.state.skillId,
+    //             clientId:localStorage.getItem("UserId"),
+    //             coordinate : "Colombo"
+    //         }
+    //         axios.create({withCredentials:true}).post("http://localhost:3000/booknow/booknow", bookNowReq)
+    //         .then(response => {
+    //             console.log("book now req response :", response.data.result.workers.length)
+    //             if(response.data.result.workers.length==0){
+    //                 alert("No available Workers")
+    //             }else{
+    //                 console.log("response.data.result", response.data.result)
+    //                 this.setState({booknowWorkers:response.data.result.workers})
+    //                 console.log("this.state.booknowWorkers",this.state.booknowWorkers)                
 
+    //             }
+    //         })  
+    //     }    
+    // }
+
+    handleBookNow() {
+        var getNearByWorkers = {
+            clientId: localStorage.getItem("UserId"),
+            jobType: this.state.skillId,
+            cordinate: "6.901829251748622"+ "," + "79.91425303864753"
+        };
+        axios
+            .post("http://localhost:3000/booknow/booknow", getNearByWorkers, {
+                withCredentials: true
+            })
+            .then(res => {
+                if (res.data.result.workers.length == 0) {
+                    alert("No available workers");
+                } else {
+                    this.setState({
+                        bookNowWorkers: res.data.result.workers
+                    });
+                    this.state.bookNowWorkers.forEach(worker => {
+                        this.state.workerIds.push(worker.WorkerId);
+                    });
+                    var sendUrgentReq = {
+                        clientId: localStorage.getItem("UserId"),
+                        jobTypeId: this.state.skillId,
+                        orderDate: "2019.12.12",
+                        location:   "6.901829251748622"+ "," + "79.91425303864753",
+                        workers: this.state.workerIds
+                    };
+                    axios.post(
+                        "http://localhost:3000/booknow/sendUrgentRequest",
+                        sendUrgentReq,
+                        {
+                            withCredentials: true
+                        }
+                    ).then(res => {
+    
+                        this.setState({
+                            date: "",
+                            skill: ""
+                        })
+                        alert("Request is send successfully")
+                    });
                 }
-            })  
-        }    
+                
+            });
     }
 
     //search worker button event, searching all the available workers
