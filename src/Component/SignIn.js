@@ -54,7 +54,7 @@ class SignIn extends React.Component{
 
             <MDBContainer>
             <MDBRow>
-                {/* sign in form */}\
+                {/* sign in form */}
                 <MDBContainer>               
                     <MDBAnimation type="fadeInRight" delay=".3s">
                     <MDBCard>

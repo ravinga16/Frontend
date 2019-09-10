@@ -15,8 +15,9 @@ export default class Showskill extends React.Component{
       console.log(SkillId)
       axios.create({withCredentials:true}).delete("http://localhost:3000/worker/skill/"+localStorage.getItem("UserId"), { data: { "skillId": SkillId } })
       .then(response=>{
-        console.log(response.data);
+        console.log("delete skill;", response.data);        
       })
+      window.location.reload();
     }
     render(){
       

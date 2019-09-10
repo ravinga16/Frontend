@@ -61,7 +61,7 @@ class Upcoming extends React.Component{
                                 <th>OrderLoaction</th>
                                 <th>FirstName</th>
                                 <th>LastName</th>
-                                <th>Duration</th>
+                                <th>Duration(mins)</th>
                                 <th>HourlyCharge</th>
                                 <th>Cancel Job</th>
                                 <th>Start Job</th>                         

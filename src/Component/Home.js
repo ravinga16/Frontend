@@ -28,19 +28,19 @@ class Home extends React.Component {
        
         // this.props.history.push('/redirected/');
         axios.post( "http://localhost:3000/user/login", this.state)
-          .then(response => {   
+          .then(response => {  
+              console.log("log in response data:", response.data) 
               var checkMessage = response.data.message;
               if(checkMessage=="Unauthorized"){
                 this.setState({isAuth:false});
-                alert("Enter correct Details");                  
+                alert("Unauthorized log in. Incorrect email or password");                  
               }else{
                   if(checkMessage=="Authorized"){
                       this.setState({isAuth:true});
                       this.setState({id:response.data.result.UserId})
                       localStorage.setItem("UserId",response.data.result.UserId);
                       localStorage.setItem("sessionEmail",response.data.result.sessionEmail);
-                      localStorage.setItem("sessionType",response.data.result.sessionType);
-                      console.log("UserId:", localStorage.getItem("UserId"))//
+                      localStorage.setItem("sessionType",response.data.result.sessionType);                    
                       //Redirect based on the UserType
                       if(response.data.result.sessionType=="Client"){
                         this.props.history.push('/client/profile/');
@@ -48,12 +48,14 @@ class Home extends React.Component {
                         this.props.history.push('/worker/profile/');
                       }
                       
+                  }else{
+                      alert("User Not Found")
                   }
               }           
           })
           .catch(error => {
               console.log(error)//
-              alert("Enter correct Details")//
+              
           })
     }
     render() {
@@ -61,10 +63,9 @@ class Home extends React.Component {
             <MDBContainer>
                 <MDBRow>
                 <MDBContainer>
-                        {/* <MDBRow>
-                            <MDBCol md="6"> */}
-                        <MDBAnimation type="fadeInRight" delay=".3s">
-                            <MDBCard>
+                       
+                        {/* <MDBAnimation type="fadeInRight" delay=".3s"> */}
+                            <MDBCard style={{marginTop:"45px"}}>
                                 <MDBCardBody>
                                     <form onSubmit={this.handleSubmit}>
                                         <p className="h4 text-center py-4">Log In</p>
@@ -81,6 +82,7 @@ class Home extends React.Component {
                                                 success="right"
                                                 name="UserEmail"
                                                 onChange={this.handleChange}
+                                                required
                                             />
                                             <MDBInput
                                                 id="password"
@@ -93,6 +95,7 @@ class Home extends React.Component {
                                                 success="right"
                                                 name="Password"
                                                 onChange={this.handleChange}
+                                                required
                                             />
                                         </div>
                                         <div className="text-center py-4 mt-3">
@@ -111,9 +114,8 @@ class Home extends React.Component {
                                     </p>
                                 </MDBModalFooter>
                             </MDBCard>
-                        </MDBAnimation>
-                        {/* </MDBCol>
-                            </MDBRow> */}
+                        {/* </MDBAnimation> */}
+                    
                     </MDBContainer>
                 </MDBRow>
             </MDBContainer>

@@ -44,6 +44,7 @@ class NewStatus extends React.Component{
             document.getElementById("statusshow").style.display="block";
             document.getElementById("statusedit").style.display="none";
         }
+        window.location.reload();
     }
     componentDidMount(){
   

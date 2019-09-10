@@ -25,14 +25,14 @@ class NewProCard extends React.Component{
     }
 
     //once the profile card is mounted
-    componentDidMount(){
-    
+    componentDidMount(){    
         let url = "http://localhost:3000/worker/profile/"+localStorage.getItem("UserId");    
         axios.get(url,{withCredentials:true})
         .then(response => {           
             this.setState({personalData:response.data.result.recordsets[0][0]})
             if(this.state.personalData.FirstName==null){
-                alert("no data")
+                //when first log in to the system
+                alert("Edit profile and update personal data")
             }
      
         })
@@ -42,9 +42,7 @@ class NewProCard extends React.Component{
 
         //base location
         axios
-            .get("http://localhost:3000/dataservices/getalllocations", {
-                withCredentials: true
-            })
+            .get("http://localhost:3000/dataservices/getalllocations", { withCredentials: true})
             .then(res => {
                 let i = 0;
                 let tempArray = {};
@@ -57,7 +55,7 @@ class NewProCard extends React.Component{
                 
             })
             .catch(function(error) {
-                // console.log(error);
+                console.log(error);
             });
      }
 
@@ -78,33 +76,40 @@ class NewProCard extends React.Component{
         document.getElementById("edit").style.display="none";
         document.getElementById("show").style.display="block"
     }
+    //input field change
     handleChange(e){
         e.preventDefault()
         this.setState({[e.target.name]:e.target.value})
     }
     handleSubmit(e){
         e.preventDefault();
-        console.log(this.state.firstName)
+       
         const workerDetails = {
             fname: this.state.firstName,
             lname: this.state.lastName,
-            baseL: this.state.skillSelected.label,
+            baseL: this.state.skillSelected.label, 
             contactno: this.state.contactNumber
           };
-    
-          axios
-            .put("http://localhost:3000/worker/profile/" + localStorage.getItem("UserId"), workerDetails, {
-              withCredentials: true
-            })
-            .then(res => {
-              console.log(res);
-              
-            });
+          console.log("worker edit profile state", workerDetails)
+          //other input fields are guarded with required field
+        if (workerDetails.baseL != undefined) {
+            axios
+                .put("http://localhost:3000/worker/profile/" + localStorage.getItem("UserId"), workerDetails, {
+                    withCredentials: true
+                })
+                .then(res => {
+                    console.log(res);
 
-        document.getElementById("edit").style.display="none";
-        document.getElementById("show").style.display="block";
-        this.componentDidMount();
-        this.forceUpdate()
+                });
+
+            document.getElementById("edit").style.display = "none";
+            document.getElementById("show").style.display = "block";
+            this.componentDidMount();
+            this.forceUpdate()
+          }else{
+              alert("Enter valid base location")
+          }
+          
     }
     render(){
         return (
@@ -236,14 +241,9 @@ class NewProCard extends React.Component{
                                     <button onClick={this.handleCancel}>      Cancel        </button>
                                 </div>
                             </form>
-                        </MDBCardText>
-               
+                        </MDBCardText>               
                     </MDBCardBody>
-                </MDBCard>
-
-
-
-                
+                </MDBCard>                
             </div>
                 
           

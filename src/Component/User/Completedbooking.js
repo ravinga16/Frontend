@@ -75,7 +75,7 @@ export default class CompletedBooking extends React.Component{
                               </div>
                               </div><br></br> 
                               
-                              <MDBBtn onClick={this.handleEditProfile} style={{marginLeft:"120px"}}>Edit Profile</MDBBtn>
+                              
                   </form>
       
                   </MDBCardBody>

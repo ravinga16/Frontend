@@ -20,6 +20,7 @@ export default class RequestedBooking extends React.Component{
             .then(response=>{
                 console.log(response.data)
             })
+            window.location.reload();
         }
       render() {
       const { collapseID } = this.state;

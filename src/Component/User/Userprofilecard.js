@@ -110,7 +110,7 @@ class Userprofilecard extends React.Component{
                   <MDBCard style={{ width: "30rem" }} id="profile"style={{display:"block"}}>
                  
                     <MDBCardBody>                     
-                      <MDBCardText>
+               
                       <form id="show" style={{ display: "block" }}>
                                 <p className="h4 text-center mb-4">PROFILE DETAILS</p>
 
@@ -234,7 +234,7 @@ class Userprofilecard extends React.Component{
                         </div>
                       </form>
 
-                      </MDBCardText>               
+                                 
                     </MDBCardBody>
                   </MDBCard>
                 </MDBCol>

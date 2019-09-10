@@ -17,7 +17,7 @@ export default class Completed extends React.Component {
     componentDidMount() {
         axios.get("http://localhost:3000/ordersWorker/getCompletedOrders/"+localStorage.getItem("UserId"))
             .then(response => {
-                console.log(response.data.result)//
+                console.log("completed.js:",response.data.result)//
                 this.setState({ completed: response.data.result[0] })
             })
     }

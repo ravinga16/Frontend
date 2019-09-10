@@ -1,15 +1,12 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-import Profilecard from "./Profilecard";
 import WorkerNavBar from "./WorkerNavBar";
 import Addskill from "./Addskill";
-
 import Showskill from "./Showskill";
-
 import axios from 'axios';
-
 import NewProCard from "./NewProCard";
 import NewStatus from "./NewStatus";
+
 export default class Workerprofile extends React.Component{
     constructor(props){
         super(props);

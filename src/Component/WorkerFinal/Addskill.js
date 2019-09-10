@@ -69,16 +69,16 @@ export default class Addskill extends React.Component{
             "description" : this.state.description,
             "hrate" : this.state.hrate
         }]}
-        let varUrl= "http://localhost:3000/worker/skill/"+ localStorage.getItem("UserId");
-        axios.post( varUrl, skillObject)
-        .then(response=>{
-            console.log(response.data)
-        })
-        .catch(error=>{
-            console.log(error)
-        })
+        
+        let varUrl = "http://localhost:3000/worker/skill/" + localStorage.getItem("UserId");
+        axios.post(varUrl, skillObject)
+            .then(response => {
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         window.location.reload();
-
     }
     render(){
         return(
@@ -95,8 +95,7 @@ export default class Addskill extends React.Component{
                             value={this.state.skillSelected}
                             onChange={this.onChangeSkillSelected}
                             options={availableSkills}
-                            placeholder="Skills"
-                            
+                            placeholder="Skills"                            
                           />
                         <br></br>  <br></br>              
                         <input
@@ -105,6 +104,7 @@ export default class Addskill extends React.Component{
                             className="form-control"
                             placeholder="Skill Description"
                             onChange={this.handleChange}
+                            required
                         />
                         <br />
                         <input

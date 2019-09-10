@@ -95,7 +95,7 @@ export default class Search extends React.Component{
             let bookNowReq = {
                 jobType:this.state.skillId,
                 clientId:localStorage.getItem("UserId"),
-                coordinate : null
+                coordinate : "Colombo"
             }
             axios.create({withCredentials:true}).post("http://localhost:3000/booknow/booknow", bookNowReq)
             .then(response => {
@@ -111,7 +111,8 @@ export default class Search extends React.Component{
             })  
         }    
     }
-    //search worker button event, sending requests to all available workers
+
+    //search worker button event, searching all the available workers
     handleSubmit(e){
         e.preventDefault();
         document.getElementById("sendRequest").style.display="block";
@@ -126,7 +127,7 @@ export default class Search extends React.Component{
             clientId: this.state.clientId 
         }
         console.log("book later req:", searchWorkerReq)
-        axios.create({withCredentials:true}).post('http://localhost:3000/bookLater/search', searchWorkerReq)
+        axios.post('http://localhost:3000/bookLater/search', searchWorkerReq, {withCredentials:true})
         .then(response => {
             console.log("search worker button press")
             console.log(response.data)
@@ -147,15 +148,17 @@ export default class Search extends React.Component{
 
 
     }
+    //book later send request
     handleSendRequest(e){
         e.preventDefault();
-        axios.post("http://localhost:3000/bookLater/sendRequest",this.state.result)
+        axios.post("http://localhost:3000/bookLater/sendRequest",this.state.result,{withCredentials:true})
         .then(response => {
             console.log(response.data)           
         })
         .catch(error => {
             console.log(error);
         })
+        window.location.reload();
     }
 
     //booknow sending request
@@ -175,7 +178,7 @@ export default class Search extends React.Component{
                         <p className="h4 text-center mb-4">Required Job Details</p>                 
                         <Select
                             required
-                        value={this.state.skillSelected}
+                            value={this.state.skillSelected}
                             onChange={this.onChangeSkillSelected}
                             options={availableSkills}
                             placeholder="Job Type" />
@@ -244,27 +247,18 @@ export default class Search extends React.Component{
                     <MDBCol size="6" id="booklaterlist" style={{ width: "75%",  display: "none", marginTop: "15px" }}>
                         {
                             this.state.availableWorkers.length ? this.state.availableWorkers.map(worker => <AvailableWorkerCard key={worker.workerId} workerId={worker.workerId} firstName={worker.firstName}  lastName={worker.lastName} baseLocation={worker.baseLocation} rate={worker.rate} skillDescription={worker.skillDescription} hourlyCharge={worker.hourlyCharge}  />):null
-                        }                           
-                          
-                               
-                    </MDBCol>
-
-                    
-                     
-                     
+                        }                          
+                                                         
+                    </MDBCol>    
                     
                 </MDBRow>
 
                     <MDBRow>
                         {/* if user select book now option */}
                         <MDBCard id="map" style={{ display: "none" , width:"50%" , marginTop:"20px"}}>
-
                             {
                                 this.state.booknowWorkers.length ? this.state.booknowWorkers.map(worker => <BooknowAvailableWorkerCard key={worker.WorkerId} workerId={worker.WorkerId} firstName={worker.FirstName} rate={worker.Rate} hourlyCharge={worker.HourlyCharge} />) : null
-                            }
-                            <button onClick={this.handleBookNowSendReq}>Send Request</button>
-
-
+                            }   
                         </MDBCard>
                     </MDBRow>
                 </MDBContainer>
