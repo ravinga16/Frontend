@@ -53,11 +53,11 @@ class MyBooking extends React.Component{
         })
 
         //Get the  Job requests sent
-        axios.get('http://localhost:3000/requests/pool/worker/'+localStorage.getItem('UserId'))
+        axios.get('http://localhost:3000/requests/owner/'+localStorage.getItem('UserId'))
         .then(response => {        
             //get the response sent by the API. setState to the response data this.setState({posts:response.data})
-            this.setState({requests:response.data.result[1]})
-            console.log("requests",this.state.requests)
+            this.setState({requests:response.data.result[0]})
+            
         })
         .catch(error => {
             console.log(error)
@@ -97,7 +97,7 @@ class MyBooking extends React.Component{
 
                     <MDBCol md="3" style={MDBColStyle}><MDBCardTitle style={MDBCardTitleStyle}>Booking Requests</MDBCardTitle>
                         {
-                            requests.length?requests.map(booking => <RequestedBooking key={booking.RequestId} RequestId={booking.RequestId} WorkerId={booking.WorkerId}  />):null
+                            requests.length?requests.map(booking => <RequestedBooking key={booking.RequestId} RequestId={booking.RequestId} SkillId={booking.SkillId} />):null
                         }
                     </MDBCol>
                 </MDBRow>

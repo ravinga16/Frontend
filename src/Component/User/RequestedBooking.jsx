@@ -37,15 +37,15 @@ export default class RequestedBooking extends React.Component{
                   <form style={{ textAlign: "left",display:"block" ,fontSize:"13px"}} name="showProfile">                              
                               <div class="row">
                                   <div class="col-md-5">Request Id: </div>
-                                  <div class="col-md-5">
-                                      <input type="text" name="RequestId" placeholder={this.props.RequestId} disabled></input>
+                                  <div class="col-md-5">{this.props.RequestId}
+                                      {/* <input type="text" name="RequestId" placeholder={this.props.RequestId} disabled></input> */}
                               </div>
                               </div><br></br> 
                                 {/*  */}
                               <div class="row">
-                                  <div class="col-md-5">Worker Id: </div>
-                                  <div class="col-md-5">
-                                      <input type="text" name="WorkerId" placeholder={this.props.WorkerId} disabled></input>
+                                  <div class="col-md-5">SkillId : </div>
+                                  <div class="col-md-5">{this.props.SkillId}
+                                      {/* <input type="text" name="SkillId" placeholder={this.props.SkillId} disabled></input> */}
                               </div>
                               </div><br></br> 
                               <button onClick={(e)=> this.cancelRequest(this.props.RequestId, e)}> Delete Requst</button>
