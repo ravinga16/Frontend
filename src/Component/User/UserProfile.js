@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {  MDBRow, MDBCol, MDBContainer } from "mdbreact";
-
 import UserNavBar from "./UserNavBar";
 import Userprofilecard from "./Userprofilecard";
 import NotificationCard from "./notificationCard";
