@@ -33,11 +33,10 @@ export default class OngoingJobCard extends React.Component{
     //  
     render(){
         const OngoingJobCardStyle = {
-            width:"50%",
-            
+            width:"50%",          
             borderStyle:"solid",
             borderWidth:"4px",
-            borderColor:"#3F729B",
+            borderColor:"#00695c",
             textAlign:"center"
         }
         return(
@@ -57,7 +56,7 @@ export default class OngoingJobCard extends React.Component{
                                 
                 Duration : {this.props.Duration}<br></br><br></br>
 
-                <button onClick={this.endJob} style={{width:"100%", height:"50px", backgroundColor:"#3F729B"}}>Finish Job</button><br></br>
+                <button onClick={this.endJob} style={{width:"100%", height:"50px", backgroundColor:"#00695c"}}>Finish Job</button><br></br>
               
             </div>
         )

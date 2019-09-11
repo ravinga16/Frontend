@@ -2,7 +2,7 @@ import React from "react";
 import {
 MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline, MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem} from "mdbreact";
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import appointment from './appointment';
+// import appointment from './appointment';
 import axios from 'axios';
 export default class WorkerNavBar extends React.Component {
   constructor(props){

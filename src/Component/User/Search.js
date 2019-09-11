@@ -37,7 +37,7 @@ export default class Search extends React.Component{
         this.handleSubmit=this.handleSubmit.bind(this);
         this.handleChange=this.handleChange.bind(this);
         this.handleSendRequest=this.handleSendRequest.bind(this);
-        this.handleBookNowSendReq=this.handleBookNowSendReq.bind(this);
+        
     }
     //getting all the skills available in the website
     componentDidMount(){
@@ -156,41 +156,46 @@ export default class Search extends React.Component{
                 
             });
     }
-
-    //search worker button event, searching all the available workers
+    //search worker, book later
     handleSubmit(e){
         e.preventDefault();
         document.getElementById("sendRequest").style.display="block";
         document.getElementById("booklaterlist").style.display="block";
-        console.log("book later details", this.state)//object sending with the axios
-        let searchWorkerReq = {
-            skillId : this.state.skillId,
-            orderDate:this.state.orderDate,
-            startTime: this.state.startTime ,
-            endTime: this.state.endTime,
-            coordinate:null,
-            clientId: this.state.clientId 
-        }
-        console.log("book later req:", searchWorkerReq)
-        axios.post('http://localhost:3000/bookLater/search', searchWorkerReq, {withCredentials:true})
-        .then(response => {
-            console.log("search worker button press")
-            console.log(response.data)
-            if(response.data.message=="No workers available"){
-                alert("No workers available")
-                document.getElementById('sendRequest').style.display="none";
-            }else if(response.data.message=="OK"){
-                if(response.data.result.Workers.length > 0){
-                    this.setState({result:response.data.result})
-                    this.setState({availableWorkers:response.data.result.Workers})
-                }
-            }          
+        let temp = new Date()
+        let todayDate = temp.getFullYear()+"-0"+(temp.getMonth()+1)+"-"+temp.getDate()
+        //check whether a old date, if not proceed
+        if(this.state.orderDate > todayDate){
+            let searchWorkerReq = {
+                skillId : this.state.skillId,
+                orderDate:this.state.orderDate,
+                startTime: this.state.startTime ,
+                endTime: this.state.endTime,
+                coordinate:null,
+                clientId: this.state.clientId 
+            }
             
-        })
-        .catch(error => {
-            console.log(error);
-        })
-
+            axios.post('http://localhost:3000/bookLater/search', searchWorkerReq, {withCredentials:true})
+            .then(response => {
+                
+                if(response.data.message=="No workers available"){
+                    alert("No workers available")
+                    document.getElementById('sendRequest').style.display="none";
+                }else if(response.data.message=="OK"){
+                    if(response.data.result.Workers.length > 0){
+                        this.setState({result:response.data.result})
+                        this.setState({availableWorkers:response.data.result.Workers})
+                    }
+                }          
+                
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    
+        }else{
+            alert("Enter a valid date")
+        }
+        
 
     }
     //book later send request
@@ -206,10 +211,6 @@ export default class Search extends React.Component{
         window.location.reload();
     }
 
-    //booknow sending request
-    handleBookNowSendReq(e){
-
-    }
     render(){
         return(
             <container>
@@ -242,7 +243,7 @@ export default class Search extends React.Component{
                         name="description"                
                         className="form-control"  />
                         <br />    
-                        <div class="row"><MDBBtn  style={{backgroundColor:"#008080",width:"100%"}} onClick={this.handleBookNow}  >  Book Now </MDBBtn>  </div> 
+                        <div class="row"><MDBBtn  style={{backgroundColor:"#008080",width:"100%"}} onClick={this.handleBookNow} disabled >  Book Now </MDBBtn>  </div> 
                         <div class="row"><MDBBtn  style={{backgroundColor:"#008080",width:"100%"}}  onClick={this.handleBookLater} >  Book Later </MDBBtn></div>             
                     
                     </form>

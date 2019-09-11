@@ -1,6 +1,7 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody,MDBAnimation } from 'mdbreact';
 import axios from 'axios';
+import './style.css'
 class SignIn extends React.Component{
     constructor(props){
         super(props);
@@ -52,12 +53,12 @@ class SignIn extends React.Component{
     render(){
         return (
 
-            <MDBContainer>
+            <div className="bg">
             <MDBRow>
                 {/* sign in form */}
                 <MDBContainer>               
-                    <MDBAnimation type="fadeInRight" delay=".3s">
-                    <MDBCard>
+                    {/* <MDBAnimation type="fadeInRight" delay=".3s"> */}
+                    <MDBCard style={{marginTop:"15%", marginLeft:"25%", width:"50%"}}>
                         <MDBCardBody>
                         <form onSubmit={this.handleSubmit}>
                             <p className="h4 text-center py-4">Sign Up</p>
@@ -67,7 +68,7 @@ class SignIn extends React.Component{
                                     <input type="radio"   name ="UserType" value="Customer" onChange={this.handleWorkerType} required/>Customer       
                                 </label>
                                 
-                                <label style={{marginLeft:"60%"}}>
+                                <label style={{marginLeft:"50%"}}>
                                     <input type="radio" id="workersign" name ="UserType" value="Worker"  onChange={this.handleWorkerType} required />Worker
                                 </label>
 
@@ -119,11 +120,11 @@ class SignIn extends React.Component{
                         </form>
                         </MDBCardBody>                        
                     </MDBCard>
-                    </MDBAnimation>
+                    {/* </MDBAnimation> */}
                    
                 </MDBContainer>
             </MDBRow>
-            </MDBContainer>
+            </div>
 
             
           );

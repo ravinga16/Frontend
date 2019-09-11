@@ -2,7 +2,7 @@ import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter, MDBAnimation} from 'mdbreact';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-
+import './style.css'
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -60,12 +60,12 @@ class Home extends React.Component {
     }
     render() {
         return (
-            <MDBContainer>
+            <div className="bg">
                 <MDBRow>
                 <MDBContainer>
                        
                         {/* <MDBAnimation type="fadeInRight" delay=".3s"> */}
-                            <MDBCard style={{marginTop:"65px", marginLeft:"25%", width:"50%"}}>
+                            <MDBCard style={{marginTop:"15%", marginLeft:"25%", width:"50%"}}>
                                 <MDBCardBody>
                                     <form onSubmit={this.handleSubmit}>
                                         <p className="h4 text-center py-4">Log In</p>
@@ -118,7 +118,7 @@ class Home extends React.Component {
                     
                     </MDBContainer>
                 </MDBRow>
-            </MDBContainer>
+            </div>
         );
     }
 }

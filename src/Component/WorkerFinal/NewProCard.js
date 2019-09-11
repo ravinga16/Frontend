@@ -105,7 +105,7 @@ class NewProCard extends React.Component{
             document.getElementById("edit").style.display = "none";
             document.getElementById("show").style.display = "block";
             this.componentDidMount();
-            this.forceUpdate()
+            window.location.reload()
           }else{
               alert("Enter valid base location")
           }
