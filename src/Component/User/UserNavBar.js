@@ -49,7 +49,7 @@ render() {
               <MDBNavLink to="/client/search/">Search Worker</MDBNavLink>
             </MDBNavItem>  
             <MDBNavItem>
-              <MDBNavLink to="/client/order/">Order Detail</MDBNavLink>
+              <MDBNavLink to="/client/order/" >Order Detail</MDBNavLink>
             </MDBNavItem> 
           </MDBNavbarNav>
           <MDBNavbarNav right>

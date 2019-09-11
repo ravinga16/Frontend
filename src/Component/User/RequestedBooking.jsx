@@ -3,6 +3,34 @@ import { MDBContainer, MDBCollapse, MDBCard, MDBCardBody, MDBBtn } from "mdbreac
 import axios from 'axios';
 
 export default class RequestedBooking extends React.Component{
+  constructor(props){
+      super(props);
+      this.state={
+        availableSkills:[]
+      }
+      
+      this.matchSkill=this.matchSkill.bind(this);
+    }
+
+    componentDidMount(){
+      //getting skill list
+      axios.get("http://localhost:3000/dataservices/getallskills", {withCredentials:true})
+      .then(res => {
+          console.log(res.data.recordsets)
+          this.setState({availableSkills: res.data.recordsets[0]})
+          
+      })
+   }
+    //retrieve skill titles and display
+    matchSkill(SkillId){
+      let i=0  
+      for(i ;i<this.state.availableSkills.length;i++){   
+        if(this.state.availableSkills[i].SkillId == SkillId){
+          return(<p>{this.state.availableSkills[i].SkillTitle}</p>)
+        }
+      }
+    }
+
     state={
         collapseID: "collapse3"
       }
@@ -44,7 +72,7 @@ export default class RequestedBooking extends React.Component{
                                 {/*  */}
                               <div class="row">
                                   <div class="col-md-5">SkillId : </div>
-                                  <div class="col-md-5">{this.props.SkillId}
+                                  <div class="col-md-5">{this.matchSkill(this.props.SkillId)}
                                       {/* <input type="text" name="SkillId" placeholder={this.props.SkillId} disabled></input> */}
                               </div>
                               </div><br></br> 

@@ -60,7 +60,7 @@ render() {
             </MDBNavItem>
             {/*  */}
             <MDBNavItem>
-              <MDBNavLink to="/worker/request/">Job Request</MDBNavLink>
+              <MDBNavLink to="/worker/request/" >Job Request</MDBNavLink>
             </MDBNavItem>
           </MDBNavbarNav>
 
