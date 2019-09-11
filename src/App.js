@@ -24,16 +24,15 @@ function App() {
       <Route path="/signin/" component={SignIn}></Route>
         <PrivateRoute path="/client/profile/" component={UserProfile}></PrivateRoute> 
 
-        {/* <Route path="/client/search/" component={SearchDelete}></Route> */}
-{/* //lklfdlsmflds */}
+      
        <PrivateRoute path="/client/search/" component={Search}></PrivateRoute>
         <PrivateRoute path ="/client/order/" component={MyBooking}></PrivateRoute>
         
         <PrivateRoute path="/worker/profile/" component={Workerprofile}></PrivateRoute> 
-        <Route path="/worker/appointment/" component={appointment}></Route> 
-        <Route path="/worker/completed/" component={Completed}></Route> 
-        <Route path="/worker/request/" component={Request}></Route> 
-        <Route path="/worker/upcoming/" component={Upcoming}></Route>
+        <PrivateRoute path="/worker/appointment/" component={appointment}></PrivateRoute> 
+        <PrivateRoute path="/worker/completed/" component={Completed}></PrivateRoute> 
+        <PrivateRoute path="/worker/request/" component={Request}></PrivateRoute> 
+        <PrivateRoute path="/worker/upcoming/" component={Upcoming}></PrivateRoute>
    
         
         
