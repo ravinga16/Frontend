@@ -33,22 +33,32 @@ class SignIn extends React.Component{
     handleSubmit(event){
         event.preventDefault();
         console.log("contactno length", this.state.ContactNumber.length)
-        console.log("signin component state object ,",this.state);    //
-        axios.post( "http://localhost:3000/user/register/", this.state)
-          .then(response => {
-              console.log(response.data.message)        
-             
-              if(response.data.message=="User Created"){
-                this.props.history.push('/');
-                console.log("user created")
-              }else if(response.data.message=="User Already Exists"){
-                  alert("User Name Already Taken. Check Another");
-              }
-              
-          })
-          .catch(error => {
-              console.log(error)
-          })
+        console.log("signin component state object contact number ,",this.state.ContactNumber.length);    //
+        console.log("signin component state object password ,",this.state.Password.length);
+        if (this.state.Password.length > 6 && this.state.ContactNumber.length == 10) {
+            axios.post("http://localhost:3000/user/register/", this.state)
+                .then(response => {
+                    console.log(response.data.message)
+
+                    if (response.data.message == "User Created") {
+                        this.props.history.push('/');
+                        console.log("user created")
+                    } else if (response.data.message == "User Already Exists") {
+                        alert("User Name Already Taken. Check Another");
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }else{
+            if(this.state.ContactNumber.length!=10){
+                alert("Enter valid phone number")
+            }else{
+                alert("Password should contain atleast 7 characters")
+            }
+        }
+        
     }
     render(){
         return (
@@ -105,7 +115,7 @@ class SignIn extends React.Component{
                                         label="Your Contact Number"
                                         icon="phone"
                                         group
-                                        type="text"
+                                        type="number"
                                         validate
                                         name="ContactNumber"
                                         onChange={this.handleChange}
