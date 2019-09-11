@@ -32,9 +32,6 @@ class SignIn extends React.Component{
     }
     handleSubmit(event){
         event.preventDefault();
-        console.log("contactno length", this.state.ContactNumber.length)
-        console.log("signin component state object contact number ,",this.state.ContactNumber.length);    //
-        console.log("signin component state object password ,",this.state.Password.length);
         if (this.state.Password.length > 6 && this.state.ContactNumber.length == 10) {
             axios.post("http://localhost:3000/user/register/", this.state)
                 .then(response => {

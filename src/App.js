@@ -22,12 +22,9 @@ function App() {
     <Switch>
         <Route exact path="/"  component={Home} ></Route>       
       <Route path="/signin/" component={SignIn}></Route>
-        <PrivateRoute path="/client/profile/" component={UserProfile}></PrivateRoute> 
-
-      
+        <PrivateRoute path="/client/profile/" component={UserProfile}></PrivateRoute>       
        <PrivateRoute path="/client/search/" component={Search}></PrivateRoute>
-        <PrivateRoute path ="/client/order/" component={MyBooking}></PrivateRoute>
-        
+        <PrivateRoute path ="/client/order/" component={MyBooking}></PrivateRoute>        
         <PrivateRoute path="/worker/profile/" component={Workerprofile}></PrivateRoute> 
         <PrivateRoute path="/worker/appointment/" component={appointment}></PrivateRoute> 
         <PrivateRoute path="/worker/completed/" component={Completed}></PrivateRoute> 
