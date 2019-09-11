@@ -89,7 +89,7 @@ class Upcoming extends React.Component{
                         </MDBTableBody>
                     </MDBTable>
                 </div>
-                <div id="ongoing" style={{ display: "none" , marginLeft:"45%", marginTop:"20px"}}>
+                <div id="ongoing" style={{ display: "none" , marginLeft:"25%", marginTop:"20px"}}>
                     <OngoingJobCard
                     OrderId = {this.state.ongoingJobDetails.OrderId} 
                     ContactNumber = {this.state.ongoingJobDetails.ContactNumber}
