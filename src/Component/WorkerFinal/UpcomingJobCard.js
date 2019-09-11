@@ -66,7 +66,8 @@ class UpcomingJobCard extends React.Component{
         } else {
             //check no job started. if not set the localstorage value
             if (localStorage.getItem("startedOrderId") == null ) {
-                localStorage.setItem("startedOrderId", OrderId);          
+                localStorage.setItem("startedOrderId", OrderId);  
+                localStorage.setItem("startTime", currentTime)        
                 //create the req.body to send
                 let startJob = {
                     "OrderId": OrderId,

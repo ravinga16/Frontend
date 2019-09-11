@@ -117,6 +117,9 @@ export default class Search extends React.Component {
 
     handleBookNow(e) {
         e.preventDefault()
+        let temp = new Date()
+        let todayDate = temp.getFullYear() + "-0" + (temp.getMonth() + 1) + "-" + temp.getDate()
+
         if (navigator.geolocation) {
             return navigator.geolocation.getCurrentPosition((pos) => {
                 this.setState({ lat: pos.coords.latitude })
@@ -145,10 +148,11 @@ export default class Search extends React.Component {
                             var sendUrgentReq = {
                                 clientId: localStorage.getItem("UserId"),
                                 jobTypeId: this.state.skillId,
-                                orderDate: "2019.09.11",
+                                orderDate: todayDate,
                                 location: this.state.lat + "," + this.state.lng,
                                 workers: this.state.workerIds
                             };
+                            console.log("send req book now", sendUrgentReq)
                             axios.post(
                                 "http://localhost:3000/booknow/sendUrgentRequest",
                                 sendUrgentReq,
@@ -189,6 +193,7 @@ export default class Search extends React.Component {
                 coordinate: null,
                 clientId: this.state.clientId
             }
+            console.log("book later send object", searchWorkerReq)
 
             axios.post('http://localhost:3000/bookLater/search', searchWorkerReq, { withCredentials: true })
                 .then(response => {

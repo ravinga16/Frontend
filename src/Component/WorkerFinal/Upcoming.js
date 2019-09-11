@@ -47,7 +47,7 @@ class Upcoming extends React.Component{
         return (
             <div>
                 <WorkerNavBar/>
-                <div style={{width: "90%", marginLeft: "5%" , marginTop:"2.5%"}}>
+                <div style={{width: "90%", marginLeft: "2%" , marginTop:"2.5%"}}>
                     <MDBTable>
                         <MDBTableHead color="teal darken-2" style={{color:"white", width: "90%"}} >
                             <tr>
