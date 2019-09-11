@@ -198,7 +198,7 @@ export default class Search extends React.Component{
         
 
     }
-    //book later send request
+    //book later send request to workers
     handleSendRequest(e){
         e.preventDefault();
         axios.post("http://localhost:3000/bookLater/sendRequest",this.state.result,{withCredentials:true})
@@ -265,6 +265,7 @@ export default class Search extends React.Component{
                                         className="form-control"
                                         name="orderDate"
                                         onChange={this.handleChange}
+                                        required
                                          />
                                     <br />
                                     <label htmlFor="defaultFormRegisterNameEx" className="grey-text">   Start Time</label>
@@ -273,6 +274,7 @@ export default class Search extends React.Component{
                                         className="form-control"
                                         name="startTime"
                                         onChange={this.handleChange}
+                                        required
                                          />
                                     <br />
                                     <label htmlFor="defaultFormRegisterNameEx" className="grey-text"> End Time  </label>
@@ -280,7 +282,8 @@ export default class Search extends React.Component{
                                         type="time"
                                         className="form-control"
                                         name="endTime"
-                                        onChange={this.handleChange} 
+                                        onChange={this.handleChange}
+                                        required 
                                          />
                                     <br />
                                     <div class="row"><MDBBtn color="unique" type="submit" style={{backgroundColor:"#008080",width:"100%"}}> Search Worker  </MDBBtn>  </div>
