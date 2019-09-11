@@ -65,7 +65,7 @@ class Home extends React.Component {
                 <MDBContainer>
                        
                         {/* <MDBAnimation type="fadeInRight" delay=".3s"> */}
-                            <MDBCard style={{marginTop:"45px"}}>
+                            <MDBCard style={{marginTop:"65px", marginLeft:"25%", width:"50%"}}>
                                 <MDBCardBody>
                                     <form onSubmit={this.handleSubmit}>
                                         <p className="h4 text-center py-4">Log In</p>
